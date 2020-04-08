@@ -21,7 +21,7 @@ export function Login() {
   const classes = useStyles();
 
   function handleSubmit() {
-    history.push('/perfil');
+    history.push('/painel');
   }
 
   return (
