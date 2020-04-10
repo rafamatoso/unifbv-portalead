@@ -29,22 +29,22 @@ import { useStyles } from './styles';
 export function Login() {
   const history = useHistory();
   const classes = useStyles();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const [state, setState] = useState({ email: '', password: '' });
 
   const verifyButtonDisable = () => {
-    return !!(email === '' || password === '');
+    return !!(state.email === '' || state.password === '');
   };
 
-  const handleSubmit = () => {
+  const handleOnChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
     history.push('/dashboard/perfil');
   };
 
@@ -57,7 +57,7 @@ export function Login() {
           <Typography component="h1" variant="h4">
             {appNameText}
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -68,7 +68,7 @@ export function Login() {
               name="email"
               autoComplete="email"
               autoFocus
-              onChange={handleEmail}
+              onChange={handleOnChange}
             />
             <TextField
               variant="outlined"
@@ -80,7 +80,7 @@ export function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
-              onChange={handlePassword}
+              onChange={handleOnChange}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -90,26 +90,25 @@ export function Login() {
               type="submit"
               disabled={verifyButtonDisable()}
               fullWidth
-              className={classes.submit}
-              onClick={handleSubmit}>
+              className={classes.submit}>
               {enterButtonText}
             </CustomButton>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  {forgotYourPwText}
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {`${dontHaveAnAccountText} ${createOneHereText}`}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
           </form>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2">
+                {forgotYourPwText}
+              </Link>
+            </Grid>
+            <Grid item>
+              <Link href="#" variant="body2">
+                {`${dontHaveAnAccountText} ${createOneHereText}`}
+              </Link>
+            </Grid>
+          </Grid>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
         </div>
       </Grid>
     </Grid>
