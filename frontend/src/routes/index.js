@@ -3,6 +3,7 @@ import { Switch, BrowserRouter, Route } from 'react-router-dom';
 
 import { Login } from '../pages/Login';
 import { Perfil } from '../pages/Perfil';
+import { CriarCurso } from '../pages/CriarCurso';
 import MenuSuperior from '../components/NavBar';
 
 export const Routes = () => (
@@ -13,6 +14,7 @@ export const Routes = () => (
       <Route path="/" exact component={Login} />
       <Route path="/dashboard/perfil" exact component={Perfil} />
       <Route path="/painel" exact component={MenuSuperior} />
+      <Route path="/createcourse" exact component={CriarCurso} /> 
     </Switch>
   </BrowserRouter>
 )
