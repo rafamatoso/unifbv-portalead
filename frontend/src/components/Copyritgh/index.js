@@ -1,14 +1,15 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import {appName, copyritgh, unifbv} from '../../utils/strings';
 
 export function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
+      {`${copyritgh}`}
       <Link color="inherit" href="https://material-ui.com/">
-        UniFBV Portal EAD
-      </Link>{' '}
+        {` ${appName} ${unifbv}`}
+      </Link>{', '}
       {new Date().getFullYear()}
       {'.'}
     </Typography>
