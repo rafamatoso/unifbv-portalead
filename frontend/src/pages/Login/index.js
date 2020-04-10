@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import Avatar from '@material-ui/core/Avatar';
-// import Button from '@material-ui/core/Button';
 import { CustomButton } from '../../components/CustomButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
@@ -12,19 +10,18 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { Copyright } from '../../components/Copyritgh';
 
 import {
-  appName,
+  appNameText,
   enterButtonText,
   remenberMeText,
   emailText,
   passwordText,
-  forgotYourPw,
-  dontHaveAnAccount,
-  createOneHere,
+  forgotYourPwText,
+  dontHaveAnAccountText,
+  createOneHereText,
 } from '../../utils/strings';
 
 import { useStyles } from './styles';
@@ -43,13 +40,12 @@ export function Login() {
     setPassword(e.target.value);
   };
 
-  const verifyDisable = () => {
+  const verifyButtonDisable = () => {
     return !!(email === '' || password === '');
   };
 
   const handleSubmit = () => {
-    console.log(email, password);
-    history.push('/painel');
+    history.push('/dashboard/perfil');
   };
 
   return (
@@ -59,7 +55,7 @@ export function Login() {
       <Grid item sm={12} md={6} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <Typography component="h1" variant="h4">
-            {appName}
+            {appNameText}
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -92,7 +88,7 @@ export function Login() {
             />
             <CustomButton
               type="submit"
-              disabled={verifyDisable()}
+              disabled={verifyButtonDisable()}
               fullWidth
               className={classes.submit}
               onClick={handleSubmit}>
@@ -101,12 +97,12 @@ export function Login() {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  {forgotYourPw}
+                  {forgotYourPwText}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {`${dontHaveAnAccount} ${createOneHere}`}
+                  {`${dontHaveAnAccountText} ${createOneHereText}`}
                 </Link>
               </Grid>
             </Grid>
