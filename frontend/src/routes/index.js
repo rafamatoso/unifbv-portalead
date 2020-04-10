@@ -14,7 +14,7 @@ export const Routes = () => (
       <Route path="/" exact component={Login} />
       <Route path="/dashboard/perfil" exact component={Perfil} />
       <Route path="/painel" exact component={MenuSuperior} />
-      <Route path="/createcourse" exact component={CriarCurso} /> 
+      <Route path="/createcourse" exact component={CriarCurso}/> 
     </Switch>
   </BrowserRouter>
 )

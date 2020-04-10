@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
     tFDescription: {
         width: '100%',
         marginLeft: 'auto',
-        marginRight: 'auto',            
+        marginRight: 'auto',        
         paddingBottom: 0,
         marginTop: 0,
         fontWeight: 500
@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.main,
     },
     form: {
-      width: '100%', // Fix IE 11 issue.
+      width: '60%', // Fix IE 11 issue.
       marginTop: theme.spacing(3),
     },
     submit: {
