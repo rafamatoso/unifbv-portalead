@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
+// import Button from '@material-ui/core/Button';
+import { CustomButton } from '../../components/CustomButton';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -13,28 +14,52 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import {Copyright} from '../../components/MaterialUi/Copyritgh';
+import { Copyright } from '../../components/Copyritgh';
+
+import {
+  appName,
+  enterButtonText,
+  remenberMeText,
+  emailText,
+  passwordText,
+  forgotYourPw,
+  dontHaveAnAccount,
+  createOneHere,
+} from '../../utils/strings';
+
 import { useStyles } from './styles';
 
 export function Login() {
   const history = useHistory();
   const classes = useStyles();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-  function handleSubmit() {
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const verifyDisable = () => {
+    return !!(email === '' || password === '');
+  };
+
+  const handleSubmit = () => {
+    console.log(email, password);
     history.push('/painel');
-  }
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={7} className={classes.image} />
-      <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+      <Grid item sm={'auto'} md={6} className={classes.image} />
+      <Grid item sm={12} md={6} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Login
+          <Typography component="h1" variant="h4">
+            {appName}
           </Typography>
           <form className={classes.form} noValidate>
             <TextField
@@ -43,10 +68,11 @@ export function Login() {
               required
               fullWidth
               id="email"
-              label="Email"
+              label={emailText}
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleEmail}
             />
             <TextField
               variant="outlined"
@@ -54,33 +80,33 @@ export function Login() {
               required
               fullWidth
               name="password"
-              label="Senha"
+              label={passwordText}
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handlePassword}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label={remenberMeText}
             />
-            <Button
+            <CustomButton
               type="submit"
+              disabled={verifyDisable()}
               fullWidth
-              variant="contained"
-              color="primary"
               className={classes.submit}
               onClick={handleSubmit}>
-              Entrar
-            </Button>
+              {enterButtonText}
+            </CustomButton>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Esqueceu sua Senha?
+                  {forgotYourPw}
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Não tem uma conta? Crie uma aqui."}
+                  {`${dontHaveAnAccount} ${createOneHere}`}
                 </Link>
               </Grid>
             </Grid>
