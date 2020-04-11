@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { auth } from '../../../services/firebase';
+// import { auth } from '../../../services/Firebase/firebase';
 
 import { CustomButton } from '../../../components/CustomButton';
 import { CustomLoader } from '../../../components/CustomLoader';
@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Typography from '@material-ui/core/Typography';
+import {signIn} from '../../../services/Firebase';
 
 import { useStyles } from './styles';
 
@@ -40,16 +41,8 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    auth
-      .signInWithEmailAndPassword(state.email, state.password)
-      .then((response) => {
-        setLoading(false);
-        history.push('/dashboard/perfil');
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
+    signIn(state, history)
+    setLoading(false)
   };
 
   return (
