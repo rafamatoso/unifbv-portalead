@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+
+import { AppBar, Toolbar, IconButton, MenuItem, Menu } from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
+
+import { useStyles } from "./styles";
 
 import {
-  AppBar,
-  Toolbar,
-  IconButton,
-  MenuItem,
-  Menu,
-} from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
-
-import { useStyles } from './styles';
-
-import { appNameText, optionAText, optionBText, painelIconText } from '../../utils/strings';
+  appNameText,
+  optionAText,
+  optionBText,
+  painelIconText,
+} from "../../utils/strings";
 
 export function NavBar() {
   const classes = useStyles();
@@ -39,7 +38,8 @@ export function NavBar() {
             edge="start"
             className={classes.menuButton}
             color="inherit"
-            aria-label="menu">
+            aria-label="menu"
+          >
             {appNameText}
           </IconButton>
           <IconButton
@@ -47,7 +47,8 @@ export function NavBar() {
             className={classes.menuButton}
             color="inherit"
             size="small"
-            aria-label="menu">
+            aria-label="menu"
+          >
             {painelIconText}
           </IconButton>
           {auth && (
@@ -58,23 +59,25 @@ export function NavBar() {
                 aria-controls="menu-appbar"
                 aria-haspopup="true"
                 onClick={handleMenu}
-                color="inherit">
+                color="inherit"
+              >
                 <AccountCircle />
               </IconButton>
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
                 anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 keepMounted
                 transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
+                  vertical: "top",
+                  horizontal: "right",
                 }}
                 open={open}
-                onClose={handleClose}>
+                onClose={handleClose}
+              >
                 <MenuItem onClick={handleClose}>{optionAText}</MenuItem>
                 <MenuItem onClick={handleClose}>{optionBText}</MenuItem>
               </Menu>

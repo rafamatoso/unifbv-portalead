@@ -1,20 +1,20 @@
-import React from 'react';
+import React from "react";
 
-import { Route, Redirect } from 'react-router-dom';
-import { connect } from '../store';
+import { Route, Redirect } from "react-router-dom";
+import { connect } from "../store";
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { user } = store;
   const { path } = rest;
-  console.log(user);
-  console.log(path);
-  console.log(rest);
-  
-  if (!user) {
-    return <Redirect to="/home" />;
-  }
 
-  return <Route {...rest} component={Component} />;
+  if (isPrivate) {
+    if (user) {
+      return <Route {...rest} component={Component} />;
+    }
+  } else {
+    return <Route {...rest} component={Component} />;
+  }
+  return <Redirect to="/home" />;
 }
 
 RouteWrapper.defaultProps = {

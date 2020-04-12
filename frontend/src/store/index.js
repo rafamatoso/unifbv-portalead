@@ -1,15 +1,15 @@
-import React, { createContext, useContext } from 'react';
+import React, { createContext, useContext } from "react";
 
-import { types } from './types';
+import { types } from "./types";
 
-import { set, get, clear } from '../services/storage';
+import { set, get, clear } from "../services/storage";
 
 export { types };
 
 const dataStorage = get();
 
 const cleanState = {
-  user: {},
+  user: null,
 };
 
 function saveState(newState) {
@@ -28,7 +28,7 @@ export const Context = createContext();
 
 const actionMap = {
   [types.SET_USER]: (state, payload) => saveState({ ...state, user: payload }),
-  [types.SET_LOGOUT]: () => logout()
+  [types.SET_LOGOUT]: () => logout(),
 };
 
 export function reducer(state, action) {

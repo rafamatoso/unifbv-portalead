@@ -1,16 +1,15 @@
-import React from 'react';
-import { Switch, BrowserRouter } from 'react-router-dom';
-import Route from './routeWrapper';
+import React from "react";
+import { Switch, BrowserRouter } from "react-router-dom";
+import Route from "./routeWrapper";
 
-import { Home } from '../pages/Home';
-import Perfil from '../pages/Perfil';
-import AddVideo from '../pages/AddVideo';
+import { Home, AddVideo, Perfil } from "../pages";
 
-import { NavBar } from '../components/NavBar';
+import { NavBar } from "../components";
 
 export const Routes = () => (
   <BrowserRouter>
-    {/* <Route path="/dashboard" component={NavBar} /> */}
+    <Route path="/dashboard" component={NavBar} isPrivate />
+
     <Switch>
       <Route path="/home" exact component={Home} />
       <Route path="/dashboard/perfil" exact component={Perfil} isPrivate />
