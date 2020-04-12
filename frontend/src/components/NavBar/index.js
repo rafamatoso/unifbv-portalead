@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
+
+import {
+  AppBar,
+  Toolbar,
+  IconButton,
+  MenuItem,
+  Menu,
+} from '@material-ui/core';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+
 import { useStyles } from './styles';
 
 import { appNameText, optionAText, optionBText, painelIconText } from '../../utils/strings';

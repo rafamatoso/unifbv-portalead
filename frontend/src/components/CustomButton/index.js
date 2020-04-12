@@ -12,8 +12,8 @@ export const CustomButton = withStyles(() => ({
       color: colors.yellow1,
     },
     '&:disabled': {
-      backgroundColor: "#f1f1f1",
-      color: '#c4c4c4',
+      backgroundColor: colors.gray2,
+      color: colors.gray1,
     },
   },
 }))(Button);

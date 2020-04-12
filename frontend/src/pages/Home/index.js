@@ -1,10 +1,7 @@
 import React from 'react';
 
-import {Login} from './Login';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import Box from '@material-ui/core/Box';
+import { Grid, Paper, Link, Box } from '@material-ui/core';
+import { Login } from './Login';
 import { Copyright } from '../../components/Copyritgh';
 
 import { useStyles } from './styles';

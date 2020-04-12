@@ -1,15 +1,14 @@
-import {auth} from './firebase';
+import { auth } from './firebase';
 
 export const signIn = (state, history) => {
-auth
-  .signInWithEmailAndPassword(state.email, state.password)
-  .then((response) => {
-    history.push('/dashboard/perfil');
-  })
-  .catch((err) => {
-    console.log(err);
-  });}
+  auth
+    .signInWithEmailAndPassword(state.email, state.password)
+    .then((response) => {
+      history.push('/dashboard/perfil');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
 
-  export const signUp = () => {}
-
-  
+export const signUp = () => {};
