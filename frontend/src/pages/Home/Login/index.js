@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { auth } from '../../../services/Firebase/firebase';
+import { connect } from '../../../store';
 
+import {
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Typography,
+} from '@material-ui/core';
 import { CustomButton } from '../../../components/CustomButton';
 import { CustomLoader } from '../../../components/CustomLoader';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Typography from '@material-ui/core/Typography';
-import {signIn} from '../../../services/Firebase';
+
+import { signIn } from '../../../services/firebase';
 
 import { useStyles } from './styles';
 
@@ -20,7 +23,7 @@ import {
   passwordText,
 } from '../../../utils/strings';
 
-export const Login = () => {
+function Login({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
   const [state, setState] = useState({ email: '', password: '' });
@@ -41,8 +44,8 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    signIn(state, history)
-    setLoading(false)
+    signIn(state, dispatch, history);
+    setLoading(false);
   };
 
   return (
@@ -92,4 +95,6 @@ export const Login = () => {
       </form>
     </div>
   );
-};
+}
+
+export default connect(Login);

@@ -1,33 +1,22 @@
 import React, { useState } from "react";
+import { useFormik } from "formik";
+import { useHistory } from "react-router-dom";
+
 import {
   TextField,
   Button,
   FormHelperText,
   Grid,
   Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
 } from "@material-ui/core";
+import { ModalUpload } from "./ModalUpload";
 import { CloudUpload } from "@material-ui/icons";
-import CustomBar from "../../components/ProgressBar";
+
 import { useStyles } from "./styles";
 
-import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../services/firebase";
+import { storage } from "../../services/firebase/config";
 
-function ProgressBar({ value, show }) {
-  return (
-    <Dialog open={show} fullWidth>
-      <DialogTitle>Carregando video!!!</DialogTitle>
-      <DialogContent>
-        <CustomBar variant="determinate" value={value} />
-      </DialogContent>
-    </Dialog>
-  );
-}
 export default function AddVideo() {
   const history = useHistory();
   const classes = useStyles();
@@ -37,8 +26,6 @@ export default function AddVideo() {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
-
       const task = storage.ref(`videos/${values.file.name}`).put(values.file);
 
       setUpload((values) => ({
@@ -71,8 +58,7 @@ export default function AddVideo() {
 
   return (
     <Grid container className={classes.root}>
-      {console.log(formik)}
-      <ProgressBar show={upload.show} value={upload.progress} />
+      <ModalUpload show={upload.show} value={upload.progress} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <form

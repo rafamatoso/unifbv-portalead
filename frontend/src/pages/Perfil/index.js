@@ -1,26 +1,32 @@
-import React from 'react';
+import React from "react";
+import { useHistory } from "react-router-dom";
 
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
-import { CustomButton } from '../../components/CustomButton';
-import { Copyright } from '../../components/Copyritgh';
+import { Box, Container } from "@material-ui/core";
+import { CustomButton } from "../../components/CustomButton";
+import { Copyright } from "../../components/Copyritgh";
 
-import { routePerfil, backButtonText } from '../../utils/strings';
+import { connect, types } from "../../store";
 
-import { useStyles } from './styles';
+import { routePerfil, backButtonText } from "../../utils/strings";
+import { auth } from "../../services/firebase/config";
 
-export function Perfil({ history }) {
+import { useStyles } from "./styles";
+
+function Perfil({ dispatch }) {
   const classes = useStyles();
+  const history = useHistory();
 
-  const handleSubmit = () => {
-    history.goBack();
-  };
+  function exit() {
+    dispatch({ type: types.SET_LOGOUT });
+    history.push("/home");
+  }
 
   return (
     <Container component="main" maxWidth="lg" className={classes.root}>
+      
       <div className={classes.paper}>
         <h1>{routePerfil}</h1>
-        <CustomButton onClick={handleSubmit} className={classes.button}>
+        <CustomButton onClick={exit} className={classes.button}>
           {backButtonText}
         </CustomButton>
         <Box mt={8}>
@@ -30,3 +36,5 @@ export function Perfil({ history }) {
     </Container>
   );
 }
+
+export default connect(Perfil);
