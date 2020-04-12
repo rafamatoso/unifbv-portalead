@@ -10,7 +10,7 @@ import {
   DialogContent,
 } from "@material-ui/core";
 import { CloudUpload } from "@material-ui/icons";
-import CustomBar from "../../components/ProgressBar";
+import ProgressBar from "../../components/ProgressBar";
 import { useStyles } from "./styles";
 
 import { useFormik } from "formik";
@@ -18,12 +18,12 @@ import { useHistory } from "react-router-dom";
 import { initialValues, validationSchema } from "./helper";
 import { storage } from "../../services/firebase";
 
-function ProgressBar({ value, show }) {
+function ModalUpload({ value, show }) {
   return (
     <Dialog open={show} fullWidth>
       <DialogTitle>Carregando video!!!</DialogTitle>
       <DialogContent>
-        <CustomBar variant="determinate" value={value} />
+        <ProgressBar variant="determinate" value={value} />
       </DialogContent>
     </Dialog>
   );
@@ -71,8 +71,7 @@ export default function AddVideo() {
 
   return (
     <Grid container className={classes.root}>
-      {console.log(formik)}
-      <ProgressBar show={upload.show} value={upload.progress} />
+      <ModalUpload show={upload.show} value={upload.progress} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <form
