@@ -16,7 +16,7 @@ import { useStyles } from "./styles";
 import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../services/firebase";
+import { storage } from "../../services/Firebase/firebase";
 
 function ModalUpload({ value, show }) {
   return (
