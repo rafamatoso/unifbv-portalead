@@ -12,6 +12,7 @@ export const routePerfil = 'Perfil';
 // Button Text Strings
 export const enterButtonText = 'Entrar';
 export const backButtonText = 'Voltar';
+export const logoutButtonText = 'Logout'
 
 // FormControlLabel Text Strings
 export const remenberMeText = 'Lembre-se de mim';

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Grid, Paper, Link, Box } from '@material-ui/core';
-import { Login } from './Login';
+import Login from './Login';
 import { Copyright } from '../../components/Copyritgh';
 
 import { useStyles } from './styles';

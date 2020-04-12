@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { connect } from '../../../store';
 
 import {
   TextField,
@@ -10,7 +11,7 @@ import {
 import { CustomButton } from '../../../components/CustomButton';
 import { CustomLoader } from '../../../components/CustomLoader';
 
-import { signIn } from '../../../services/Firebase';
+import { signIn } from '../../../services/firebase';
 
 import { useStyles } from './styles';
 
@@ -22,7 +23,7 @@ import {
   passwordText,
 } from '../../../utils/strings';
 
-export const Login = () => {
+function Login({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
   const [state, setState] = useState({ email: '', password: '' });
@@ -43,7 +44,7 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    signIn(state, history);
+    signIn(state, dispatch, history);
     setLoading(false);
   };
 
@@ -94,4 +95,6 @@ export const Login = () => {
       </form>
     </div>
   );
-};
+}
+
+export default connect(Login);

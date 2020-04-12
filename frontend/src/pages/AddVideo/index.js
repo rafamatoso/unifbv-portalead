@@ -1,33 +1,22 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
+import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
+
 import {
   TextField,
   Button,
   FormHelperText,
   Grid,
   Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-} from "@material-ui/core";
-import { CloudUpload } from "@material-ui/icons";
-import CustomBar from "../../components/ProgressBar";
-import { useStyles } from "./styles";
+} from '@material-ui/core';
+import { ModalUpload } from './ModalUpload';
+import { CloudUpload } from '@material-ui/icons';
 
-import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
-import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../services/firebase";
+import { useStyles } from './styles';
 
-function ProgressBar({ value, show }) {
-  return (
-    <Dialog open={show} fullWidth>
-      <DialogTitle>Carregando video!!!</DialogTitle>
-      <DialogContent>
-        <CustomBar variant="determinate" value={value} />
-      </DialogContent>
-    </Dialog>
-  );
-}
+import { initialValues, validationSchema } from './helper';
+import { storage } from '../../services/firebase/config';
+
 export default function AddVideo() {
   const history = useHistory();
   const classes = useStyles();
@@ -47,7 +36,7 @@ export default function AddVideo() {
       }));
 
       task.on(
-        "state_changed",
+        'state_changed',
         function progress(snapshot) {
           setUpload((values) => ({
             ...values,
@@ -62,7 +51,7 @@ export default function AddVideo() {
             ...values,
             show: false,
           }));
-          history.push("/dashboard/perfil");
+          history.push('/dashboard/perfil');
         }
       );
     },
@@ -71,15 +60,13 @@ export default function AddVideo() {
 
   return (
     <Grid container className={classes.root}>
-      {console.log(formik)}
-      <ProgressBar show={upload.show} value={upload.progress} />
+      <ModalUpload show={upload.show} value={upload.progress} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
           <form
             noValidate
             onSubmit={formik.handleSubmit}
-            className={classes.form}
-          >
+            className={classes.form}>
             <TextField
               name="title"
               onChange={formik.handleChange}
@@ -114,7 +101,7 @@ export default function AddVideo() {
               id="button-file"
               accept="video/*"
               type="file"
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               name="file"
               onChange={(e) =>
                 formik.setFieldValue(e.target.name, e.target.files[0])
@@ -128,9 +115,8 @@ export default function AddVideo() {
               htmlFor="button-file"
               className={classes.upload}
               size="large"
-              fullWidth
-            >
-              {formik.values.file ? formik.values.file.name : "Upload Video"}
+              fullWidth>
+              {formik.values.file ? formik.values.file.name : 'Upload Video'}
               <CloudUpload />
             </Button>
             <FormHelperText error={formik.errors.file && formik.touched.file}>
@@ -143,16 +129,14 @@ export default function AddVideo() {
               <Button
                 variant="contained"
                 color="secondary"
-                className={classes.submit}
-              >
+                className={classes.submit}>
                 Cancelar
               </Button>
               <Button
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                type="submit"
-              >
+                type="submit">
                 Salvar
               </Button>
             </div>
