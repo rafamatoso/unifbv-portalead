@@ -8,8 +8,12 @@ export const CustomButton = withStyles(() => ({
     fontWeight: 'bolder',
     color: colors.white1,
     '&:hover': {
-      backgroundColor: colors.blue2,
+      backgroundColor: colors.blue1,
       color: colors.yellow1,
+    },
+    '&:disabled': {
+      backgroundColor: colors.gray2,
+      color: colors.gray1,
     },
   },
 }))(Button);
