@@ -1,7 +1,6 @@
 import React from "react";
 
 import { useHistory } from "react-router-dom";
-import MenuSuperior from "../../components/NavBar"
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -23,16 +22,14 @@ function handleSubmit() {
   //history.push('/createcourse');
 }
 
-export function CriarCurso() {
+export default function CriarCurso() {
   const history = useHistory();
   const classes = useStyles();
 
   return (
-    
+    //import MenuSuperior from "../../components/NavBar"
     <Container component="main" maxWidth="100%">
-      <MenuSuperior></MenuSuperior>
       <CssBaseline />
-      
       <div className={classes.paper} >
         <form margin="5" className={classes.form} noValidate>
           <Card >

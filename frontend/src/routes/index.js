@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, BrowserRouter } from "react-router-dom";
 import Route from "./routeWrapper";
 
-import { Home, AddVideo, Perfil } from "../pages";
+import { Home, AddVideo, Perfil, CriarCurso } from "../pages";
 
 import { NavBar } from "../components";
 
@@ -14,6 +14,7 @@ export const Routes = () => (
       <Route path="/home" exact component={Home} />
       <Route path="/dashboard/perfil" exact component={Perfil} isPrivate />
       <Route path="/dashboard/addVideo" exact component={AddVideo} isPrivate />
+      <Route path="/dashboard/addCourse" exact component={ CriarCurso } isPrivate />
     </Switch>
   </BrowserRouter>
 );
