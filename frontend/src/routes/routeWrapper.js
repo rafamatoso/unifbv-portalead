@@ -5,7 +5,7 @@ import { connect } from "../store";
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { user } = store;
-  const { path } = rest;
+  // const { path } = rest;
 
   if (isPrivate) {
     if (user) {

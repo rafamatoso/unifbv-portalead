@@ -12,7 +12,8 @@ export const routePerfil = 'Perfil';
 // Button Text Strings
 export const enterButtonText = 'Entrar';
 export const backButtonText = 'Voltar';
-export const logoutButtonText = 'Logout'
+export const logoutButtonText = 'Logout';
+export const signUpButtonText = "Registrar";
 
 // FormControlLabel Text Strings
 export const remenberMeText = 'Lembre-se de mim';
@@ -21,6 +22,7 @@ export const remenberMeText = 'Lembre-se de mim';
 export const forgotYourPwText = 'Esqueceu sua Senha?';
 export const dontHaveAnAccountText = 'Não tem uma Conta?';
 export const createOneHereText = 'Crie uma Aqui.';
+export const alreadyHaveAAccount = `Já tem uma conta? Entre no ${appNameText}`
 
 // IconButton Text String
 export const painelIconText = 'Painel';
