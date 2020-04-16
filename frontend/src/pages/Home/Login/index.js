@@ -8,8 +8,7 @@ import {
   Checkbox,
   Typography,
 } from '@material-ui/core';
-import { CustomButton } from '../../../components/CustomButton';
-import { CustomLoader } from '../../../components/CustomLoader';
+import { CustomButton } from '../../../components';
 
 import { signIn } from '../../../services/firebase';
 
@@ -26,12 +25,10 @@ import {
 function Login({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
-  const [state, setState] = useState({ email: '', password: '' });
-  const [loading, setLoading] = useState(false);
 
-  const verifyButtonDisable = () => {
-    return !!(state.email === '' || state.password === '');
-  };
+  const initialState = { email: '', password: '' };
+
+  const [state, setState] = useState(initialState);
 
   const handleOnChange = (e) => {
     const value = e.target.value;
@@ -43,57 +40,60 @@ function Login({ dispatch }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
     signIn(state, dispatch, history);
-    setLoading(false);
+  };
+
+  const verifyButtonDisable = () => {
+    return !!(state.email === '' || state.password === '');
   };
 
   return (
-    <div className={classes.paper}>
-      <Typography component="h1" variant="h4">
-        {appNameText}
-      </Typography>
-      <form className={classes.form} noValidate onSubmit={handleSubmit}>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="email"
-          label={emailText}
-          name="email"
-          autoComplete="email"
-          autoFocus
-          onChange={handleOnChange}
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          name="password"
-          label={passwordText}
-          type="password"
-          id="password"
-          autoComplete="current-password"
-          onChange={handleOnChange}
-        />
-        <FormControlLabel
-          control={<Checkbox value="remember" color="primary" />}
-          label={remenberMeText}
-        />
-        <div className={classes.containerBtnLoader}>
-          <CustomButton
-            type="submit"
-            disabled={verifyButtonDisable() || loading}
+    <>
+      <div className={classes.paper}>
+        <Typography component="h1" variant="h4">
+          {appNameText}
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
             fullWidth
-            className={classes.submit}>
-            {enterButtonText}
-          </CustomButton>
-          {loading && <CustomLoader size={24}></CustomLoader>}
-        </div>
-      </form>
-    </div>
+            id="email"
+            label={emailText}
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={handleOnChange}
+          />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label={passwordText}
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={handleOnChange}
+          />
+          <FormControlLabel
+            control={<Checkbox value="remember" color="primary" />}
+            label={remenberMeText}
+          />
+          <div className={classes.containerBtnLoader}>
+            <CustomButton
+              type="submit"
+              fullWidth
+              disabled={verifyButtonDisable()}
+              className={classes.submit}>
+              {enterButtonText}
+            </CustomButton>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }
 
