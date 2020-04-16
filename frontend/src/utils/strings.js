@@ -14,6 +14,7 @@ export const enterButtonText = 'Entrar';
 export const backButtonText = 'Voltar';
 export const logoutButtonText = 'Logout';
 export const signUpButtonText = "Registrar";
+export const signOutButtonText = 'Logout'
 
 // FormControlLabel Text Strings
 export const remenberMeText = 'Lembre-se de mim';

@@ -1,45 +1,55 @@
-import React from 'react';
-import {
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import React, { useState } from 'react';
+import { connect } from '../../../store';
 
-import { CustomButton } from '../../../components/CustomButton';
+import { TextField, Typography } from '@material-ui/core';
+import { CustomButton } from '../../../components';
+
+import { signUp } from '../../../services/firebase';
 
 import { useStyles } from './styles';
 
-import { appNameText,signUpButtonText } from '../../../utils/strings';
+import { appNameText, signUpButtonText } from '../../../utils/strings';
 
-export default function SignUp({ history }) {
+function SignUp() {
   const classes = useStyles();
+
+  const initialState = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+  };
+
+  const [state, setState] = useState(initialState);
+
+  const handleOnChange = (e) => {
+    const value = e.target.value;
+    setState({
+      ...state,
+      [e.target.name]: value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signUp(state);
+  };
+
+  const verifyButtonDisable = () => {
+    return !!(
+      state.firstName === '' ||
+      state.lastName === '' ||
+      state.email === '' ||
+      state.password === ''
+    );
+  };
 
   return (
     <div className={classes.paper}>
       <Typography component="h1" variant="h5">
         {`${signUpButtonText} no ${appNameText}`}
       </Typography>
-      <form className={classes.form} noValidate>
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="firstName"
-          label="Primeiro Nome"
-          name="firstName"
-          autoComplete="fname"
-          autoFocus
-        />
-        <TextField
-          variant="outlined"
-          margin="normal"
-          required
-          fullWidth
-          id="lastName"
-          label="Sobrenome"
-          name="lastName"
-          autoComplete="lname"
-        />
+      <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
           variant="outlined"
           margin="normal"
@@ -49,6 +59,7 @@ export default function SignUp({ history }) {
           label="E-mail"
           name="email"
           autoComplete="email"
+          onChange={handleOnChange}
         />
         <TextField
           variant="outlined"
@@ -60,13 +71,13 @@ export default function SignUp({ history }) {
           name="password"
           autoComplete="current-password"
           type="password"
+          onChange={handleOnChange}
         />
         <div className={classes.containerBtnLoader}>
           <CustomButton
             type="submit"
             fullWidth
-            variant="contained"
-            color="primary"
+            disabled={verifyButtonDisable()}
             className={classes.submit}>
             {signUpButtonText}
           </CustomButton>
@@ -75,3 +86,5 @@ export default function SignUp({ history }) {
     </div>
   );
 }
+
+export default connect(SignUp);

@@ -9,7 +9,6 @@ import Register from './Register';
 import { useStyles } from './styles';
 
 import {
-  forgotYourPwText,
   dontHaveAnAccountText,
   createOneHereText,
   alreadyHaveAAccount
@@ -19,6 +18,9 @@ export function Home() {
   const classes = useStyles();
   const [showRegister, setShowRegister] = useState(false);
 
+  const handleShowRegister = () => {
+    setShowRegister(!showRegister)
+  }
 
   return (
     <>
@@ -30,15 +32,9 @@ export function Home() {
               <Login></Login>
               <div className={classes.link}>
                 <Grid item>
-                  <Link href="#" variant="body2">
-                    {forgotYourPwText}
-                  </Link>
-                </Grid>
-                <Grid item>
                   <Link
-                    href="#"
                     variant="body2"
-                    onClick={() => setShowRegister(true)}>
+                    onClick={handleShowRegister}>
                     {`${dontHaveAnAccountText} ${createOneHereText}`}
                   </Link>
                 </Grid>
@@ -50,9 +46,8 @@ export function Home() {
               <div className={classes.link}>
                 <Grid item>
                   <Link
-                    to="#"
                     variant="body2"
-                    onClick={() => setShowRegister(false)}>
+                    onClick={handleShowRegister}>
                     {alreadyHaveAAccount}
                   </Link>
                 </Grid>
