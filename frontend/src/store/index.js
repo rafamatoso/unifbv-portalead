@@ -10,6 +10,7 @@ const dataStorage = get();
 
 const cleanState = {
   user: null,
+  loading: null
 };
 
 function saveState(newState) {
@@ -28,6 +29,7 @@ export const Context = createContext();
 
 const actionMap = {
   [types.SET_USER]: (state, payload) => saveState({ ...state, user: payload }),
+  [types.SET_LOADING]: (state, payload) => saveState({ ...state, loading: payload }),
   [types.SET_LOGOUT]: () => logout(),
 };
 
