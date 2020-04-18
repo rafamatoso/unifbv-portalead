@@ -11,17 +11,19 @@ export const signIn = ({ email, password }, dispatch, history) => {
       history.push('/dashboard/perfil');
     })
     .catch((err) => {
+      dispatch({ type: types.SET_LOADING, payload: false });
       console.log(err);
     });
 };
 
-export const signUp = ({ email, password }) => {
+export const signUp = ({ email, password }, dispatch) => {
   auth
     .createUserWithEmailAndPassword(email, password)
     .then((response) => {
       console.log(response);
     })
     .catch((err) => {
+      dispatch({ type: types.SET_LOADING, payload: false });
       console.log(err);
     });
 };

@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
+import { connect, types } from '../../store';
 
-import { Grid, Paper, Link, Box } from '@material-ui/core';
+import {
+  Grid,
+  Paper,
+  Link,
+  Box,
+  Backdrop,
+  CircularProgress,
+} from '@material-ui/core';
 import { Copyright } from '../../components/Copyritgh';
 
 import Login from './Login';
@@ -11,19 +19,25 @@ import { useStyles } from './styles';
 import {
   dontHaveAnAccountText,
   createOneHereText,
-  alreadyHaveAAccount
+  alreadyHaveAAccount,
 } from '../../utils/strings';
 
-export function Home() {
+function Home({ store, dispatch }) {
   const classes = useStyles();
   const [showRegister, setShowRegister] = useState(false);
+  const { loading } = store;
 
   const handleShowRegister = () => {
-    setShowRegister(!showRegister)
-  }
+    setShowRegister(!showRegister);
+  };
 
   return (
     <>
+      {loading && (
+        <Backdrop className={classes.backdrop} open={loading}>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
       <Grid container component="main" className={classes.root}>
         <Grid item sm={'auto'} md={6} className={classes.image} />
         <Grid item sm={12} md={6} component={Paper} elevation={6} square>
@@ -32,9 +46,7 @@ export function Home() {
               <Login></Login>
               <div className={classes.link}>
                 <Grid item>
-                  <Link
-                    variant="body2"
-                    onClick={handleShowRegister}>
+                  <Link variant="body2" onClick={handleShowRegister}>
                     {`${dontHaveAnAccountText} ${createOneHereText}`}
                   </Link>
                 </Grid>
@@ -45,9 +57,7 @@ export function Home() {
               <Register></Register>
               <div className={classes.link}>
                 <Grid item>
-                  <Link
-                    variant="body2"
-                    onClick={handleShowRegister}>
+                  <Link variant="body2" onClick={handleShowRegister}>
                     {alreadyHaveAAccount}
                   </Link>
                 </Grid>
@@ -64,3 +74,5 @@ export function Home() {
     </>
   );
 }
+
+export default connect(Home);

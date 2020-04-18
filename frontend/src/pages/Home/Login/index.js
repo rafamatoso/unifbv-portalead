@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { connect } from '../../../store';
+import { connect, types } from '../../../store';
 
 import {
   TextField,
@@ -25,10 +25,10 @@ import {
 function Login({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
-
+  
   const initialState = { email: '', password: '' };
 
-  const [state, setState] = useState(initialState);
+  const [state, setState] = useState(initialState)
 
   const handleOnChange = (e) => {
     const value = e.target.value;
@@ -39,6 +39,7 @@ function Login({ dispatch }) {
   };
 
   const handleSubmit = (e) => {
+    dispatch({ type: types.SET_LOADING, payload: true });
     e.preventDefault();
     signIn(state, dispatch, history);
   };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from '../../../store';
+import { connect, types } from '../../../store';
 
 import { TextField, Typography } from '@material-ui/core';
 import { CustomButton } from '../../../components';
@@ -10,12 +10,10 @@ import { useStyles } from './styles';
 
 import { appNameText, signUpButtonText } from '../../../utils/strings';
 
-function SignUp() {
+function SignUp({ dispatch }) {
   const classes = useStyles();
 
   const initialState = {
-    firstName: '',
-    lastName: '',
     email: '',
     password: '',
   };
@@ -32,13 +30,12 @@ function SignUp() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signUp(state);
+    dispatch({ type: types.SET_LOADING, payload: true });
+    signUp(state, dispatch);
   };
 
   const verifyButtonDisable = () => {
     return !!(
-      state.firstName === '' ||
-      state.lastName === '' ||
       state.email === '' ||
       state.password === ''
     );
