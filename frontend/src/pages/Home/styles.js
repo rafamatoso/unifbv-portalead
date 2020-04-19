@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   link: {
     margin: theme.spacing(4),
+    color: colors.blue1,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',

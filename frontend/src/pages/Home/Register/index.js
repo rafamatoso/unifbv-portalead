@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect, types } from '../../../store';
+import { useFormik } from 'formik';
 
 import { TextField, Typography } from '@material-ui/core';
 import { CustomButton } from '../../../components';
 
 import { signUp } from '../../../services/firebase';
+
+import { initialValues, validationSchema } from '../helper';
 
 import { useStyles } from './styles';
 
@@ -13,37 +16,39 @@ import { appNameText, signUpButtonText } from '../../../utils/strings';
 function SignUp({ dispatch }) {
   const classes = useStyles();
 
-  const initialState = {
-    email: '',
-    password: '',
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    values,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch({ type: types.SET_LOADING, payload: true });
+      signUp(values, dispatch);
+    },
+  });
+
+  const handleHelperTextEmail = () => {
+    return Boolean(errors.email) && touched.email ? errors.email : null;
   };
 
-  const [state, setState] = useState(initialState);
-
-  const handleOnChange = (e) => {
-    const value = e.target.value;
-    setState({
-      ...state,
-      [e.target.name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch({ type: types.SET_LOADING, payload: true });
-    signUp(state, dispatch);
+  const handleHelperTextPassword = () => {
+    return Boolean(errors.password) && touched.password
+      ? errors.password
+      : null;
   };
 
   const verifyButtonDisable = () => {
-    return !!(
-      state.email === '' ||
-      state.password === ''
-    );
+    return !!(values.email === '' || values.password === '');
   };
 
   return (
     <div className={classes.paper}>
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h4" className={classes.typography}>
         {`${signUpButtonText} no ${appNameText}`}
       </Typography>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -56,7 +61,10 @@ function SignUp({ dispatch }) {
           label="E-mail"
           name="email"
           autoComplete="email"
-          onChange={handleOnChange}
+          onChange={handleChange}
+          error={Boolean(errors.email) && touched.email}
+          onBlur={handleBlur}
+          helperText={handleHelperTextEmail()}
         />
         <TextField
           variant="outlined"
@@ -68,7 +76,10 @@ function SignUp({ dispatch }) {
           name="password"
           autoComplete="current-password"
           type="password"
-          onChange={handleOnChange}
+          onChange={handleChange}
+          error={Boolean(errors.password) && touched.password                                                                                                                                                                                                                                                                                                     }
+          onBlur={handleBlur}
+          helperText={handleHelperTextPassword()}
         />
         <div className={classes.containerBtnLoader}>
           <CustomButton
