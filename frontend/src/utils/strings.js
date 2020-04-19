@@ -25,9 +25,6 @@ export const dontHaveAnAccountText = 'Não tem uma Conta?';
 export const createOneHereText = 'Crie uma Aqui.';
 export const alreadyHaveAAccount = `Já tem uma conta? Entre no ${appNameText}`
 
-// IconButton Text String
-export const painelIconText = 'Painel';
+// NavBar
+export const courseIconText = 'Cursos';
 
-// MenuItem Text String
-export const optionAText = 'Opção A';
-export const optionBText = 'Opção B';
