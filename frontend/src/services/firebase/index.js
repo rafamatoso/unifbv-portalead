@@ -1,16 +1,42 @@
-import { auth } from "./config";
-import { types } from "../../store/types";
+import { auth } from './config';
+import { types } from '../../store/types';
 
-export const signIn = (state, dispatch, history) => {
+
+export const signIn = ({ email, password }, dispatch, history) => {
   auth
-    .signInWithEmailAndPassword(state.email, state.password)
+    .signInWithEmailAndPassword(email, password)
     .then((response) => {
+      console.log(response);
       dispatch({ type: types.SET_USER, payload: response.user });
-      history.push("/dashboard/perfil");
+      history.push('/dashboard/perfil');
     })
     .catch((err) => {
+      dispatch({ type: types.SET_LOADING, payload: false });
       console.log(err);
     });
 };
 
-export const signUp = () => {};
+export const signUp = ({ email, password }, dispatch) => {
+  auth
+    .createUserWithEmailAndPassword(email, password)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((err) => {
+      dispatch({ type: types.SET_LOADING, payload: false });
+      console.log(err);
+    });
+};
+
+export const signOut = (dispatch, history) => {
+    auth
+    .signOut()
+    .then((response) => {
+      console.log(response);
+      dispatch({ type: types.SET_LOGOUT });
+      history.push('/home');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}

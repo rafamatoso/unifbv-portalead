@@ -5,10 +5,11 @@ import { Box, Container } from "@material-ui/core";
 import { CustomButton } from "../../components/CustomButton";
 import { Copyright } from "../../components/Copyritgh";
 
-import { connect, types } from "../../store";
+import { signOut } from '../../services/firebase';
 
-import { routePerfil, backButtonText } from "../../utils/strings";
-import { auth } from "../../services/firebase/config";
+import { connect } from "../../store";
+
+import { routePerfil, signOutButtonText } from '../../utils/strings';
 
 import { useStyles } from "./styles";
 
@@ -16,18 +17,17 @@ function Perfil({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
 
-  function exit() {
-    dispatch({ type: types.SET_LOGOUT });
-    history.push("/home");
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signOut(dispatch, history);
+  };
 
   return (
     <Container component="main" maxWidth="lg" className={classes.root}>
-      
       <div className={classes.paper}>
         <h1>{routePerfil}</h1>
-        <CustomButton onClick={exit} className={classes.button}>
-          {backButtonText}
+        <CustomButton onClick={handleSubmit} className={classes.button}>
+          {signOutButtonText}
         </CustomButton>
         <Box mt={8}>
           <Copyright />
