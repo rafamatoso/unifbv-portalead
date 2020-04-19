@@ -83,8 +83,7 @@ function NavBar({dispatch}) {
                 horizontal: 'right',
               }}
               open={open}
-              onClose={handleClose}
-              onClick={handleLogout}>
+              onClose={handleClose}>
               <div className={classes.containerMenuItem}>
                 <ExitToApp></ExitToApp>
                 <MenuItem onClick={handleClose}>{logoutButtonText}</MenuItem>
