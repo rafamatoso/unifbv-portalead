@@ -1,14 +1,16 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { colors } from "../../utils/colors";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    height: "90vh",
+    minHeight: "90vh",
+    backgroundColor: colors.gray2,
+    justifyContent: "space-between",
+    padding: theme.spacing(0, 2),
   },
+  button: { justifyContent: "flex-end" },
 
-  paper: {
-    margin: theme.spacing(8, 4),
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
+  position: {
+    marginTop: theme.spacing(3),
   },
 }));

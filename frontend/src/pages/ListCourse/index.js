@@ -21,8 +21,12 @@ export default function ListCourse() {
   }, []);
   return (
     <Grid container className={classes.root}>
+      {/* <Button className={classes.button} variant="contained" color="primary">
+        Adicionar Novo
+      </Button> */}
+
       {courses.map((item) => (
-        <CardCourse key={item.id} data={item} />
+        <CardCourse className={classes.position} key={item.id} data={item} />
       ))}
     </Grid>
   );
