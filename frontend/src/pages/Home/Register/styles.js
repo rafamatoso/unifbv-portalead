@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core';
+import { colors } from '../../../utils/colors';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
@@ -8,13 +9,13 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  typography: {
+    color: colors.blue1
+  },
   form: {
     width: '100%', // Fix IE 11 issue.
   },
   submit: {
     margin: theme.spacing(2, 0, 0),
-  },
-  containerBtnLoader: {
-    position: 'relative',
   },
 }));

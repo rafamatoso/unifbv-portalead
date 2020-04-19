@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect, types } from '../../store';
+import { connect } from '../../store';
 
 import {
   Grid,
@@ -22,7 +22,7 @@ import {
   alreadyHaveAAccount,
 } from '../../utils/strings';
 
-function Home({ store, dispatch }) {
+function Home({ store }) {
   const classes = useStyles();
   const [showRegister, setShowRegister] = useState(false);
   const { loading } = store;
