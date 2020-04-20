@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from '../../store';
+import { connect } from '../../../store';
 
 import {
   Button,
@@ -16,7 +16,7 @@ import {
   MenuItem,
   Card,
 } from '@material-ui/core';
-import { Copyright } from '../../components/Copyritgh';
+import { Copyright } from '../../../components/Copyritgh';
 
 import { useStyles } from './styles';
 

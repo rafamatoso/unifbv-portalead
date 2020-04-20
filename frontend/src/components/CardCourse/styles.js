@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 305,
   },
   spaceImage: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
   },
   sizeImage: {
     height: 140,
@@ -20,6 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& .description": {
       height: 68,
+      
     },
     "& *": {
       textOverflow: "ellipsis",

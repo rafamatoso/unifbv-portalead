@@ -5,7 +5,7 @@ import { useFormik } from 'formik';
 import { TextField, Typography } from '@material-ui/core';
 import { CustomButton } from '../../../components';
 
-import { signUp } from '../../../services/firebase';
+import { signUp } from '../../../services/firebase/signs';
 
 import { initialValues, validationSchema } from '../helper';
 
