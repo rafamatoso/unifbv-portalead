@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { connect } from '../../../store';
 import { useFormik } from "formik";
 
 import {
@@ -15,9 +16,9 @@ import { CloudUpload } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../services/firebase/config";
+import { storage } from "../../../services/firebase/config";
 
-export default function AddVideo() {
+function AddVideo() {
   const history = useHistory();
   const classes = useStyles();
 
@@ -148,3 +149,5 @@ export default function AddVideo() {
     </Grid>
   );
 }
+
+export default connect(AddVideo)

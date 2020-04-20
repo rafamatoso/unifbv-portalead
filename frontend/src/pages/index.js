@@ -1,6 +1,6 @@
 import Home  from './Home';
-import Perfil from './Perfil';
-import AddVideo from './AddVideo';
-import AddCourse from './AddCourse'
+import ListCourse from './Course/ListCourse';
+import AddCourse from './Course/AddCourse';
+import AddVideo from './Video/AddVideo';
 
-export { Home, AddVideo, Perfil, AddCourse };
+export { Home, ListCourse, AddCourse, AddVideo };

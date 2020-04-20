@@ -5,7 +5,7 @@ import { connect } from '../../store/index';
 import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
 import {AccountCircle, ExitToApp} from '@material-ui/icons';
 
-import { signOut } from '../../services/firebase';
+import { signOut } from '../../services/firebase/signs';
 
 import { useStyles } from './styles';
 
@@ -83,10 +83,11 @@ function NavBar({dispatch}) {
                 horizontal: 'right',
               }}
               open={open}
-              onClose={handleClose}>
+              onClose={handleClose}
+              onClick={handleClose}>
               <div className={classes.containerMenuItem}>
                 <ExitToApp></ExitToApp>
-                <MenuItem onClick={handleClose}>{logoutButtonText}</MenuItem>
+                <MenuItem onClick={handleLogout}>{logoutButtonText}</MenuItem>
               </div>
             </Menu>
           </div>

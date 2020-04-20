@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import {imageBg} from '../../assets/img';
+import {imageBg} from '../../../assets/img';
 
 export const useStyles = makeStyles((theme) => ({
     paper: {

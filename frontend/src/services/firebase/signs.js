@@ -8,7 +8,7 @@ export const signIn = ({ email, password }, dispatch, history) => {
     .then((response) => {
       console.log(response);
       dispatch({ type: types.SET_USER, payload: response.user });
-      history.push('/dashboard/perfil');
+      history.push('/dashboard/courses');
     })
     .catch((err) => {
       dispatch({ type: types.SET_LOADING, payload: false });
