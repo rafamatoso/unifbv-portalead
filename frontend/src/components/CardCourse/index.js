@@ -10,13 +10,17 @@ import {
 } from "@material-ui/core";
 import Share from "@material-ui/icons/ShareTwoTone";
 import { useStyles } from "./styles";
-// import { Container } from './styles';
+import { Link } from "react-router-dom";
 
 export default function CardCourse({ data, className }) {
   const classes = useStyles();
   return (
     <Card className={`${classes.root} ${className}`}>
-      <CardActionArea className={classes.spaceImage}>
+      <CardActionArea
+        className={classes.spaceImage}
+        component={Link}
+        to={`/dashboard/courses/${data.id}`}
+      >
         <CardMedia
           className={classes.sizeImage}
           component="img"
