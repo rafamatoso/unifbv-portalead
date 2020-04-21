@@ -1,6 +1,6 @@
 # Platea
 
-![[Codacy Badge](https://api.codacy.com/project/badge/Grade/7c81a5252a6d48f8ad30a71f2289b2de)](https://www.codacy.com/manual/rafamatoso/unifbv-portalead?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rafamatoso/unifbv-portalead&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/7c81a5252a6d48f8ad30a71f2289b2de)](https://www.codacy.com/manual/rafamatoso/unifbv-portalead?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=rafamatoso/unifbv-portalead&amp;utm_campaign=Badge_Grade)
 ![GitHub repo size](https://img.shields.io/github/repo-size/rafamatoso/unifbv-portalead)
 ![GitHub contributors](https://img.shields.io/github/contributors/rafamatoso/unifbv-portalead)
 ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/rafamatoso/unifbv-portalead)
