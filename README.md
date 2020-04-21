@@ -2,7 +2,7 @@
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/rafamatoso/unifbv-portalead) ![GitHub contributors](https://img.shields.io/github/contributors/rafamatoso/unifbv-portalead) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/rafamatoso/unifbv-portalead)
 
-Trabalho Acadêmico que tem como objetivo a criação de um Portal EAD, usando as tecnologias recentes de desenvolvimento web e que seja adaptável às mais diversas instituições de ensino.< br/>
+Trabalho Acadêmico que tem como objetivo a criação de um Portal EAD, usando as tecnologias recentes de desenvolvimento web e que seja adaptável às mais diversas instituições de ensino.
 
 ## Começando
 
