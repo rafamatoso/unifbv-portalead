@@ -20,7 +20,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     "& .description": {
       height: 68,
-      
     },
     "& *": {
       textOverflow: "ellipsis",
