@@ -5,7 +5,6 @@ import { connect } from "../store";
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   const { user } = store;
-  // const { path } = rest;
 
   if (isPrivate) {
     if (user) {
@@ -14,7 +13,7 @@ function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   } else {
     return <Route {...rest} component={Component} />;
   }
-  return <Redirect to="/home" />;
+  return <Redirect to='/home' />;
 }
 
 RouteWrapper.defaultProps = {

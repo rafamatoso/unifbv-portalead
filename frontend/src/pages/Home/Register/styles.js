@@ -1,19 +1,19 @@
-import { makeStyles } from '@material-ui/core';
-import { colors } from '../../../utils/colors';
+import { makeStyles } from "@material-ui/core";
+import { colors } from "../../../utils/colors";
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(8, 4),
-    marginBottom: '16px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    marginBottom: "16px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   typography: {
-    color: colors.blue1
+    color: colors.blue1,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
   },
   submit: {
     margin: theme.spacing(2, 0, 0),
