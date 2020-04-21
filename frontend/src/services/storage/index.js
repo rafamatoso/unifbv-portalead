@@ -1,11 +1,7 @@
 import { keys } from "./storageKeys";
 
 export function get() {
-  try {
-    return JSON.parse(localStorage.getItem(keys.GLOBAL_STORE));
-  } catch (err) {
-    return undefined;
-  }
+  return JSON.parse(localStorage.getItem(keys.GLOBAL_STORE));
 }
 
 export const set = (value) =>
