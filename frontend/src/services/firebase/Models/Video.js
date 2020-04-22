@@ -1,6 +1,6 @@
-import { database, storage } from "../services/firebase/config";
+import { database, storage } from "../config";
 import firebase from "firebase/app";
-import collections from "../utils/collections";
+import collections from "../../../utils/collections";
 
 function upload(file, onProgress, onError, onComplete) {
   return new Promise((resolve, reject) => {
@@ -47,15 +47,17 @@ class Video {
       .collection(collections.courses)
       .doc(idCourse)
       .update({
-        videos: FieldValue.arrayUnion(ref.path),
+        videos: FieldValue.arrayUnion(ref),
       });
   }
 
   list(idCourse, observer) {
     const resolver = async (query) => {
       const data = query.data();
+      console.log(data.videos[0]);
+
       return await Promise.all(
-        data.videos.map((item) => item.get().then((doc) => doc.data()))
+        data.videos.map((item) => item.get().then((resp) => resp.data()))
       );
     };
 

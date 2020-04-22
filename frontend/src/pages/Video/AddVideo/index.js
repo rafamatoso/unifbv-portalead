@@ -16,7 +16,7 @@ import { CloudUpload } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
 import { initialValues, validationSchema } from "./helper";
-import Video from "../../../Models/Video";
+import Video from "../../../services/firebase/Models/Video";
 
 function AddVideo() {
   const { id } = useParams();

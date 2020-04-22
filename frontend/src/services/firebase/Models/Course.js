@@ -1,5 +1,5 @@
-import { database, storage } from "../services/firebase/config";
-import collections from "../utils/collections";
+import { database, storage } from "../config";
+import collections from "../../../utils/collections";
 
 function upload(file, onProgress, onError, onComplete) {
   return new Promise((resolve, reject) => {

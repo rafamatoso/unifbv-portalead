@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Grid } from "@material-ui/core";
 import { CardCourse } from "../../../components";
 
-import Course from "../../../Models/Course";
+import Course from "../../../services/firebase/Models/Course";
 
 import { useStyles } from "./styles";
 

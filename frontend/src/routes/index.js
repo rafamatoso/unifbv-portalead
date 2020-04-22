@@ -24,7 +24,12 @@ export const Routes = () => (
         component={ListVideo}
         isPrivate
       />
-      <Route path="/dashboard/addvideo" exact component={AddVideo} isPrivate />
+      <Route
+        path="/dashboard/courses/:id/addvideo"
+        exact
+        component={AddVideo}
+        isPrivate
+      />
 
       <Route path="/" component={() => <Redirect to="/home" />} />
     </Switch>
