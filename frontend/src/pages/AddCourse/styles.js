@@ -9,12 +9,11 @@ export const useStyles = makeStyles((theme) => ({
       alignItems: 'center',
     },
     tFDescription: {
-        width: '100%',
-        marginLeft: 'auto',
-        marginRight: 'auto',        
-        paddingBottom: 0,
-        marginTop: 0,
-        fontWeight: 500
+      placeholder: 'teste place',
+      width: '100%',
+      height: '200px',
+      padding: '15px 22px',
+      
     },
     avatar: {
       margin: theme.spacing(1),
