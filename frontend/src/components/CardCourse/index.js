@@ -19,7 +19,7 @@ export default function CardCourse({ data, className }) {
       <CardActionArea
         className={classes.spaceImage}
         component={Link}
-        to={`/dashboard/courses/${data.id}`}
+        to={`/dashboard/courses/${data.id}/listVideo`}
       >
         <CardMedia
           className={classes.sizeImage}

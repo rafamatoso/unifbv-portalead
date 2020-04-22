@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
-import { connect } from '../../../store';
+import { useHistory, useParams } from "react-router-dom";
+import { connect } from "../../../store";
 import { useFormik } from "formik";
 
 import {
@@ -16,9 +16,10 @@ import { CloudUpload } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../../services/firebase/config";
+import Video from "../../../Models/Video";
 
 function AddVideo() {
+  const { id } = useParams();
   const history = useHistory();
   const classes = useStyles();
 
@@ -27,15 +28,13 @@ function AddVideo() {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      const task = storage.ref(`videos/${values.file.name}`).put(values.file);
-
       setUpload((values) => ({
         ...values,
         show: true,
       }));
 
-      task.on(
-        "state_changed",
+      Video.create(
+        { idCourse: id, ...values },
         function progress(snapshot) {
           setUpload((values) => ({
             ...values,
@@ -150,4 +149,4 @@ function AddVideo() {
   );
 }
 
-export default connect(AddVideo)
+export default connect(AddVideo);

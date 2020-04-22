@@ -1,10 +1,10 @@
-import React from 'react';
-import { Switch, BrowserRouter } from 'react-router-dom';
-import Route from './routeWrapper';
+import React from "react";
+import { Switch, BrowserRouter, Redirect } from "react-router-dom";
+import Route from "./routeWrapper";
 
-import { Home, ListCourse, AddCourse, AddVideo } from '../pages';
+import { Home, ListCourse, AddCourse, ListVideo, AddVideo } from "../pages";
 
-import { NavBar } from '../components';
+import { NavBar } from "../components";
 
 export const Routes = () => (
   <BrowserRouter>
@@ -18,7 +18,15 @@ export const Routes = () => (
         component={AddCourse}
         isPrivate
       />
+      <Route
+        path="/dashboard/courses/:id/listVideo"
+        exact
+        component={ListVideo}
+        isPrivate
+      />
       <Route path="/dashboard/addvideo" exact component={AddVideo} isPrivate />
+
+      <Route path="/" component={() => <Redirect to="/home" />} />
     </Switch>
   </BrowserRouter>
 );
