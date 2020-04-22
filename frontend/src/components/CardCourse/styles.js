@@ -2,24 +2,25 @@ import { makeStyles } from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 250,
-    maxHeight: 305,
+    maxWidth: 350,
+    maxHeight: 380,
   },
   spaceImage: {
     padding: theme.spacing(0),
   },
   sizeImage: {
-    height: 140,
+    height: 200,
   },
   sizeContent: {
-    padding: 4,
+    padding: 10,
     minHeight: 100,
-    maxHeight: 100,
+    maxHeight: 160,
     "& .title": {
       height: 32,
+      fontWeight: 'bold'
     },
     "& .description": {
-      height: 68,
+      height: 70,
     },
     "& *": {
       textOverflow: "ellipsis",
@@ -27,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   positionButtons: {
     justifyContent: "flex-end",
-    padding: theme.spacing(0, 1, 0, 1),
+    padding: theme.spacing(1, 1, 0, 1),
     "& .child": { padding: theme.spacing(1) },
   },
 }));

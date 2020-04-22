@@ -31,8 +31,8 @@ function NavBar({ dispatch }) {
     setAnchorEl(null);
   };
 
-  const handleGoTo = () => {
-    history.push(`${routeDashboard}/perfil`);
+  const handleGoToCourse = () => {
+    history.push(`${routeDashboard}/courses`);
   };
 
   const handleLogout = (e) => {
@@ -56,7 +56,7 @@ function NavBar({ dispatch }) {
               edge='start'
               color='inherit'
               aria-label='menu'
-              onClick={handleGoTo}
+              onClick={handleGoToCourse}
               className={classes.iconButton}>
               {courseIconText}
             </IconButton>
@@ -79,7 +79,7 @@ function NavBar({ dispatch }) {
               }}
               keepMounted
               transformOrigin={{
-                vertical: "top",
+                vertical: "bottom",
                 horizontal: "right",
               }}
               open={open}
