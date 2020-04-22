@@ -3,7 +3,7 @@ import { colors } from "../../../utils/colors";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "90vh",
+    height: "92vh",
     backgroundColor: colors.gray2,
     justifyContent: "space-around",
   },
