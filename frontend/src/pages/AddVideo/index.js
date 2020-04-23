@@ -17,6 +17,7 @@ import { useStyles } from "./styles";
 import { initialValues, validationSchema } from "./helper";
 import { storage } from "../../services/firebase/config";
 
+
 export default function AddVideo() {
   const history = useHistory();
   const classes = useStyles();
@@ -26,7 +27,8 @@ export default function AddVideo() {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      const task = storage.ref(`videos/${values.file.name}`).put(values.file);
+      const task = storage.ref(`videos/${values.file.name}`).put(values.file) ;
+      
 
       setUpload((values) => ({
         ...values,

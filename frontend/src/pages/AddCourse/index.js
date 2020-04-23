@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "../../store";
 import { storage } from "../../services/firebase/config";
+import { database } from "../../services/firebase/config";
 import { useFormik } from "formik";
-
+import { useHistory } from "react-router-dom";
 import {
   Button,
   CssBaseline,
@@ -22,21 +23,64 @@ import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 import { Copyright } from "../../components/Copyritgh";
 
 import { useStyles } from "./styles";
-import { set } from "../../services/storage";
 
 function AddCourse(initialValues, onSubmit) {
   const classes = useStyles();
+  //const history = useHistory();
+  const [upload, setUpload] = useState({ progress: 0, show: false });
 
   const formik = useFormik({
     initialValues: {
-      courseTitle: "",
-      coursePrivacy: "",
-      courseImage: "",
-      courseDescription: "",
+      items: {
+        courseTitle: "",
+        coursePrivacy: "",
+
+        courseDescription: "",
+      },
+
+      file: null,
     },
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      const taskStorage = storage
+        .ref(`courses/covers/${values.file.name}`)
+        .put(values.file);
+
+      setUpload((values) => ({
+        ...values,
+        show: true,
+      }));
+
+      taskStorage.on(
+        "state_changed",
+        function progress(snapshot) {
+          setUpload((values) => ({
+            ...values,
+            progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+          }));
+        },
+        function error(errors) {
+          console.log(errors);
+        },
+        function complete() {
+          setUpload((values) => ({
+            ...values,
+            show: false,
+          }));
+        }
+      );
+      const taskDatabase = database
+        .collection("courses")
+        .doc(values.items.courseTitle)
+        .set(values.items)
+        .then(function () {
+          console.log("Document successfully written!");
+        })
+        .catch(function (error) {
+          console.error("Error writing document: ", error);
+        });
     },
+
+    //validationSchema,
   });
 
   return (
@@ -51,7 +95,7 @@ function AddCourse(initialValues, onSubmit) {
                   <label>Titulo do Curso:</label>
                   <Input
                     autoComplete="cTitle"
-                    name="courseTitle"
+                    name="items.courseTitle"
                     variant="outlined"
                     required
                     fullWidth
@@ -60,28 +104,22 @@ function AddCourse(initialValues, onSubmit) {
                     label="Titulo do Curso"
                     autoFocus
                     onChange={formik.handleChange}
-                    value={formik.values.courseTitle}
+                    value={formik.values.items.courseTitle}
                   />
                 </Grid>
 
                 <Grid item xs={12}>
                   <label>Visibilidade:</label>
                   <Select
-                    name="coursePrivacy"
+                    name="items.coursePrivacy"
                     defaultValue={""}
                     onChange={formik.handleChange}
                     fullWidth
                   >
-                    <MenuItem
-                      value={"1"}
-                      onChange={formik.handleChange.coursePrivacy}
-                    >
+                    <MenuItem value={"1"} onChange={formik.handleChange}>
                       Privado
                     </MenuItem>
-                    <MenuItem
-                      value={"2"}
-                      onChange={formik.handleChange.coursePrivacy}
-                    >
+                    <MenuItem value={"2"} onChange={formik.handleChange}>
                       Aberto
                     </MenuItem>
                   </Select>
@@ -95,7 +133,7 @@ function AddCourse(initialValues, onSubmit) {
                           accept="image/*"
                           type="file"
                           style={{ display: "none" }}
-                          name="courseImage"
+                          name="file"
                           onChange={(e) =>
                             formik.setFieldValue(
                               e.target.name,
@@ -103,7 +141,7 @@ function AddCourse(initialValues, onSubmit) {
                             )
                           }
                           onClick={(e) =>
-                            formik.setFieldTouched(e.target.courseImage, true)
+                            formik.setFieldTouched(e.target.name, true)
                           }
                         />
                         <Button
@@ -114,7 +152,9 @@ function AddCourse(initialValues, onSubmit) {
                           className={classes.upload}
                           size="large"
                         >
-                          {/* {formik.values.courseImage ? formik.values.courseImage.name : formik.values.courseTitle} */}
+                          {formik.values.courseImage
+                            ? formik.values.courseImage.name
+                            : formik.values.courseImage}
                           <AddAPhotoIcon />
                         </Button>
                       </Box>
@@ -123,22 +163,22 @@ function AddCourse(initialValues, onSubmit) {
                 </Grid>
                 <Grid item xs={12}>
                   <label>Descrição do Curso:</label>
-                  
-                  <TextField 
-                    name="courseDescription"
+
+                  <TextField
+                    name="items.courseDescription"
                     placeholder="Descrição..."
                     multiline="true"
-                    rows="5"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+                    rows="5"
                     size="large"
                     maxWidth
                     fullWidth
                     onChange={formik.handleChange}
-                    value={formik.values.courseDescription}
+                    value={formik.values.items.courseDescription}
                   />
                 </Grid>
               </Grid>
             </CardContent>
-          </Card>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+          </Card>
           <Box display="flex" alignContent="center" margin="1" width="60%">
             <Button
               type="reset"
