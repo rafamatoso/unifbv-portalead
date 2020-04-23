@@ -1,14 +1,13 @@
-import { auth } from './config';
-import { types } from '../../store/types';
-
+import { auth } from "./config";
+import { types } from "../../store/types";
 
 export const signIn = ({ email, password }, dispatch, history) => {
   auth
     .signInWithEmailAndPassword(email, password)
     .then((response) => {
-      console.log(response);
       dispatch({ type: types.SET_USER, payload: response.user });
-      history.push('/dashboard/courses');
+      history.push("/dashboard/courses");
+      dispatch({ type: types.SET_LOADING, payload: false });
     })
     .catch((err) => {
       dispatch({ type: types.SET_LOADING, payload: false });
@@ -19,9 +18,7 @@ export const signIn = ({ email, password }, dispatch, history) => {
 export const signUp = ({ email, password }, dispatch) => {
   auth
     .createUserWithEmailAndPassword(email, password)
-    .then((response) => {
-      console.log(response);
-    })
+    .then((response) => {})
     .catch((err) => {
       dispatch({ type: types.SET_LOADING, payload: false });
       console.log(err);
@@ -29,14 +26,11 @@ export const signUp = ({ email, password }, dispatch) => {
 };
 
 export const signOut = (dispatch, history) => {
-    auth
+  auth
     .signOut()
     .then((response) => {
-      console.log(response);
       dispatch({ type: types.SET_LOGOUT });
-      history.push('/home');
+      history.push("/home");
     })
-    .catch((err) => {
-      console.log(err);
-    });
-}
+    .catch((err) => {});
+};

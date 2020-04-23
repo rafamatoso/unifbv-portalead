@@ -41,9 +41,6 @@ function AddVideo() {
             progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           }));
         },
-        function error(errors) {
-          console.log(errors);
-        },
         function complete() {
           setUpload((values) => ({
             ...values,

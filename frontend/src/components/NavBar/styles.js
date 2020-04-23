@@ -1,13 +1,13 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-import { colors } from '../../utils/colors';
+import { colors } from "../../utils/colors";
 
 export const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
   },
   logo: {
-    '&:hover': {
+    "&:hover": {
       color: colors.yellow1,
     },
   },
@@ -18,26 +18,26 @@ export const useStyles = makeStyles(() => ({
     flexGrow: 1,
   },
   containerIcon: {
-    display: 'flex',
-    width: '100vw',
-    justifyContent: 'space-between',
-    margin: '4px 1rem 0 3rem',
+    display: "flex",
+    width: "100vw",
+    justifyContent: "space-between",
+    margin: "4px 1rem 0 3rem",
   },
   iconButton: {
-    fontSize: '1.03rem',
-    '&:hover': {
+    fontSize: "1.03rem",
+    "&:hover": {
       color: colors.yellow1,
     },
   },
   circularButton: {
-    '&:hover': {
+    "&:hover": {
       color: colors.yellow1,
     },
   },
   containerMenuItem: {
-    display: 'flex',
-    height: '30px',
-    alignItems: 'center',
-    marginLeft: '10px',
+    display: "flex",
+    height: "30px",
+    alignItems: "center",
+    marginLeft: "10px",
   },
 }));
