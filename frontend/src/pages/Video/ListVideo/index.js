@@ -1,11 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Paper, Typography, Button } from "@material-ui/core";
+import {
+  Grid,
+  Paper,
+  Typography,
+  Button,
+  Drawer,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  ListItemAvatar,
+  Avatar,
+  Divider,
+} from "@material-ui/core";
 
 import { useParams } from "react-router-dom";
 import { Course, Video } from "../../../services/firebase/Models";
 
 import { useStyles } from "./styles";
-import { Add } from "@material-ui/icons";
+import {
+  Add,
+  PlayCircleFilled,
+  EditOutlined,
+  DeleteOutline,
+} from "@material-ui/icons";
 
 export default function ListVideo() {
   const { id: idCourse } = useParams();
@@ -77,8 +96,43 @@ export default function ListVideo() {
           </Button>
         </div>
       </Paper>
+
       {console.log(course)}
-      {course.videos?.map((item) => (
+      <Drawer
+        className={classes.drawer}
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <Toolbar />
+        <div className={classes.drawerContainer}>
+          <List>
+            <ListItem style={{ flexDirection: "column" }}>
+              <ListItemAvatar>
+                <Avatar variant="square" src={course.img} />
+              </ListItemAvatar>
+              <ListItemText
+                primary={course.title}
+                secondary={course.description}
+              />
+            </ListItem>
+            <Divider />
+            {course.videos?.map((item) => (
+              <ListItem button>
+                <ListItemIcon>
+                  <PlayCircleFilled />
+                </ListItemIcon>
+                <ListItemText
+                  primary={item.title}
+                  secondary={item.description}
+                />
+              </ListItem>
+            ))}
+          </List>
+        </div>
+      </Drawer>
+      {/* {course.videos?.map((item) => (
         <Paper
           elevation={6}
           style={{
@@ -90,7 +144,7 @@ export default function ListVideo() {
             padding: "20px",
           }}
         >
-          <video src={item.file} height="80%" controls />
+          <PlayCircleFilled color="primary" />
           <div
             style={{
               display: "flex",
@@ -117,8 +171,10 @@ export default function ListVideo() {
               {item.description}
             </Typography>
           </div>
+          <EditOutlined color="primary" />
+          <DeleteOutline color="primary" />
         </Paper>
-      ))}
+      ))} */}
     </Grid>
   );
 }
