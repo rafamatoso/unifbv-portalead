@@ -23,10 +23,14 @@ import { Copyright } from "../../../components/Copyritgh";
 
 import { useStyles } from "./styles";
 
+import { useHistory } from "react-router-dom";
+
 function AddCourse(initialValues, onSubmit) {
+  
   const classes = useStyles();
-  //const history = useHistory();
-  const [upload, setUpload] = useState({ progress: 0, show: false });
+
+  const history = useHistory();
+  
 
   const formik = useFormik({
     initialValues: {
@@ -39,6 +43,7 @@ function AddCourse(initialValues, onSubmit) {
 
       file: null,
     },
+
     onSubmit: (values) => {
       const taskStorage = storage.ref(`courses/covers/${values.file.name}`).put(values.file).then(function() {
         console.log("Image successfully written in storage!!!")
@@ -60,6 +65,11 @@ function AddCourse(initialValues, onSubmit) {
       });
     },
   });
+
+
+  function handleClick() {
+    history.push("/dashboard/courses");
+  }
 
   return (
     <Container component='main' maxWidth='100%'>
@@ -130,9 +140,9 @@ function AddCourse(initialValues, onSubmit) {
                           className={classes.upload}
                           size="large"
                         >
-                          {/* {formik.values.img
+                          {formik.values.file
                             ? formik.values.file.name
-                            : formik.values.file} */}
+                            : formik.values.file}
                           <AddAPhotoIcon />
                         </Button>
                       </Box>
@@ -157,13 +167,15 @@ function AddCourse(initialValues, onSubmit) {
               </Grid>
             </CardContent>
           </Card>
-          <Box display='flex' alignContent='center' margin='1' width='60%'>
+          <div margin-top="0" className={classes.buttons}>
+          <Box display='flex' alignContent='center'  width='60%'>
             <Button
               type="reset"
               fullWidth
               variant='contained'
               color='secondary'
               className={classes.submit}
+              onClick={handleClick}
               spacing="auto"
             >
               Cancel
@@ -179,6 +191,7 @@ function AddCourse(initialValues, onSubmit) {
               Submit
             </Button>
           </Box>
+          </div>
           <Grid container justify='flex-end'></Grid>
         </form>
       </div>
