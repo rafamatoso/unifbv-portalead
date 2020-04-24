@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import { connect } from "../store";
 
 function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
@@ -13,6 +13,7 @@ function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
   } else {
     return <Route {...rest} component={Component} />;
   }
+  return <Redirect to="/home" />;
 }
 
 RouteWrapper.defaultProps = {

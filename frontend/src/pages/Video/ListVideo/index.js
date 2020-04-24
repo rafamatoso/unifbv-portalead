@@ -130,7 +130,6 @@ export default function ListVideo() {
         </div>
       ) : null}
 
-      {console.log(course)}
       <Drawer
         className={classes.drawer}
         variant="permanent"

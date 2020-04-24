@@ -42,7 +42,6 @@ class Video {
   list(idCourse, observer) {
     const resolver = async (query) => {
       const data = query.data();
-      console.log(data.videos[0]);
 
       return await Promise.all(
         data.videos.map((item) =>
@@ -66,8 +65,7 @@ class Video {
   }
 
   async listUnique(id, observer) {
-    const resolver = async (query) => {
-      console.log(await storage.refFromURL(query.data().file).getMetadata());
+    const resolver = (query) => {
       return query.data();
     };
 
