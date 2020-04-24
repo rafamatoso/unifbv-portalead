@@ -89,6 +89,9 @@ class Video {
     if (typeof data.file === "object") {
       data.file = await upload(data.file, onProgress, onError, onComplete);
     }
+    if (onComplete) {
+      onComplete();
+    }
     return database.collection(collections.videos).doc(id).update(data);
   }
 

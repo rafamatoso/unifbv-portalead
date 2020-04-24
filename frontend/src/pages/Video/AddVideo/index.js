@@ -32,6 +32,21 @@ function AddVideo() {
   }, [idVideo]);
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
+  function handlerProgress(snapshot) {
+    setUpload((values) => ({
+      ...values,
+      progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+    }));
+  }
+
+  function handlerComplete() {
+    setUpload((values) => ({
+      ...values,
+      show: false,
+    }));
+    history.push(`/dashboard/courses/${id}/listVideo`);
+  }
+
   const formik = useFormik({
     initialValues: state || initialValues,
     enableReinitialize: true,
@@ -41,23 +56,22 @@ function AddVideo() {
         show: true,
       }));
 
-      Video.create(
-        { idCourse: id, ...values },
-        function progress(snapshot) {
-          setUpload((values) => ({
-            ...values,
-            progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-          }));
-        },
-        null,
-        function complete() {
-          setUpload((values) => ({
-            ...values,
-            show: false,
-          }));
-          history.push(`/dashboard/courses/${id}/listVideo`);
-        }
-      );
+      if (idVideo) {
+        Video.update(
+          idVideo,
+          { idCourse: id, ...values },
+          handlerProgress,
+          null,
+          handlerComplete
+        );
+      } else {
+        Video.create(
+          { idCourse: id, ...values },
+          handlerProgress,
+          null,
+          handlerComplete
+        );
+      }
     },
     validationSchema,
   });
