@@ -27,7 +27,8 @@ function AddVideo() {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      const task = storage.ref(`videos/${values.file.name}`).put(values.file);
+      const task = storage.ref(`videos/${values.file.name}`).put(values.file) ;
+      
 
       setUpload((values) => ({
         ...values,

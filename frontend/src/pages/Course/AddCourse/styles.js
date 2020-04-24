@@ -30,4 +30,9 @@ export const useStyles = makeStyles((theme) => ({
   card: {
     backgroundImage: `url(${imageBg})`,
   },
+  buttons: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  }
 }));
