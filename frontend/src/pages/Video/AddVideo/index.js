@@ -29,7 +29,7 @@ function AddVideo() {
       setState(await Video.listUnique(idVideo));
     }
     get();
-  }, []);
+  }, [idVideo]);
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
   const formik = useFormik({

@@ -10,12 +10,9 @@ import {
   ListItemIcon,
   ListItemText,
   Toolbar,
-  ListItemAvatar,
-  Avatar,
   Divider,
   ListItemSecondaryAction,
   IconButton,
-  Popover,
   MenuItem,
   Menu,
 } from "@material-ui/core";
@@ -78,7 +75,7 @@ export default function ListVideo() {
           padding: "20px",
         }}
       >
-        <img src={course.img} height="80%" />
+        <img src={course.img} alt={course.title} height="80%" />
         <div
           style={{
             display: "flex",
@@ -145,7 +142,7 @@ export default function ListVideo() {
         <div className={classes.drawerContainer}>
           <List>
             <ListItem style={{ flexDirection: "column" }}>
-              <img src={course.img} width={60} />
+              <img src={course.img} alt={course.title} width={60} />
 
               <ListItemText
                 primary={course.title}

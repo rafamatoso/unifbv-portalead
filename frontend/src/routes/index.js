@@ -5,6 +5,7 @@ import Route from "./routeWrapper";
 import { Home, ListCourse, AddCourse, ListVideo, AddVideo } from "../pages";
 
 import { NavBar } from "../components";
+import NotFound from "../pages/NotFound";
 
 export const Routes = () => (
   <BrowserRouter>
@@ -31,7 +32,12 @@ export const Routes = () => (
         isPrivate
       />
 
-      <Route path="/" component={() => <Redirect to="/home" />} />
+      <Route
+        path="/"
+        exact
+        component={() => <Redirect to="/dashboard/courses" />}
+      />
+      <Route path="*" component={NotFound} />
     </Switch>
   </BrowserRouter>
 );
