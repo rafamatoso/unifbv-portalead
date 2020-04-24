@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { connect } from "../../../store";
 import { useFormik } from "formik";
 
@@ -16,41 +16,64 @@ import { CloudUpload } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../../services/firebase/config";
+import Video from "../../../services/firebase/Models/Video";
 
 function AddVideo() {
+  const { id, idVideo } = useParams();
   const history = useHistory();
   const classes = useStyles();
+  const [state, setState] = useState(null);
 
+  useEffect(() => {
+    async function get() {
+      if (idVideo) {
+        setState(await Video.listUnique(idVideo));
+      }
+    }
+    get();
+  }, [idVideo]);
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit: (values, { resetForm }) => {
-      const task = storage.ref(`videos/${values.file.name}`).put(values.file) ;
-      
+  function handlerProgress(snapshot) {
+    setUpload((values) => ({
+      ...values,
+      progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+    }));
+  }
 
+  function handlerComplete() {
+    setUpload((values) => ({
+      ...values,
+      show: false,
+    }));
+    history.push(`/dashboard/courses/${id}/listVideo`);
+  }
+
+  const formik = useFormik({
+    initialValues: state || initialValues,
+    enableReinitialize: true,
+    onSubmit: (values, { resetForm }) => {
       setUpload((values) => ({
         ...values,
         show: true,
       }));
 
-      task.on(
-        "state_changed",
-        function progress(snapshot) {
-          setUpload((values) => ({
-            ...values,
-            progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-          }));
-        },
-        function complete() {
-          setUpload((values) => ({
-            ...values,
-            show: false,
-          }));
-          history.push("/dashboard/perfil");
-        }
-      );
+      if (idVideo) {
+        Video.update(
+          idVideo,
+          { idCourse: id, ...values },
+          handlerProgress,
+          null,
+          handlerComplete
+        );
+      } else {
+        Video.create(
+          { idCourse: id, ...values },
+          handlerProgress,
+          null,
+          handlerComplete
+        );
+      }
     },
     validationSchema,
   });
@@ -63,13 +86,15 @@ function AddVideo() {
           <form
             noValidate
             onSubmit={formik.handleSubmit}
-            className={classes.form}>
+            className={classes.form}
+          >
             <TextField
-              name='title'
+              name="title"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label='Titulo'
-              variant='outlined'
+              value={formik.values.title}
+              label="Titulo"
+              variant="outlined"
               fullWidth
               error={formik.errors.title && formik.touched.title}
               helperText={
@@ -79,12 +104,13 @@ function AddVideo() {
               }
             />
             <TextField
-              name='description'
+              name="description"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label='Descrição'
+              value={formik.values.description}
+              label="Descrição"
               multiline
-              variant='outlined'
+              variant="outlined"
               fullWidth
               error={formik.errors.description && formik.touched.description}
               helperText={
@@ -95,25 +121,29 @@ function AddVideo() {
             />
 
             <input
-              id='button-file'
-              accept='video/*'
-              type='file'
+              id="button-file"
+              accept="video/*"
+              type="file"
               style={{ display: "none" }}
-              name='file'
+              name="file"
               onChange={(e) =>
                 formik.setFieldValue(e.target.name, e.target.files[0])
               }
               onClick={(e) => formik.setFieldTouched(e.target.name, true)}
             />
             <Button
-              variant='contained'
-              color='primary'
-              component='label'
-              htmlFor='button-file'
+              variant="contained"
+              color="primary"
+              component="label"
+              htmlFor="button-file"
               className={classes.upload}
-              size='large'
-              fullWidth>
-              {formik.values.file ? formik.values.file.name : "Upload Video"}
+              size="large"
+              fullWidth
+            >
+              {typeof formik.values.file !== "string" &&
+              formik.values.file !== null
+                ? formik.values.file.name
+                : "Upload Video"}
               <CloudUpload />
             </Button>
             <FormHelperText error={formik.errors.file && formik.touched.file}>
@@ -124,16 +154,18 @@ function AddVideo() {
 
             <div className={classes.formButton}>
               <Button
-                variant='contained'
-                color='secondary'
-                className={classes.submit}>
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+              >
                 Cancelar
               </Button>
               <Button
-                variant='contained'
-                color='primary'
+                variant="contained"
+                color="primary"
                 className={classes.submit}
-                type='submit'>
+                type="submit"
+              >
                 Salvar
               </Button>
             </div>

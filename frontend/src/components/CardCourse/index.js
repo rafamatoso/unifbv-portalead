@@ -19,28 +19,31 @@ export default function CardCourse({ data, className }) {
       <CardActionArea
         className={classes.spaceImage}
         component={Link}
-        to={`/dashboard/courses/${data.id}`}>
+        to={`/dashboard/courses/${data.id}/listVideo`}
+      >
         <CardMedia
           className={classes.sizeImage}
-          component='img'
+          component="img"
           alt={data.title}
           src={data.img}
-          loading='lazy'
+          loading="lazy"
           title={data.title}
         />
         <CardContent className={classes.sizeContent}>
           <Typography
-            className='title'
+            className="title"
             gutterBottom
-            variant='h6'
-            component='h3'>
+            variant="h6"
+            component="h3"
+          >
             {data.title}
           </Typography>
           <Typography
-            className='description'
-            variant='body2'
-            color='textSecondary'
-            component='p'>
+            className="description"
+            variant="body2"
+            color="textSecondary"
+            component="p"
+          >
             {data.description}
           </Typography>
         </CardContent>
@@ -48,10 +51,11 @@ export default function CardCourse({ data, className }) {
 
       <CardActions className={classes.positionButtons}>
         <IconButton
-          className='child'
-          color='primary'
-          aria-label='upload picture'
-          component='span'>
+          className="child"
+          color="primary"
+          aria-label="upload picture"
+          component="span"
+        >
           <Share />
         </IconButton>
       </CardActions>

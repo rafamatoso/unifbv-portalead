@@ -42,36 +42,39 @@ function NavBar({ dispatch }) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static' className={classes.appBar}>
+      <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
           <IconButton
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            className={classes.logo}>
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            className={classes.logo}
+          >
             {appNameText}
           </IconButton>
           <div className={classes.containerIcon}>
             <IconButton
-              edge='start'
-              color='inherit'
-              aria-label='menu'
+              edge="start"
+              color="inherit"
+              aria-label="menu"
               onClick={handleGoToCourse}
-              className={classes.iconButton}>
+              className={classes.iconButton}
+            >
               {courseIconText}
             </IconButton>
             <IconButton
-              edge='end'
-              aria-label='account of current user'
-              aria-controls='menu-appbar'
-              aria-haspopup='true'
+              edge="end"
+              aria-label="account of current user"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
               onClick={handleMenu}
-              color='inherit'
-              className={classes.circularButton}>
+              color="inherit"
+              className={classes.circularButton}
+            >
               <AccountCircle />
             </IconButton>
             <Menu
-              id='menu-appbar'
+              id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: "top",
@@ -84,7 +87,8 @@ function NavBar({ dispatch }) {
               }}
               open={open}
               onClose={handleClose}
-              onClick={handleClose}>
+              onClick={handleClose}
+            >
               <div className={classes.containerMenuItem}>
                 <ExitToApp></ExitToApp>
                 <MenuItem onClick={handleLogout}>{logoutButtonText}</MenuItem>
@@ -93,6 +97,7 @@ function NavBar({ dispatch }) {
           </div>
         </Toolbar>
       </AppBar>
+      <Toolbar />
     </div>
   );
 }

@@ -1,7 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { connect } from "../../../store";
-import { storage } from "../../../services/firebase/config";
-import { database } from "../../../services/firebase/config"; 
 import { useFormik } from "formik";
 import {
   Button,
@@ -24,55 +22,34 @@ import { Copyright } from "../../../components/Copyright";
 import { useStyles } from "./styles";
 
 import { useHistory } from "react-router-dom";
+import { Course } from "../../../services/firebase/Models";
 
-function AddCourse(initialValues, onSubmit) {
-  
+function AddCourse() {
   const classes = useStyles();
 
   const history = useHistory();
-  
 
   const formik = useFormik({
     initialValues: {
-      items: {
-        title: "",
-        img: "",
-        show: "",
-        description: "",
-      },
-
-      file: null,
+      title: "",
+      img: null,
+      show: "",
+      description: "",
+      videos: [],
     },
 
-    onSubmit: (values) => {
-      const taskStorage = storage.ref(`courses/covers/${values.file.name}`).put(values.file).then(function() {
-        console.log("Image successfully written in storage!!!")
-        const getImageUploaded = storage.ref(`courses/covers/${values.file.name}`).getDownloadURL().then(function(url) {
-          values.items.img = url.toString();
-          console.log("URL to Image from storage succefully setted to object to send to database");
-          const taskDatabase = database
-          .collection("courses")
-          .doc(values.items.title)
-          .set(values.items)
-          .then(function () {
-            console.log("Document successfully written!");
-            alert(`${`${values.items.title}`}: Adicionado com Sucesso`);
-          })
-          .catch(function (error) {
-            console.error("Error writing document: ", error);
-          });
-        });
-      });
+    onSubmit: async (values) => {
+      await Course.create(values);
+      handleClick();
     },
   });
-
 
   function handleClick() {
     history.push("/dashboard/courses");
   }
 
   return (
-    <Container component='main' maxWidth='100%'>
+    <Container component="main" maxWidth="100%">
       <CssBaseline />
       <div className={classes.paper}>
         <form onSubmit={formik.handleSubmit}>
@@ -83,23 +60,23 @@ function AddCourse(initialValues, onSubmit) {
                   <label>Titulo do Curso:</label>
                   <Input
                     autoComplete="cTitle"
-                    name="items.title"
+                    name="title"
                     variant="outlined"
                     required
                     fullWidth
-                    placeholder='Titulo do Curso'
-                    id='courseTitle'
-                    label='Titulo do Curso'
+                    placeholder="Titulo do Curso"
+                    id="courseTitle"
+                    label="Titulo do Curso"
                     autoFocus
                     onChange={formik.handleChange}
-                    value={formik.values.items.courseTitle}
+                    value={formik.values.courseTitle}
                   />
                 </Grid>
 
                 <Grid item xs={12}>
                   <label>Visibilidade:</label>
                   <Select
-                    name="items.show"
+                    name="show"
                     defaultValue={""}
                     onChange={formik.handleChange}
                     fullWidth
@@ -112,8 +89,8 @@ function AddCourse(initialValues, onSubmit) {
                     </MenuItem>
                   </Select>
                 </Grid>
-                <Grid item xs={12} alignItems='center' justify='center'>
-                  <Card variant='outlined' fullWidth>
+                <Grid item xs={12} alignItems="center" justify="center">
+                  <Card variant="outlined" fullWidth>
                     <CardContent>
                       <Box display="flex" justifyContent="center">
                         <input
@@ -121,7 +98,7 @@ function AddCourse(initialValues, onSubmit) {
                           accept="image/*"
                           type="file"
                           style={{ display: "none" }}
-                          name="file"
+                          name="img"
                           onChange={(e) =>
                             formik.setFieldValue(
                               e.target.name,
@@ -140,8 +117,8 @@ function AddCourse(initialValues, onSubmit) {
                           className={classes.upload}
                           size="large"
                         >
-                          {formik.values.file
-                            ? formik.values.file.name
+                          {formik.values.img
+                            ? formik.values.img.name
                             : formik.values.file}
                           <AddAPhotoIcon />
                         </Button>
@@ -153,7 +130,7 @@ function AddCourse(initialValues, onSubmit) {
                   <label>Descrição do Curso:</label>
 
                   <TextField
-                    name="items.description"
+                    name="description"
                     placeholder="Descrição..."
                     multiline="true"
                     rows="5"
@@ -161,38 +138,38 @@ function AddCourse(initialValues, onSubmit) {
                     maxWidth
                     fullWidth
                     onChange={formik.handleChange}
-                    value={formik.values.items.description}
+                    value={formik.values.description}
                   />
                 </Grid>
               </Grid>
             </CardContent>
           </Card>
           <div margin-top="0" className={classes.buttons}>
-          <Box display='flex' alignContent='center'  width='60%'>
-            <Button
-              type="reset"
-              fullWidth
-              variant='contained'
-              color='secondary'
-              className={classes.submit}
-              onClick={handleClick}
-              spacing="auto"
-            >
-              Cancel
-            </Button>
-            <span> &nbsp; </span>
-            <Button
-              type='submit'
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Submit
-            </Button>
-          </Box>
+            <Box display="flex" alignContent="center" width="60%">
+              <Button
+                type="reset"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+                onClick={handleClick}
+                spacing="auto"
+              >
+                Cancelar
+              </Button>
+              <span> &nbsp; </span>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Salvar
+              </Button>
+            </Box>
           </div>
-          <Grid container justify='flex-end'></Grid>
+          <Grid container justify="flex-end"></Grid>
         </form>
       </div>
       <Box mt={5}>

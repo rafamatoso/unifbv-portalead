@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 import { colors } from "../../utils/colors";
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
@@ -13,6 +13,7 @@ export const useStyles = makeStyles(() => ({
   },
   appBar: {
     backgroundColor: colors.blue1,
+    zIndex: theme.zIndex.drawer + 1,
   },
   title: {
     flexGrow: 1,
