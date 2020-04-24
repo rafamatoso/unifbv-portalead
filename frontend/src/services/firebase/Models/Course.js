@@ -3,14 +3,7 @@ import collections from "../../../utils/collections";
 
 function upload(file, onProgress, onError, onComplete) {
   return new Promise((resolve, reject) => {
-    const str = file.name.split(".");
-    const task = storage
-      .ref(
-        `/images/${Date.now()}_${Buffer.from(
-          str.slice(0, str.length - 2)
-        ).toString("base64")}.${str.lastItem}`
-      )
-      .put(file);
+    const task = storage.ref(`/images/${Date.now()}_${file.name}`).put(file);
 
     task.on(
       "state_changed",
@@ -20,7 +13,9 @@ function upload(file, onProgress, onError, onComplete) {
         reject(error);
       },
       async () => {
-        onComplete();
+        if (onComplete) {
+          onComplete();
+        }
 
         resolve(await task.snapshot.ref.getDownloadURL());
       }
