@@ -25,7 +25,7 @@ export const Routes = () => (
         isPrivate
       />
       <Route
-        path="/dashboard/courses/:id/addvideo"
+        path="/dashboard/courses/:id/addvideo/:idVideo?"
         exact
         component={AddVideo}
         isPrivate

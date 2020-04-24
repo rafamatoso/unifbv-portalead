@@ -1,22 +1,11 @@
 import { database, storage } from "../config";
 import firebase from "firebase/app";
 import collections from "../../../utils/collections";
+const FieldValue = firebase.firestore.FieldValue;
 
 function upload(file, onProgress, onError, onComplete) {
   return new Promise((resolve, reject) => {
-    const str = file.name.split(".");
-    console.log(
-      // Buffer.from(str.slice(0, str.length - 1)).toString("base64"),
-      str[str.length - 1]
-    );
-
-    const task = storage
-      .ref(
-        `/videos/${Date.now()}_${Buffer.from(
-          str.slice(0, str.length - 1)
-        ).toString("base64")}.${str[str.length - 1]}`
-      )
-      .put(file);
+    const task = storage.ref(`/videos/${Date.now()}_${file.name}`).put(file);
 
     task.on(
       "state_changed",
@@ -26,7 +15,9 @@ function upload(file, onProgress, onError, onComplete) {
         reject(error);
       },
       async () => {
-        onComplete();
+        if (onComplete) {
+          onComplete();
+        }
 
         resolve(await task.snapshot.ref.getDownloadURL());
       }
@@ -37,15 +28,12 @@ function upload(file, onProgress, onError, onComplete) {
 class Video {
   //precisa ser testado
   async create(data, onProgress, onError, onComplete) {
-    const FieldValue = firebase.firestore.FieldValue;
-
-    const { idCourse, ...rest } = data;
-    rest.file = await upload(data.file, onProgress, onError, onComplete);
+    data.file = await upload(data.file, onProgress, onError, onComplete);
     const ref = database.collection(collections.videos).doc();
-    await ref.set(rest);
+    await ref.set(data);
     database
       .collection(collections.courses)
-      .doc(idCourse)
+      .doc(data.idCourse)
       .update({
         videos: FieldValue.arrayUnion(ref),
       });
@@ -57,7 +45,9 @@ class Video {
       console.log(data.videos[0]);
 
       return await Promise.all(
-        data.videos.map((item) => item.get().then((resp) => resp.data()))
+        data.videos.map((item) =>
+          item.get().then((resp) => ({ id: resp.id, ...resp.data() }))
+        )
       );
     };
 
@@ -76,7 +66,8 @@ class Video {
   }
 
   async listUnique(id, observer) {
-    const resolver = (query) => {
+    const resolver = async (query) => {
+      console.log(await storage.refFromURL(query.data().file).getMetadata());
       return query.data();
     };
 
@@ -101,8 +92,17 @@ class Video {
     return database.collection(collections.videos).doc(id).update(data);
   }
 
-  delete(id) {
-    return database.collection(collections.videos).doc(id).delete();
+  async delete(data) {
+    const ref = database.collection(collections.videos).doc(data.id);
+
+    database
+      .collection(collections.courses)
+      .doc(data.idCourse)
+      .update({
+        videos: FieldValue.arrayRemove(ref),
+      });
+    await storage.refFromURL(data.file).delete();
+    ref.delete();
   }
 }
 

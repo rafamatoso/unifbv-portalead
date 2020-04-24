@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { connect } from "../../../store";
 import { useFormik } from "formik";
@@ -19,14 +19,22 @@ import { initialValues, validationSchema } from "./helper";
 import Video from "../../../services/firebase/Models/Video";
 
 function AddVideo() {
-  const { id } = useParams();
+  const { id, idVideo } = useParams();
   const history = useHistory();
   const classes = useStyles();
+  const [state, setState] = useState(null);
 
+  useEffect(() => {
+    async function get() {
+      setState(await Video.listUnique(idVideo));
+    }
+    get();
+  }, []);
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
   const formik = useFormik({
-    initialValues,
+    initialValues: state || initialValues,
+    enableReinitialize: true,
     onSubmit: (values, { resetForm }) => {
       setUpload((values) => ({
         ...values,
@@ -41,12 +49,13 @@ function AddVideo() {
             progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           }));
         },
+        null,
         function complete() {
           setUpload((values) => ({
             ...values,
             show: false,
           }));
-          history.push("/dashboard/perfil");
+          history.push(`/dashboard/courses/${id}/listVideo`);
         }
       );
     },
@@ -67,6 +76,7 @@ function AddVideo() {
               name="title"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.title}
               label="Titulo"
               variant="outlined"
               fullWidth
@@ -81,6 +91,7 @@ function AddVideo() {
               name="description"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
+              value={formik.values.description}
               label="Descrição"
               multiline
               variant="outlined"
@@ -113,7 +124,10 @@ function AddVideo() {
               size="large"
               fullWidth
             >
-              {formik.values.file ? formik.values.file.name : "Upload Video"}
+              {typeof formik.values.file !== "string" &&
+              formik.values.file !== null
+                ? formik.values.file.name
+                : "Upload Video"}
               <CloudUpload />
             </Button>
             <FormHelperText error={formik.errors.file && formik.touched.file}>
