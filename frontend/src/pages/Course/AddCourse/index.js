@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { connect } from "../../store";
-import { storage } from "../../services/firebase/config";
-import { database } from "../../services/firebase/config";
+import { connect } from "../../../store";
+import { storage } from "../../../services/firebase/config";
+import { database } from "../../../services/firebase/config"; 
 import { useFormik } from "formik";
-import { useHistory } from "react-router-dom";
 import {
   Button,
   CssBaseline,
@@ -20,7 +19,7 @@ import {
 
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
-import { Copyright } from "../../components/Copyritgh";
+import { Copyright } from "../../../components/Copyritgh";
 
 import { useStyles } from "./styles";
 
@@ -32,55 +31,34 @@ function AddCourse(initialValues, onSubmit) {
   const formik = useFormik({
     initialValues: {
       items: {
-        courseTitle: "",
-        coursePrivacy: "",
-
-        courseDescription: "",
+        title: "",
+        img: "",
+        show: "",
+        description: "",
       },
 
       file: null,
     },
     onSubmit: (values) => {
-      const taskStorage = storage
-        .ref(`courses/covers/${values.file.name}`)
-        .put(values.file);
-
-      setUpload((values) => ({
-        ...values,
-        show: true,
-      }));
-
-      taskStorage.on(
-        "state_changed",
-        function progress(snapshot) {
-          setUpload((values) => ({
-            ...values,
-            progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-          }));
-        },
-        function error(errors) {
-          console.log(errors);
-        },
-        function complete() {
-          setUpload((values) => ({
-            ...values,
-            show: false,
-          }));
-        }
-      );
-      const taskDatabase = database
-        .collection("courses")
-        .doc(values.items.courseTitle)
-        .set(values.items)
-        .then(function () {
-          console.log("Document successfully written!");
-        })
-        .catch(function (error) {
-          console.error("Error writing document: ", error);
+      const taskStorage = storage.ref(`courses/covers/${values.file.name}`).put(values.file).then(function() {
+        console.log("Image successfully written in storage!!!")
+        const getImageUploaded = storage.ref(`courses/covers/${values.file.name}`).getDownloadURL().then(function(url) {
+          values.items.img = url.toString();
+          console.log("URL to Image from storage succefully setted to object to send to database");
+          const taskDatabase = database
+          .collection("courses")
+          .doc(values.items.title)
+          .set(values.items)
+          .then(function () {
+            console.log("Document successfully written!");
+            alert(`${`${values.items.title}`}: Adicionado com Sucesso`);
+          })
+          .catch(function (error) {
+            console.error("Error writing document: ", error);
+          });
         });
+      });
     },
-
-    //validationSchema,
   });
 
   return (
@@ -95,7 +73,7 @@ function AddCourse(initialValues, onSubmit) {
                   <label>Titulo do Curso:</label>
                   <Input
                     autoComplete="cTitle"
-                    name="items.courseTitle"
+                    name="items.title"
                     variant="outlined"
                     required
                     fullWidth
@@ -111,15 +89,15 @@ function AddCourse(initialValues, onSubmit) {
                 <Grid item xs={12}>
                   <label>Visibilidade:</label>
                   <Select
-                    name="items.coursePrivacy"
+                    name="items.show"
                     defaultValue={""}
                     onChange={formik.handleChange}
                     fullWidth
                   >
-                    <MenuItem value={"1"} onChange={formik.handleChange}>
+                    <MenuItem value={"false"} onChange={formik.handleChange}>
                       Privado
                     </MenuItem>
-                    <MenuItem value={"2"} onChange={formik.handleChange}>
+                    <MenuItem value={"true"} onChange={formik.handleChange}>
                       Aberto
                     </MenuItem>
                   </Select>
@@ -152,9 +130,9 @@ function AddCourse(initialValues, onSubmit) {
                           className={classes.upload}
                           size="large"
                         >
-                          {formik.values.courseImage
-                            ? formik.values.courseImage.name
-                            : formik.values.courseImage}
+                          {/* {formik.values.img
+                            ? formik.values.file.name
+                            : formik.values.file} */}
                           <AddAPhotoIcon />
                         </Button>
                       </Box>
@@ -165,7 +143,7 @@ function AddCourse(initialValues, onSubmit) {
                   <label>Descrição do Curso:</label>
 
                   <TextField
-                    name="items.courseDescription"
+                    name="items.description"
                     placeholder="Descrição..."
                     multiline="true"
                     rows="5"
@@ -173,7 +151,7 @@ function AddCourse(initialValues, onSubmit) {
                     maxWidth
                     fullWidth
                     onChange={formik.handleChange}
-                    value={formik.values.items.courseDescription}
+                    value={formik.values.items.description}
                   />
                 </Grid>
               </Grid>
