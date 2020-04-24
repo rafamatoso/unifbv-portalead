@@ -26,7 +26,9 @@ function AddVideo() {
 
   useEffect(() => {
     async function get() {
-      setState(await Video.listUnique(idVideo));
+      if (idVideo) {
+        setState(await Video.listUnique(idVideo));
+      }
     }
     get();
   }, [idVideo]);
