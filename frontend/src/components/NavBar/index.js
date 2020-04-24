@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { connect } from '../../store/index';
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { connect } from "../../store/index";
 
-import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
-import {AccountCircle, ExitToApp} from '@material-ui/icons';
+import { AppBar, Toolbar, IconButton, MenuItem, Menu } from "@material-ui/core";
+import { AccountCircle, ExitToApp } from "@material-ui/icons";
 
-import { signOut } from '../../services/firebase/signs';
+import { signOut } from "../../services/firebase/signs";
 
-import { useStyles } from './styles';
+import { useStyles } from "./styles";
 
 import {
   appNameText,
   logoutButtonText,
   courseIconText,
-} from '../../utils/strings';
+} from "../../utils/strings";
 
-const routeDashboard = '/dashboard'
+const routeDashboard = "/dashboard";
 
-function NavBar({dispatch}) {
+function NavBar({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -31,56 +31,56 @@ function NavBar({dispatch}) {
     setAnchorEl(null);
   };
 
-  const handleGoTo = () => {
-    history.push(`${routeDashboard}/perfil`)
-  }
+  const handleGoToCourse = () => {
+    history.push(`${routeDashboard}/courses`);
+  };
 
   const handleLogout = (e) => {
     e.preventDefault();
     signOut(dispatch, history);
-  }
+  };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes.appBar}>
+      <AppBar position='static' className={classes.appBar}>
         <Toolbar>
           <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="menu"
+            edge='start'
+            color='inherit'
+            aria-label='menu'
             className={classes.logo}>
             {appNameText}
           </IconButton>
           <div className={classes.containerIcon}>
             <IconButton
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              onClick={handleGoTo}
+              edge='start'
+              color='inherit'
+              aria-label='menu'
+              onClick={handleGoToCourse}
               className={classes.iconButton}>
               {courseIconText}
             </IconButton>
             <IconButton
-              edge="end"
-              aria-label="account of current user"
-              aria-controls="menu-appbar"
-              aria-haspopup="true"
+              edge='end'
+              aria-label='account of current user'
+              aria-controls='menu-appbar'
+              aria-haspopup='true'
               onClick={handleMenu}
-              color="inherit"
+              color='inherit'
               className={classes.circularButton}>
               <AccountCircle />
             </IconButton>
             <Menu
-              id="menu-appbar"
+              id='menu-appbar'
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "top",
+                horizontal: "right",
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
+                vertical: "bottom",
+                horizontal: "right",
               }}
               open={open}
               onClose={handleClose}
@@ -97,4 +97,4 @@ function NavBar({dispatch}) {
   );
 }
 
-export default connect(NavBar)
+export default connect(NavBar);

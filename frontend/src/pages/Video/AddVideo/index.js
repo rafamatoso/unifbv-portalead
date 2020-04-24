@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { connect } from '../../../store';
+import { connect } from "../../../store";
 import { useFormik } from "formik";
 
 import {
@@ -27,7 +27,8 @@ function AddVideo() {
   const formik = useFormik({
     initialValues,
     onSubmit: (values, { resetForm }) => {
-      const task = storage.ref(`videos/${values.file.name}`).put(values.file);
+      const task = storage.ref(`videos/${values.file.name}`).put(values.file) ;
+      
 
       setUpload((values) => ({
         ...values,
@@ -41,9 +42,6 @@ function AddVideo() {
             ...values,
             progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           }));
-        },
-        function error(errors) {
-          console.log(errors);
         },
         function complete() {
           setUpload((values) => ({
@@ -65,14 +63,13 @@ function AddVideo() {
           <form
             noValidate
             onSubmit={formik.handleSubmit}
-            className={classes.form}
-          >
+            className={classes.form}>
             <TextField
-              name="title"
+              name='title'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label="Titulo"
-              variant="outlined"
+              label='Titulo'
+              variant='outlined'
               fullWidth
               error={formik.errors.title && formik.touched.title}
               helperText={
@@ -82,12 +79,12 @@ function AddVideo() {
               }
             />
             <TextField
-              name="description"
+              name='description'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label="Descrição"
+              label='Descrição'
               multiline
-              variant="outlined"
+              variant='outlined'
               fullWidth
               error={formik.errors.description && formik.touched.description}
               helperText={
@@ -98,25 +95,24 @@ function AddVideo() {
             />
 
             <input
-              id="button-file"
-              accept="video/*"
-              type="file"
+              id='button-file'
+              accept='video/*'
+              type='file'
               style={{ display: "none" }}
-              name="file"
+              name='file'
               onChange={(e) =>
                 formik.setFieldValue(e.target.name, e.target.files[0])
               }
               onClick={(e) => formik.setFieldTouched(e.target.name, true)}
             />
             <Button
-              variant="contained"
-              color="primary"
-              component="label"
-              htmlFor="button-file"
+              variant='contained'
+              color='primary'
+              component='label'
+              htmlFor='button-file'
               className={classes.upload}
-              size="large"
-              fullWidth
-            >
+              size='large'
+              fullWidth>
               {formik.values.file ? formik.values.file.name : "Upload Video"}
               <CloudUpload />
             </Button>
@@ -128,18 +124,16 @@ function AddVideo() {
 
             <div className={classes.formButton}>
               <Button
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-              >
+                variant='contained'
+                color='secondary'
+                className={classes.submit}>
                 Cancelar
               </Button>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 className={classes.submit}
-                type="submit"
-              >
+                type='submit'>
                 Salvar
               </Button>
             </div>
@@ -150,4 +144,4 @@ function AddVideo() {
   );
 }
 
-export default connect(AddVideo)
+export default connect(AddVideo);
