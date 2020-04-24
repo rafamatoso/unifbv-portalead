@@ -16,7 +16,7 @@ import {
   MenuItem,
   Card,
 } from '@material-ui/core';
-import { Copyright } from '../../../components/Copyritgh';
+import { Copyright } from '../../../components/Copyritght';
 
 import { useStyles } from './styles';
 

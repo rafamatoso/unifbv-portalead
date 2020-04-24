@@ -9,7 +9,7 @@ import {
   Backdrop,
   CircularProgress,
 } from '@material-ui/core';
-import { Copyright } from '../../components/Copyritgh';
+import { Copyright } from '../../components/Copyritght';
 
 import Login from './Login';
 import Register from './Register';
@@ -43,7 +43,7 @@ function Home({ store }) {
         <Grid item sm={12} md={6} component={Paper} elevation={6} square>
           {!showRegister ? (
             <>
-              <Login></Login>
+              <Login/>
               <div className={classes.link}>
                 <Grid item>
                   <Link variant="body2" onClick={handleShowRegister}>

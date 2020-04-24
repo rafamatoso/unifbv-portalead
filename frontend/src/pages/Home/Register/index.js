@@ -77,7 +77,7 @@ function SignUp({ dispatch }) {
           autoComplete="current-password"
           type="password"
           onChange={handleChange}
-          error={Boolean(errors.password) && touched.password                                                                                                                                                                                                                                                                                                     }
+          error={Boolean(errors.password) && touched.password}
           onBlur={handleBlur}
           helperText={handleHelperTextPassword()}
         />

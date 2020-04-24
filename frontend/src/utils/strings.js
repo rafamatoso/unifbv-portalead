@@ -1,9 +1,10 @@
 // Generals Text Strings
-export const appNameText = 'Platea';
+export const appNameText = 'Platea.';
 export const emailText = 'E-mail';
 export const passwordText = 'Senha';
 export const copyritghText = 'Copyright ©';
 export const unifbvText = 'UniFBV Wyden';
+export const UniversityLink = 'https://www.wyden.com.br/unifbv';
 
 // Routes Text Strings
 export const routeLogin = 'Login';
@@ -13,7 +14,7 @@ export const routePerfil = 'Perfil';
 export const enterButtonText = 'Entrar';
 export const backButtonText = 'Voltar';
 export const logoutButtonText = 'Logout';
-export const signUpButtonText = "Registrar";
+export const signUpButtonText = 'Registrar';
 export const signOutButtonText = 'Logout'
 
 // FormControlLabel Text Strings
@@ -24,6 +25,8 @@ export const forgotYourPwText = 'Esqueceu sua Senha?';
 export const dontHaveAnAccountText = 'Não tem uma Conta?';
 export const createOneHereText = 'Crie uma Aqui.';
 export const alreadyHaveAAccount = `Já tem uma conta? Entre no ${appNameText}`
+export const GoToInicialPage = 'Clique aqui Para voltar Para a pagina Inicial';
+export const NotFoundText ='Pagina nao encontrada.';
 
 // NavBar
 export const courseIconText = 'Cursos';
