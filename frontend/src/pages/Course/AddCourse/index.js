@@ -19,7 +19,7 @@ import {
 
 import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
 
-import { Copyright } from "../../../components/Copyritgh";
+import { Copyright } from "../../../components/Copyright";
 
 import { useStyles } from "./styles";
 
