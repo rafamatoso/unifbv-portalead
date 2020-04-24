@@ -1,97 +1,102 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { connect, types } from '../../../store';
+import React from "react";
+import { useHistory } from "react-router-dom";
+import { connect, types } from "../../../store";
+import { useFormik } from "formik";
 
-import {
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Typography,
-} from '@material-ui/core';
-import { CustomButton } from '../../../components';
+import { TextField, Typography } from "@material-ui/core";
+import { CustomButton } from "../../../components";
 
-import { signIn } from '../../../services/firebase';
+import { signIn } from "../../../services/firebase/signs";
 
-import { useStyles } from './styles';
+import { initialValues, validationSchema } from "../helper";
+
+import { useStyles } from "./styles";
 
 import {
   appNameText,
   enterButtonText,
-  remenberMeText,
   emailText,
   passwordText,
-} from '../../../utils/strings';
+} from "../../../utils/strings";
 
 function Login({ dispatch }) {
   const classes = useStyles();
   const history = useHistory();
-  
-  const initialState = { email: '', password: '' };
 
-  const [state, setState] = useState(initialState)
+  const {
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    errors,
+    touched,
+    values,
+  } = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      dispatch({ type: types.SET_LOADING, payload: true });
+      signIn(values, dispatch, history);
+    },
+  });
 
-  const handleOnChange = (e) => {
-    const value = e.target.value;
-    setState({
-      ...state,
-      [e.target.name]: value,
-    });
+  const handleHelperTextEmail = () => {
+    return Boolean(errors.email) && touched.email ? errors.email : null;
   };
 
-  const handleSubmit = (e) => {
-    dispatch({ type: types.SET_LOADING, payload: true });
-    e.preventDefault();
-    signIn(state, dispatch, history);
+  const handleHelperTextPassword = () => {
+    return Boolean(errors.password) && touched.password
+      ? errors.password
+      : null;
   };
 
   const verifyButtonDisable = () => {
-    return !!(state.email === '' || state.password === '');
+    return !!(values.email === "" || values.password === "");
   };
 
   return (
     <>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4">
+        <Typography component='h1' variant='h4' className={classes.typography}>
           {appNameText}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            id="email"
+            id='email'
             label={emailText}
-            name="email"
-            autoComplete="email"
+            name='email'
+            autoComplete='email'
             autoFocus
-            onChange={handleOnChange}
+            onChange={handleChange}
+            error={Boolean(errors.email) && touched.email}
+            onBlur={handleBlur}
+            helperText={handleHelperTextEmail()}
           />
           <TextField
-            variant="outlined"
-            margin="normal"
+            variant='outlined'
+            margin='normal'
             required
             fullWidth
-            name="password"
+            name='password'
             label={passwordText}
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            onChange={handleOnChange}
+            type='password'
+            id='password'
+            autoComplete='current-password'
+            onChange={handleChange}
+            error={Boolean(errors.password) && touched.password}
+            onBlur={handleBlur}
+            helperText={handleHelperTextPassword()}
           />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label={remenberMeText}
-          />
-          <div className={classes.containerBtnLoader}>
-            <CustomButton
-              type="submit"
-              fullWidth
-              disabled={verifyButtonDisable()}
-              className={classes.submit}>
-              {enterButtonText}
-            </CustomButton>
-          </div>
+          <CustomButton
+            type='submit'
+            fullWidth
+            disabled={verifyButtonDisable()}
+            className={classes.submit}>
+            {enterButtonText}
+          </CustomButton>
         </form>
       </div>
     </>

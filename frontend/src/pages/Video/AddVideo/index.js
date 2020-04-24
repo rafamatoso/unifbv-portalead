@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useFormik } from "formik";
 import { useHistory } from "react-router-dom";
+import { connect } from "../../../store";
+import { useFormik } from "formik";
 
 import {
   TextField,
@@ -15,10 +16,9 @@ import { CloudUpload } from "@material-ui/icons";
 import { useStyles } from "./styles";
 
 import { initialValues, validationSchema } from "./helper";
-import { storage } from "../../services/firebase/config";
+import { storage } from "../../../services/firebase/config";
 
-
-export default function AddVideo() {
+function AddVideo() {
   const history = useHistory();
   const classes = useStyles();
 
@@ -43,9 +43,6 @@ export default function AddVideo() {
             progress: (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           }));
         },
-        function error(errors) {
-          console.log(errors);
-        },
         function complete() {
           setUpload((values) => ({
             ...values,
@@ -66,14 +63,13 @@ export default function AddVideo() {
           <form
             noValidate
             onSubmit={formik.handleSubmit}
-            className={classes.form}
-          >
+            className={classes.form}>
             <TextField
-              name="title"
+              name='title'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label="Titulo"
-              variant="outlined"
+              label='Titulo'
+              variant='outlined'
               fullWidth
               error={formik.errors.title && formik.touched.title}
               helperText={
@@ -83,12 +79,12 @@ export default function AddVideo() {
               }
             />
             <TextField
-              name="description"
+              name='description'
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              label="Descrição"
+              label='Descrição'
               multiline
-              variant="outlined"
+              variant='outlined'
               fullWidth
               error={formik.errors.description && formik.touched.description}
               helperText={
@@ -99,25 +95,24 @@ export default function AddVideo() {
             />
 
             <input
-              id="button-file"
-              accept="video/*"
-              type="file"
+              id='button-file'
+              accept='video/*'
+              type='file'
               style={{ display: "none" }}
-              name="file"
+              name='file'
               onChange={(e) =>
                 formik.setFieldValue(e.target.name, e.target.files[0])
               }
               onClick={(e) => formik.setFieldTouched(e.target.name, true)}
             />
             <Button
-              variant="contained"
-              color="primary"
-              component="label"
-              htmlFor="button-file"
+              variant='contained'
+              color='primary'
+              component='label'
+              htmlFor='button-file'
               className={classes.upload}
-              size="large"
-              fullWidth
-            >
+              size='large'
+              fullWidth>
               {formik.values.file ? formik.values.file.name : "Upload Video"}
               <CloudUpload />
             </Button>
@@ -129,18 +124,16 @@ export default function AddVideo() {
 
             <div className={classes.formButton}>
               <Button
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-              >
+                variant='contained'
+                color='secondary'
+                className={classes.submit}>
                 Cancelar
               </Button>
               <Button
-                variant="contained"
-                color="primary"
+                variant='contained'
+                color='primary'
                 className={classes.submit}
-                type="submit"
-              >
+                type='submit'>
                 Salvar
               </Button>
             </div>
@@ -150,3 +143,5 @@ export default function AddVideo() {
     </Grid>
   );
 }
+
+export default connect(AddVideo);

@@ -84,7 +84,7 @@ function AddCourse(initialValues, onSubmit) {
   });
 
   return (
-    <Container component="main" maxWidth="100%">
+    <Container component='main' maxWidth='100%'>
       <CssBaseline />
       <div className={classes.paper}>
         <form onSubmit={formik.handleSubmit}>
@@ -99,9 +99,9 @@ function AddCourse(initialValues, onSubmit) {
                     variant="outlined"
                     required
                     fullWidth
-                    placeholder="Titulo do Curso"
-                    id="courseTitle"
-                    label="Titulo do Curso"
+                    placeholder='Titulo do Curso'
+                    id='courseTitle'
+                    label='Titulo do Curso'
                     autoFocus
                     onChange={formik.handleChange}
                     value={formik.values.items.courseTitle}
@@ -124,8 +124,8 @@ function AddCourse(initialValues, onSubmit) {
                     </MenuItem>
                   </Select>
                 </Grid>
-                <Grid item xs={12} alignItems="center" justify="center">
-                  <Card variant="outlined" fullWidth>
+                <Grid item xs={12} alignItems='center' justify='center'>
+                  <Card variant='outlined' fullWidth>
                     <CardContent>
                       <Box display="flex" justifyContent="center">
                         <input
@@ -179,12 +179,12 @@ function AddCourse(initialValues, onSubmit) {
               </Grid>
             </CardContent>
           </Card>
-          <Box display="flex" alignContent="center" margin="1" width="60%">
+          <Box display='flex' alignContent='center' margin='1' width='60%'>
             <Button
               type="reset"
               fullWidth
-              variant="contained"
-              color="secondary"
+              variant='contained'
+              color='secondary'
               className={classes.submit}
               spacing="auto"
             >
@@ -192,7 +192,7 @@ function AddCourse(initialValues, onSubmit) {
             </Button>
             <span> &nbsp; </span>
             <Button
-              type="submit"
+              type='submit'
               fullWidth
               variant="contained"
               color="primary"
@@ -201,7 +201,7 @@ function AddCourse(initialValues, onSubmit) {
               Submit
             </Button>
           </Box>
-          <Grid container justify="flex-end"></Grid>
+          <Grid container justify='flex-end'></Grid>
         </form>
       </div>
       <Box mt={5}>
