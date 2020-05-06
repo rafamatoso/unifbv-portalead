@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid,Modal } from "@material-ui/core";
 import { CardCourse } from "../../../components";
-
+import AddCourse from "../AddCourse"
 import Course from "../../../services/firebase/Models/Course";
 
 import { useStyles } from "./styles";
@@ -11,11 +11,12 @@ import { useHistory } from "react-router-dom";
 export default function ListCourse() {
   const classes = useStyles();
   const [courses, setCourses] = useState([]);
+  const [open, setOpen] = useState(false);
 
   const history = useHistory();
 
   function handleClick() {
-    history.push("/dashboard/addCourse");
+    setOpen( state=> !state )
   }
   useEffect(() => {
     Course.list((value) => setCourses(value));
@@ -36,6 +37,15 @@ export default function ListCourse() {
           <CardCourse className={classes.position} key={item.id} data={item} />
         ))}
       </Grid>
+
+      <Modal 
+      open={open}
+      onClose={handleClick}
+      >
+        
+        <AddCourse onClose={handleClick} />
+        
+      </Modal>
     </div>
   );
 }

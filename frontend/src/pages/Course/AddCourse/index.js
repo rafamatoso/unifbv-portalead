@@ -24,10 +24,11 @@ import { useStyles } from "./styles";
 import { useHistory } from "react-router-dom";
 import { Course } from "../../../services/firebase/Models";
 
-function AddCourse() {
+function AddCourse({onClose}) {
   const classes = useStyles();
 
-  const history = useHistory();
+  // const history = useHistory();
+
 
   const formik = useFormik({
     initialValues: {
@@ -40,13 +41,13 @@ function AddCourse() {
 
     onSubmit: async (values) => {
       await Course.create(values);
-      handleClick();
+      onClose();
     },
   });
 
-  function handleClick() {
-    history.push("/dashboard/courses");
-  }
+  // function handleClick() {
+  //   history.push("/dashboard/courses");
+  // }
 
   return (
     <Container component="main" maxWidth="100%">
@@ -142,9 +143,7 @@ function AddCourse() {
                   />
                 </Grid>
               </Grid>
-            </CardContent>
-          </Card>
-          <div margin-top="0" className={classes.buttons}>
+              <div margin-top="0" className={classes.buttons}>
             <Box display="flex" alignContent="center" width="60%">
               <Button
                 type="reset"
@@ -152,7 +151,7 @@ function AddCourse() {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
-                onClick={handleClick}
+                onClick={onClose}
                 spacing="auto"
               >
                 Cancelar
@@ -169,6 +168,9 @@ function AddCourse() {
               </Button>
             </Box>
           </div>
+            </CardContent>
+          </Card>
+          
           <Grid container justify="flex-end"></Grid>
         </form>
       </div>
