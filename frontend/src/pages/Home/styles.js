@@ -4,6 +4,7 @@ import { colors } from "../../utils/colors";
 
 export const useStyles = makeStyles((theme) => ({
   root: {
+    paddingRight:"70vh",
     height: "100vh",
   },
   image: {
