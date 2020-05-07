@@ -21,14 +21,11 @@ import { Copyright } from "../../../components/Copyright";
 
 import { useStyles } from "./styles";
 
-import { useHistory } from "react-router-dom";
+
 import { Course } from "../../../services/firebase/Models";
 
 function AddCourse({onClose}) {
   const classes = useStyles();
-
-  // const history = useHistory();
-
 
   const formik = useFormik({
     initialValues: {
@@ -44,10 +41,6 @@ function AddCourse({onClose}) {
       onClose();
     },
   });
-
-  // function handleClick() {
-  //   history.push("/dashboard/courses");
-  // }
 
   return (
     <Container component="main" maxWidth="100%">

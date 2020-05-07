@@ -15,12 +15,13 @@ import {
   IconButton,
   MenuItem,
   Menu,
+  Modal,
 } from "@material-ui/core";
 import { Player, BigPlayButton, LoadingSpinner } from "video-react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { Course, Video } from "../../../services/firebase/Models";
-
+import AddVideo from "../AddVideo"
 import { useStyles } from "./styles";
 import "../../../../node_modules/video-react/dist/video-react.css";
 import {
@@ -37,9 +38,13 @@ export default function ListVideo() {
   const classes = useStyles();
   const [course, setCourse] = useState({});
   const [video, setVideo] = useState(null);
-
+  const [openModal, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+
+  function handleClick() {
+    setOpen( state=> !state )
+  }; 
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -110,18 +115,24 @@ export default function ListVideo() {
             width="30%"
             startIcon={<Add />}
             component={Link}
-            to={`/dashboard/courses/${idCourse}/addVideo`}
+            onClick={handleClick}
           >
             Adicionar Aula
           </Button>
+          
+          <Modal 
+      open={openModal}
+      onClose={handleClick}
+      >
+        
+        <AddVideo onClose={handleClick} />
+        
+      </Modal>
         </div>
       </Paper>
       {video ? (
         <div style={{ width: "90%", margin: "10px auto" }}>
           <Player
-            // autoPlay={
-            //   course.videos?.length ? video.id !== course.videos[0]?.id : true
-            // }
             src={video?.file}
           >
             <BigPlayButton position="center" />

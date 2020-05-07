@@ -18,7 +18,7 @@ import { useStyles } from "./styles";
 import { initialValues, validationSchema } from "./helper";
 import Video from "../../../services/firebase/Models/Video";
 
-function AddVideo() {
+function AddVideo({onClose}) {
   const { id, idVideo } = useParams();
   const history = useHistory();
   const classes = useStyles();
@@ -46,7 +46,8 @@ function AddVideo() {
       ...values,
       show: false,
     }));
-    history.push(`/dashboard/courses/${id}/listVideo`);
+    onClose();
+    
   }
 
   const formik = useFormik({
@@ -157,6 +158,7 @@ function AddVideo() {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
+                onClick={onClose}
               >
                 Cancelar
               </Button>
