@@ -8,6 +8,13 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "husky": {
+    "hooks": {
+      "commit-msg": "node scripts/husky/index.js",
+      "pre-push": "yarn lint && yarn run test",
+      "pre-commit": "yarn lint"
+    }
+  },
   "dependencies": {
     "@material-ui/core": "^4.9.9",
     "@material-ui/icons": "^4.9.1",
