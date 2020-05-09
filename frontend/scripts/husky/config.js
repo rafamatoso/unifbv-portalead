@@ -1,4 +1,4 @@
-const FILE_PATH = ".git/COMMIT_EDITMSG";
+const FILE_PATH = "../.git/COMMIT_EDITMSG";
 const MAX_MESSAGE_SIZE = 72;
 const SUCCESS_STATUS = 0;
 const ERROR_STATUS = 1;

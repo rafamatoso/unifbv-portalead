@@ -25,7 +25,7 @@ describe("Husky config", () => {
     });
 
     test("file path", async () => {
-      expect(FILE_PATH).toBe(".git/COMMIT_EDITMSG");
+      expect(FILE_PATH).toBe("../.git/COMMIT_EDITMSG");
     });
 
     test("sucess status", async () => {

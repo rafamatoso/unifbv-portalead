@@ -9,28 +9,20 @@ export const signIn = ({ email, password }, dispatch, history) => {
       history.push("/dashboard/courses");
       dispatch({ type: types.SET_LOADING, payload: false });
     })
-    .catch((err) => {
+    .catch(() => {
       dispatch({ type: types.SET_LOADING, payload: false });
-      console.log(err);
     });
 };
 
 export const signUp = ({ email, password }, dispatch) => {
-  auth
-    .createUserWithEmailAndPassword(email, password)
-    .then((response) => {})
-    .catch((err) => {
-      dispatch({ type: types.SET_LOADING, payload: false });
-      console.log(err);
-    });
+  auth.createUserWithEmailAndPassword(email, password).catch((err) => {
+    dispatch({ type: types.SET_LOADING, payload: false });
+  });
 };
 
 export const signOut = (dispatch, history) => {
-  auth
-    .signOut()
-    .then((response) => {
-      dispatch({ type: types.SET_LOGOUT });
-      history.push("/home");
-    })
-    .catch((err) => {});
+  auth.signOut().then(() => {
+    dispatch({ type: types.SET_LOGOUT });
+    history.push("/home");
+  });
 };

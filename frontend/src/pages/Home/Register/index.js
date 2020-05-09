@@ -48,34 +48,34 @@ function SignUp({ dispatch }) {
 
   return (
     <div className={classes.paper}>
-      <Typography component='h1' variant='h4' className={classes.typography}>
+      <Typography component="h1" variant="h4" className={classes.typography}>
         {`${signUpButtonText} no ${appNameText}`}
       </Typography>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
-          variant='outlined'
-          margin='normal'
+          variant="outlined"
+          margin="normal"
           required
           fullWidth
-          id='email'
-          label='E-mail'
-          name='email'
-          autoComplete='email'
+          id="email"
+          label="E-mail"
+          name="email"
+          autoComplete="email"
           onChange={handleChange}
           error={Boolean(errors.email) && touched.email}
           onBlur={handleBlur}
           helperText={handleHelperTextEmail()}
         />
         <TextField
-          variant='outlined'
-          margin='normal'
+          variant="outlined"
+          margin="normal"
           required
           fullWidth
-          id='password'
-          label='Senha'
-          name='password'
-          autoComplete='current-password'
-          type='password'
+          id="password"
+          label="Senha"
+          name="password"
+          autoComplete="current-password"
+          type="password"
           onChange={handleChange}
           error={Boolean(errors.password) && touched.password}
           onBlur={handleBlur}
@@ -83,10 +83,11 @@ function SignUp({ dispatch }) {
         />
         <div className={classes.containerBtnLoader}>
           <CustomButton
-            type='submit'
+            type="submit"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}>
+            className={classes.submit}
+          >
             {signUpButtonText}
           </CustomButton>
         </div>

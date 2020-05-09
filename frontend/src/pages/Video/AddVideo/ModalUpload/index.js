@@ -8,7 +8,7 @@ export const ModalUpload = ({ value, show }) => {
     <Dialog open={show} fullWidth>
       <DialogTitle>Carregando video!!!</DialogTitle>
       <DialogContent>
-        <CustomProgressBar variant='determinate' value={value} />
+        <CustomProgressBar variant="determinate" value={value} />
       </DialogContent>
     </Dialog>
   );

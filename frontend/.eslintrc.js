@@ -15,10 +15,10 @@ module.exports = {
     ecmaFeatures: {
       jsx: true,
     },
-    ecmaVersion: 11,
+    ecmaVersion: 2018,
     sourceType: "module",
   },
-  plugins: ["react", "prettier", "jest"],
+  plugins: ["react-app", "prettier", "jest"],
   rules: {
     "prettier/prettier": [
       "error",
