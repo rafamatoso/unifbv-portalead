@@ -9,7 +9,6 @@ export default function App() {
   return (
     <Store.Context.Provider value={{store, dispatch}}>
       <Routes />
-      <p string="aaa"> </p>
     </Store.Context.Provider>
   );
 }
