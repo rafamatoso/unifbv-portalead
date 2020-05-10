@@ -1,4 +1,4 @@
-import { database, storage } from "../config";
+import { database, storage } from "..";
 import firebase from "firebase/app";
 import collections from "../../../utils/collections";
 const FieldValue = firebase.firestore.FieldValue;

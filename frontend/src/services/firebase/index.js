@@ -17,6 +17,8 @@ export const database = firebase.firestore();
 
 export const storage = firebase.storage();
 
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+
 export const auth = firebase.auth();
 
 export default app;

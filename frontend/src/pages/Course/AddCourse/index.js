@@ -1,5 +1,4 @@
 import React from "react";
-import { connect } from "../../../store";
 import { useFormik } from "formik";
 import {
   Button,
@@ -179,4 +178,4 @@ function AddCourse() {
   );
 }
 
-export default connect(AddCourse);
+export default AddCourse;

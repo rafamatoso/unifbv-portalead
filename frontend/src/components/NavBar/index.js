@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { connect } from "../../store/index";
 
 import { AppBar, Toolbar, IconButton, MenuItem, Menu } from "@material-ui/core";
 import { AccountCircle, ExitToApp } from "@material-ui/icons";
 
-import { signOut } from "../../services/firebase/signs";
+import Auth from "../../services/firebase/Models/Auth";
+import { useDispatch } from "react-redux";
 
 import { useStyles } from "./styles";
 
@@ -14,12 +14,14 @@ import {
   logoutButtonText,
   courseIconText,
 } from "../../utils/strings";
+import { setLoading } from "../../Store/ducks/layout";
 
 const routeDashboard = "/dashboard";
 
-function NavBar({ dispatch }) {
+function NavBar() {
   const classes = useStyles();
   const history = useHistory();
+  const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -35,9 +37,17 @@ function NavBar({ dispatch }) {
     history.push(`${routeDashboard}/courses`);
   };
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-    signOut(dispatch, history);
+    dispatch(setLoading(true));
+    try {
+      await Auth.signOut();
+      // dispatch(setUser());
+      history.push("/home");
+    } catch (err) {
+      console.log(err);
+    }
+    dispatch(setLoading(false));
   };
 
   return (
@@ -102,4 +112,4 @@ function NavBar({ dispatch }) {
   );
 }
 
-export default connect(NavBar);
+export default NavBar;
