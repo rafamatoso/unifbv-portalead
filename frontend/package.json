@@ -5,14 +5,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
-    "lint": "eslint .",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "precommit": "lint-staged"
   },
   "husky": {
     "hooks": {
-      "commit-msg": "node scripts/husky/index.js",
-      "pre-push": "yarn run test"
+      "pre-commit": "yarn precommit",
+      "commit-msg": "node scripts/husky/index.js"
     }
   },
   "dependencies": {
@@ -32,9 +32,11 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.0.1",
     "chalk": "^4.0.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-base": "^14.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jest": "^23.10.0",
@@ -44,11 +46,8 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
-    "prettier": "^2.0.5",
-    "react-test-renderer": "^16.13.1"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "lint-staged": "^10.2.2",
+    "prettier": "^2.0.5"
   },
   "browserslist": {
     "production": [
