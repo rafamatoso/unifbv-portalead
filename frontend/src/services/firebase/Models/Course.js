@@ -1,4 +1,4 @@
-import { database, storage } from "../config";
+import { database, storage } from "..";
 import collections from "../../../utils/collections";
 
 function upload(file, onProgress, onError, onComplete) {

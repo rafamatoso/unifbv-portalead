@@ -1,12 +1,13 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { connect, types } from "../../../store";
 import { useFormik } from "formik";
 
 import { TextField, Typography } from "@material-ui/core";
 import { CustomButton } from "../../../components";
 
-import { signIn } from "../../../services/firebase/signs";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../Store/ducks/layout";
+
+import Auth from "../../../services/firebase/Models/Auth";
 
 import { initialValues, validationSchema } from "../helper";
 
@@ -19,9 +20,9 @@ import {
   passwordText,
 } from "../../../utils/strings";
 
-function Login({ dispatch }) {
+function Login() {
   const classes = useStyles();
-  const history = useHistory();
+  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -33,9 +34,13 @@ function Login({ dispatch }) {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      dispatch({ type: types.SET_LOADING, payload: true });
-      signIn(values, dispatch, history);
+    onSubmit: async (values) => {
+      dispatch(setLoading(true));
+      try {
+        await Auth.signIn(values);
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
 
@@ -104,4 +109,4 @@ function Login({ dispatch }) {
   );
 }
 
-export default connect(Login);
+export default Login;

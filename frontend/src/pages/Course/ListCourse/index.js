@@ -7,19 +7,22 @@ import Course from "../../../services/firebase/Models/Course";
 import { useStyles } from "./styles";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setLoading } from "../../../Store/ducks/layout";
 
 export default function ListCourse() {
   const classes = useStyles();
   const [courses, setCourses] = useState([]);
-
+  const dispatch = useDispatch();
   const history = useHistory();
 
   function handleClick() {
     history.push("/dashboard/addCourse");
   }
   useEffect(() => {
+    dispatch(setLoading(false));
     Course.list((value) => setCourses(value));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className={classes.root}>

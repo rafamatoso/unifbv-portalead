@@ -1,10 +1,10 @@
 import React from "react";
 
 import { Route, Redirect } from "react-router-dom";
-import { connect } from "../store";
+import { useSelector } from "react-redux";
 
-function RouteWrapper({ component: Component, isPrivate, store, ...rest }) {
-  const { user } = store;
+function RouteWrapper({ component: Component, isPrivate, ...rest }) {
+  const user = useSelector((state) => state.user);
 
   if (isPrivate) {
     if (user) {
@@ -20,4 +20,4 @@ RouteWrapper.defaultProps = {
   isPrivate: false,
 };
 
-export default connect(RouteWrapper);
+export default RouteWrapper;

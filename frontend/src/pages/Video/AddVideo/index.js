@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { connect } from "../../../store";
 import { useFormik } from "formik";
 
 import {
@@ -176,4 +175,4 @@ function AddVideo() {
   );
 }
 
-export default connect(AddVideo);
+export default AddVideo;

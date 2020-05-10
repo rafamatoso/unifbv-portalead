@@ -28,8 +28,4 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: "space-between",
     alignItems: "center",
   },
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: colors.yellow1,
-  },
 }));

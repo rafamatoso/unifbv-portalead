@@ -1,25 +1,23 @@
-import React from "react";
+import React from 'react';
 
-import { Typography, Link } from "@material-ui/core";
+import {Typography, Link} from '@material-ui/core';
 
 import {
   UniversityLink,
   appNameText,
   copyritghText,
   unifbvText,
-} from "../../utils/strings";
+} from '../../utils/strings';
 
 export function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {`${copyritghText}`}
-      <Link color="inherit" href={UniversityLink} />
-      <Link color="inherit" href="https://material-ui.com/" />
-      {` ${appNameText} ${unifbvText}`}
+      {`${copyritghText} ${appNameText} `}
+      <Link color="inherit" href={UniversityLink}>
+        {`${unifbvText}`}
+      </Link>
 
-      {", "}
-      {new Date().getFullYear()}
-      {"."}
+      {`, ${new Date().getFullYear()}.`}
     </Typography>
   );
 }
