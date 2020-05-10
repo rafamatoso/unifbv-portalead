@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react';
 
-import { Typography, Link } from "@material-ui/core";
+import {Typography, Link} from '@material-ui/core';
 
 import {
   UniversityLink,
   appNameText,
   copyritghText,
   unifbvText,
-} from "../../utils/strings";
+} from '../../utils/strings';
 
 export function Copyright() {
   return (
