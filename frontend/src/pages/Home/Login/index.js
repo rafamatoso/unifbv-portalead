@@ -56,19 +56,19 @@ function Login({ dispatch }) {
   return (
     <>
       <div className={classes.paper}>
-        <Typography component='h1' variant='h4' className={classes.typography}>
+        <Typography component="h1" variant="h4" className={classes.typography}>
           {appNameText}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            id='email'
+            id="email"
             label={emailText}
-            name='email'
-            autoComplete='email'
+            name="email"
+            autoComplete="email"
             autoFocus
             onChange={handleChange}
             error={Boolean(errors.email) && touched.email}
@@ -76,25 +76,26 @@ function Login({ dispatch }) {
             helperText={handleHelperTextEmail()}
           />
           <TextField
-            variant='outlined'
-            margin='normal'
+            variant="outlined"
+            margin="normal"
             required
             fullWidth
-            name='password'
+            name="password"
             label={passwordText}
-            type='password'
-            id='password'
-            autoComplete='current-password'
+            type="password"
+            id="password"
+            autoComplete="current-password"
             onChange={handleChange}
             error={Boolean(errors.password) && touched.password}
             onBlur={handleBlur}
             helperText={handleHelperTextPassword()}
           />
           <CustomButton
-            type='submit'
+            type="submit"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}>
+            className={classes.submit}
+          >
             {enterButtonText}
           </CustomButton>
         </form>

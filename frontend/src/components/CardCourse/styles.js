@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     maxHeight: 160,
     "& .title": {
       height: 32,
-      fontWeight: 'bold'
+      fontWeight: "bold",
     },
     "& .description": {
       height: 70,

@@ -8,8 +8,8 @@ import {
   Box,
   Backdrop,
   CircularProgress,
-} from '@material-ui/core';
-import { Copyright } from '../../components/Copyright';
+} from "@material-ui/core";
+import { Copyright } from "../../components/Copyright";
 
 import Login from "./Login";
 import Register from "./Register";
@@ -35,18 +35,18 @@ function Home({ store }) {
     <>
       {loading && (
         <Backdrop className={classes.backdrop} open={loading}>
-          <CircularProgress color='inherit' />
+          <CircularProgress color="inherit" />
         </Backdrop>
       )}
-      <Grid container component='main' className={classes.root}>
+      <Grid container component="main" className={classes.root}>
         <Grid item sm={"auto"} md={6} className={classes.image} />
         <Grid item sm={12} md={6} component={Paper} elevation={6} square>
           {!showRegister ? (
             <>
-              <Login/>
+              <Login />
               <div className={classes.link}>
                 <Grid item>
-                  <Link variant='body2' onClick={handleShowRegister}>
+                  <Link variant="body2" onClick={handleShowRegister}>
                     {`${dontHaveAnAccountText} ${createOneHereText}`}
                   </Link>
                 </Grid>
@@ -57,7 +57,7 @@ function Home({ store }) {
               <Register></Register>
               <div className={classes.link}>
                 <Grid item>
-                  <Link variant='body2' onClick={handleShowRegister}>
+                  <Link variant="body2" onClick={handleShowRegister}>
                     {alreadyHaveAAccount}
                   </Link>
                 </Grid>
