@@ -1,4 +1,4 @@
-const execute = (validationResult, log, {green, yellow, red}, exitFn) => {
+const execute = (validationResult, log, { green, yellow, red }, exitFn) => {
   if (validationResult.isSucess) {
     log(green('Validação de mensagem de commit realizada com sucesso.'));
     log(green('Tipo de commit identificado: '), yellow(validationResult.rule));
@@ -29,7 +29,7 @@ const execute = (validationResult, log, {green, yellow, red}, exitFn) => {
   return exitFn(validationResult.status);
 };
 
-const startValidation = (validateFn, log, {cyan}) => {
+const startValidation = (validateFn, log, { cyan }) => {
   log(cyan('Iniciando validação de mensagem de commit...'));
 
   return validateFn();

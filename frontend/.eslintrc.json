@@ -4,7 +4,11 @@
     "es6": true,
     "jest": true
   },
-  "extends": ["plugin:react/recommended", "airbnb"],
+  "extends": [
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -20,7 +24,7 @@
   "plugins": ["react", "prettier", "jest"],
   "rules": {
     "strict": 0,
-    "max-len": "off",
+    "max-len": ["error", 80],
     "react/jsx-filename-extension": [0],
     "jsx-a11y/anchor-is-valid": 0,
     "import/prefer-default-export": "off",
@@ -33,6 +37,7 @@
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",
     "implicit-arrow-linebreak": "off",
-    "react/jsx-curly-newline": "off"
+    "react/jsx-curly-newline": "off",
+    "operator-linebreak": "off"
   }
 }

@@ -1,6 +1,6 @@
-import {executeFn} from '../../scripts/husky/execute';
+import { executeFn } from '../../scripts/husky/execute';
 
-const colorMock = (color) => (logInfo) => ({color, logInfo});
+const colorMock = (color) => (logInfo) => ({ color, logInfo });
 
 const colors = {
   cyan: colorMock('cyan'),
@@ -47,7 +47,7 @@ describe('Husky index', () => {
       color: 'green',
       logInfo: 'Tipo de commit identificado: ',
     });
-    expect(logStack[3]).toStrictEqual({color: 'yellow', logInfo: 'Rule 1'});
+    expect(logStack[3]).toStrictEqual({ color: 'yellow', logInfo: 'Rule 1' });
     expect(logStack[4]).toStrictEqual({
       color: 'green',
       logInfo: 'Mensagem de commit validada: ',
@@ -97,7 +97,7 @@ describe('Husky index', () => {
         color: 'red',
         logInfo: 'Tipo de commit identificado: ',
       });
-      expect(logStack[4]).toStrictEqual({color: 'yellow', logInfo: 'Rule 1'});
+      expect(logStack[4]).toStrictEqual({ color: 'yellow', logInfo: 'Rule 1' });
       expect(logStack[5]).toStrictEqual({
         color: 'red',
         logInfo: 'Mensagem de commit: ',
@@ -214,7 +214,7 @@ describe('Husky index', () => {
         color: 'red',
         logInfo: 'Tipo de commit identificado: ',
       });
-      expect(logStack[4]).toStrictEqual({color: 'yellow', logInfo: 'Rule 1'});
+      expect(logStack[4]).toStrictEqual({ color: 'yellow', logInfo: 'Rule 1' });
       expect(logStack[5]).toStrictEqual({
         color: 'yellow',
         logInfo: 'Exemplo(s) de mensagens para este tipo de commit:',
@@ -266,7 +266,7 @@ describe('Husky index', () => {
         color: 'red',
         logInfo: 'Tipo de commit identificado: ',
       });
-      expect(logStack[4]).toStrictEqual({color: 'yellow', logInfo: 'Rule 1'});
+      expect(logStack[4]).toStrictEqual({ color: 'yellow', logInfo: 'Rule 1' });
       expect(logStack[5]).toStrictEqual({
         color: 'red',
         logInfo: 'Mensagem de commit: ',

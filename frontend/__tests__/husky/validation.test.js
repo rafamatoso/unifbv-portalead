@@ -1,4 +1,4 @@
-import {validateFunction} from '../../scripts/husky/validation';
+import { validateFunction } from '../../scripts/husky/validation';
 
 const getFSMock = (expectedExistsSync, expectedReadFileSync) => ({
   existsSync: () => expectedExistsSync,
