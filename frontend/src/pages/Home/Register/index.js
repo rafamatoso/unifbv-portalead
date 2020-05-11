@@ -1,20 +1,23 @@
-import React from "react";
-import { connect, types } from "../../../store";
-import { useFormik } from "formik";
+import React from 'react';
+import { useFormik } from 'formik';
 
-import { TextField, Typography } from "@material-ui/core";
-import { CustomButton } from "../../../components";
+import { TextField, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { CustomButton } from '../../../components';
 
-import { signUp } from "../../../services/firebase/signs";
+import Auth from '../../../services/firebase/Models/Auth';
 
-import { initialValues, validationSchema } from "../helper";
+import { setLoading } from '../../../Store/ducks/layout';
 
-import { useStyles } from "./styles";
+import { initialValues, validationSchema } from '../helper';
 
-import { appNameText, signUpButtonText } from "../../../utils/strings";
+import { useStyles } from './styles';
 
-function SignUp({ dispatch }) {
+import { appNameText, signUpButtonText } from '../../../utils/strings';
+
+function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const {
     handleSubmit,
@@ -26,56 +29,53 @@ function SignUp({ dispatch }) {
   } = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      dispatch({ type: types.SET_LOADING, payload: true });
-      signUp(values, dispatch);
+    onSubmit: async (values) => {
+      dispatch(setLoading(true));
+      const data = await Auth.signUp(values);
+      dispatch(setLoading(false));
+      console.log(data);
     },
   });
 
-  const handleHelperTextEmail = () => {
-    return Boolean(errors.email) && touched.email ? errors.email : null;
-  };
+  const handleHelperTextEmail = () =>
+    Boolean(errors.email) && touched.email ? errors.email : null;
 
-  const handleHelperTextPassword = () => {
-    return Boolean(errors.password) && touched.password
-      ? errors.password
-      : null;
-  };
+  const handleHelperTextPassword = () =>
+    Boolean(errors.password) && touched.password ? errors.password : null;
 
-  const verifyButtonDisable = () => {
-    return !!(values.email === "" || values.password === "");
-  };
+  const verifyButtonDisable = () =>
+    !!(values.email === '' || values.password === '');
 
   return (
     <div className={classes.paper}>
-      <Typography component='h1' variant='h4' className={classes.typography}>
+      <Typography component="h1" variant="h4" className={classes.typography}>
         {`${signUpButtonText} no ${appNameText}`}
       </Typography>
       <form className={classes.form} noValidate onSubmit={handleSubmit}>
         <TextField
-          variant='outlined'
-          margin='normal'
+          variant="outlined"
+          margin="normal"
           required
           fullWidth
-          id='email'
-          label='E-mail'
-          name='email'
-          autoComplete='email'
+          id="email"
+          label="E-mail"
+          name="email"
+          autoComplete="email"
           onChange={handleChange}
           error={Boolean(errors.email) && touched.email}
           onBlur={handleBlur}
           helperText={handleHelperTextEmail()}
         />
         <TextField
-          variant='outlined'
-          margin='normal'
+          variant="outlined"
+          margin="normal"
           required
           fullWidth
-          id='password'
-          label='Senha'
-          name='password'
-          autoComplete='current-password'
-          type='password'
+          id="password"
+          label="Senha"
+          name="password"
+          autoComplete="current-password"
+          type="password"
           onChange={handleChange}
           error={Boolean(errors.password) && touched.password}
           onBlur={handleBlur}
@@ -83,10 +83,11 @@ function SignUp({ dispatch }) {
         />
         <div className={classes.containerBtnLoader}>
           <CustomButton
-            type='submit'
+            type="submit"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}>
+            className={classes.submit}
+          >
             {signUpButtonText}
           </CustomButton>
         </div>
@@ -95,4 +96,4 @@ function SignUp({ dispatch }) {
   );
 }
 
-export default connect(SignUp);
+export default SignUp;

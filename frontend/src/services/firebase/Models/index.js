@@ -1,4 +1,5 @@
-import Course from "./Course";
-import Video from "./Video";
+import Auth from './Auth';
+import Course from './Course';
+import Video from './Video';
 
-export { Course, Video };
+export { Auth, Course, Video };

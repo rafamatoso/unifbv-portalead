@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Card,
   CardActionArea,
@@ -7,10 +7,10 @@ import {
   Typography,
   CardActions,
   IconButton,
-} from "@material-ui/core";
-import Share from "@material-ui/icons/ShareTwoTone";
-import { useStyles } from "./styles";
-import { Link } from "react-router-dom";
+} from '@material-ui/core';
+import Share from '@material-ui/icons/ShareTwoTone';
+import { Link } from 'react-router-dom';
+import { useStyles } from './styles';
 
 export default function CardCourse({ data, className }) {
   const classes = useStyles();

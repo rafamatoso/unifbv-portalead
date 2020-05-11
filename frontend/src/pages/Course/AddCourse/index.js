@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "../../../store";
-import { useFormik } from "formik";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React from 'react';
+import { useFormik } from 'formik';
 import {
   Button,
   CssBaseline,
@@ -13,26 +13,25 @@ import {
   Select,
   MenuItem,
   Card,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
-import { Copyright } from "../../../components/Copyright";
+import { Copyright } from '../../../components/Copyright';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
+import { Course } from '../../../services/firebase/Models';
 
-import { Course } from "../../../services/firebase/Models";
-
-function AddCourse({onClose}) {
+function AddCourse({ onClose }) {
   const classes = useStyles();
 
   const formik = useFormik({
     initialValues: {
-      title: "",
+      title: '',
       img: null,
-      show: "",
-      description: "",
+      show: '',
+      description: '',
       videos: [],
     },
 
@@ -71,14 +70,14 @@ function AddCourse({onClose}) {
                   <label>Visibilidade:</label>
                   <Select
                     name="show"
-                    defaultValue={""}
+                    defaultValue=""
                     onChange={formik.handleChange}
                     fullWidth
                   >
-                    <MenuItem value={"false"} onChange={formik.handleChange}>
+                    <MenuItem value="false" onChange={formik.handleChange}>
                       Privado
                     </MenuItem>
-                    <MenuItem value={"true"} onChange={formik.handleChange}>
+                    <MenuItem value="true" onChange={formik.handleChange}>
                       Aberto
                     </MenuItem>
                   </Select>
@@ -91,21 +90,21 @@ function AddCourse({onClose}) {
                           id="button-file"
                           accept="image/*"
                           type="file"
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                           name="img"
-                          onChange={(e) =>
+                          onChange={(e) => {
                             formik.setFieldValue(
                               e.target.name,
-                              e.target.files[0]
-                            )
-                          }
-                          onClick={(e) =>
-                            formik.setFieldTouched(e.target.name, true)
-                          }
+                              e.target.files[0],
+                            );
+                          }}
+                          onClick={(e) => {
+                            formik.setFieldTouched(e.target.name, true);
+                          }}
                         />
                         <Button
                           variant="contained"
-                          //color="primary"
+                          // color="primary"
                           component="label"
                           htmlFor="button-file"
                           className={classes.upload}
@@ -137,34 +136,34 @@ function AddCourse({onClose}) {
                 </Grid>
               </Grid>
               <div margin-top="0" className={classes.buttons}>
-            <Box display="flex" alignContent="center" width="60%">
-              <Button
-                type="reset"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-                onClick={onClose}
-                spacing="auto"
-              >
-                Cancelar
-              </Button>
-              <span> &nbsp; </span>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Salvar
-              </Button>
-            </Box>
-          </div>
+                <Box display="flex" alignContent="center" width="60%">
+                  <Button
+                    type="reset"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    className={classes.submit}
+                    onClick={onClose}
+                    spacing="auto"
+                  >
+                    Cancelar
+                  </Button>
+                  <span> &nbsp; </span>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Salvar
+                  </Button>
+                </Box>
+              </div>
             </CardContent>
           </Card>
-          
-          <Grid container justify="flex-end"></Grid>
+
+          <Grid container justify="flex-end" />
         </form>
       </div>
       <Box mt={5}>
@@ -174,4 +173,4 @@ function AddCourse({onClose}) {
   );
 }
 
-export default connect(AddCourse);
+export default AddCourse;
