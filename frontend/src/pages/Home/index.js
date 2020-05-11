@@ -1,21 +1,20 @@
 import React, { useState } from 'react';
-import { Grid, Paper, Link, Box } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import { Grid, Paper, Link, Box } from '@material-ui/core';
+
 import { Copyright } from '../../components/Copyright';
-
-import Login from './Login';
-import Register from './Register';
-
-import { useStyles } from './styles';
-
+import { Auth } from '../../services/firebase/Models';
+import { setUser } from '../../store/ducks/user';
 import {
   dontHaveAnAccountText,
   createOneHereText,
   alreadyHaveAAccount,
 } from '../../utils/strings';
-import { Auth } from '../../services/firebase/Models';
-import { setUser } from '../../Store/ducks/user';
+import Login from './Login';
+import Register from './Register';
+import { useStyles } from './styles';
 
 function Home() {
   const classes = useStyles();

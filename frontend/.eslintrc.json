@@ -21,7 +21,7 @@
     "ecmaVersion": 11,
     "sourceType": "module"
   },
-  "plugins": ["react", "prettier", "jest"],
+  "plugins": ["react", "prettier", "jest", "import-helpers"],
   "rules": {
     "strict": 0,
     "max-len": ["error", 80],
@@ -38,6 +38,19 @@
     "import/no-named-as-default-member": "off",
     "implicit-arrow-linebreak": "off",
     "react/jsx-curly-newline": "off",
-    "operator-linebreak": "off"
+    "operator-linebreak": "off",
+    "import-helpers/order-imports": [
+      "warn",
+      {
+        "newlinesBetween": "always",
+        "groups": [
+          "/react/",
+          "module",
+          "/^@shared/",
+          ["parent", "sibling", "index"]
+        ],
+        "alphabetize": { "order": "asc", "ignoreCase": true }
+      }
+    ]
   }
 }
