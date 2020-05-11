@@ -1,19 +1,15 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import { TextField, Typography } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+
 import { CustomButton } from '../../../components';
-
 import Auth from '../../../services/firebase/Models/Auth';
-
-import { setLoading } from '../../../Store/ducks/layout';
-
-import { initialValues, validationSchema } from '../helper';
-
-import { useStyles } from './styles';
-
+import { setLoading } from '../../../store/ducks/layout';
 import { appNameText, signUpButtonText } from '../../../utils/strings';
+import { initialValues, validationSchema } from '../helper';
+import { useStyles } from './styles';
 
 function SignUp() {
   const classes = useStyles();

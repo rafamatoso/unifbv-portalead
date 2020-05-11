@@ -1,10 +1,9 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import store from './Store';
-
-import { Routes } from './routes';
 
 import Loading from './components/Loading';
+import { Routes } from './routes';
+import store from './store';
 
 import './App.css';
 

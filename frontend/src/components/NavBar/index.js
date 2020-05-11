@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
 import { AccountCircle, ExitToApp } from '@material-ui/icons';
 
-import { useDispatch } from 'react-redux';
 import Auth from '../../services/firebase/Models/Auth';
-
-import { useStyles } from './styles';
-
+import { setLoading } from '../../store/ducks/layout';
 import {
   appNameText,
   logoutButtonText,
   courseIconText,
 } from '../../utils/strings';
-import { setLoading } from '../../Store/ducks/layout';
+import { useStyles } from './styles';
 
 const routeDashboard = '/dashboard';
 
