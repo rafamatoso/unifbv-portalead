@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-import { AppBar, Toolbar, IconButton, MenuItem, Menu } from "@material-ui/core";
-import { AccountCircle, ExitToApp } from "@material-ui/icons";
+import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
+import { AccountCircle, ExitToApp } from '@material-ui/icons';
 
-import Auth from "../../services/firebase/Models/Auth";
-import { useDispatch } from "react-redux";
+import { useDispatch } from 'react-redux';
+import Auth from '../../services/firebase/Models/Auth';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 import {
   appNameText,
   logoutButtonText,
   courseIconText,
-} from "../../utils/strings";
-import { setLoading } from "../../Store/ducks/layout";
+} from '../../utils/strings';
+import { setLoading } from '../../Store/ducks/layout';
 
-const routeDashboard = "/dashboard";
+const routeDashboard = '/dashboard';
 
 function NavBar() {
   const classes = useStyles();
@@ -43,7 +43,7 @@ function NavBar() {
     try {
       await Auth.signOut();
       // dispatch(setUser());
-      history.push("/home");
+      history.push('/home');
     } catch (err) {
       console.log(err);
     }
@@ -87,20 +87,20 @@ function NavBar() {
               id="menu-appbar"
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
+                vertical: 'top',
+                horizontal: 'right',
               }}
               keepMounted
               transformOrigin={{
-                vertical: "bottom",
-                horizontal: "right",
+                vertical: 'bottom',
+                horizontal: 'right',
               }}
               open={open}
               onClose={handleClose}
               onClick={handleClose}
             >
               <div className={classes.containerMenuItem}>
-                <ExitToApp></ExitToApp>
+                <ExitToApp />
                 <MenuItem onClick={handleLogout}>{logoutButtonText}</MenuItem>
               </div>
             </Menu>

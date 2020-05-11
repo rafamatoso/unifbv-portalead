@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { useFormik } from "formik";
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
 
 import {
   TextField,
@@ -8,14 +8,14 @@ import {
   FormHelperText,
   Grid,
   Paper,
-} from "@material-ui/core";
-import { ModalUpload } from "./ModalUpload";
-import { CloudUpload } from "@material-ui/icons";
+} from '@material-ui/core';
+import { CloudUpload } from '@material-ui/icons';
+import { ModalUpload } from './ModalUpload';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
-import { initialValues, validationSchema } from "./helper";
-import Video from "../../../services/firebase/Models/Video";
+import { initialValues, validationSchema } from './helper';
+import Video from '../../../services/firebase/Models/Video';
 
 function AddVideo() {
   const { id, idVideo } = useParams();
@@ -51,7 +51,7 @@ function AddVideo() {
   const formik = useFormik({
     initialValues: state || initialValues,
     enableReinitialize: true,
-    onSubmit: (values, { resetForm }) => {
+    onSubmit: (values) => {
       setUpload((values) => ({
         ...values,
         show: true,
@@ -63,14 +63,14 @@ function AddVideo() {
           { idCourse: id, ...values },
           handlerProgress,
           null,
-          handlerComplete
+          handlerComplete,
         );
       } else {
         Video.create(
           { idCourse: id, ...values },
           handlerProgress,
           null,
-          handlerComplete
+          handlerComplete,
         );
       }
     },
@@ -123,7 +123,7 @@ function AddVideo() {
               id="button-file"
               accept="video/*"
               type="file"
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               name="file"
               onChange={(e) =>
                 formik.setFieldValue(e.target.name, e.target.files[0])
@@ -139,10 +139,10 @@ function AddVideo() {
               size="large"
               fullWidth
             >
-              {typeof formik.values.file !== "string" &&
+              {typeof formik.values.file !== 'string' &&
               formik.values.file !== null
                 ? formik.values.file.name
-                : "Upload Video"}
+                : 'Upload Video'}
               <CloudUpload />
             </Button>
             <FormHelperText error={formik.errors.file && formik.touched.file}>

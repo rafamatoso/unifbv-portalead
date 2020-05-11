@@ -1,24 +1,24 @@
-import React from "react";
-import { useFormik } from "formik";
+import React from 'react';
+import { useFormik } from 'formik';
 
-import { TextField, Typography } from "@material-ui/core";
-import { CustomButton } from "../../../components";
+import { TextField, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import { CustomButton } from '../../../components';
 
-import { useDispatch } from "react-redux";
-import { setLoading } from "../../../Store/ducks/layout";
+import { setLoading } from '../../../Store/ducks/layout';
 
-import Auth from "../../../services/firebase/Models/Auth";
+import Auth from '../../../services/firebase/Models/Auth';
 
-import { initialValues, validationSchema } from "../helper";
+import { initialValues, validationSchema } from '../helper';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
 import {
   appNameText,
   enterButtonText,
   emailText,
   passwordText,
-} from "../../../utils/strings";
+} from '../../../utils/strings';
 
 function Login() {
   const classes = useStyles();
@@ -44,19 +44,14 @@ function Login() {
     },
   });
 
-  const handleHelperTextEmail = () => {
-    return Boolean(errors.email) && touched.email ? errors.email : null;
-  };
+  const handleHelperTextEmail = () =>
+    Boolean(errors.email) && touched.email ? errors.email : null;
 
-  const handleHelperTextPassword = () => {
-    return Boolean(errors.password) && touched.password
-      ? errors.password
-      : null;
-  };
+  const handleHelperTextPassword = () =>
+    Boolean(errors.password) && touched.password ? errors.password : null;
 
-  const verifyButtonDisable = () => {
-    return !!(values.email === "" || values.password === "");
-  };
+  const verifyButtonDisable = () =>
+    !!(values.email === '' || values.password === '');
 
   return (
     <>

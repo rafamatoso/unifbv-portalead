@@ -1,14 +1,15 @@
-import { database, storage } from "..";
-import firebase from "firebase/app";
-import collections from "../../../utils/collections";
-const FieldValue = firebase.firestore.FieldValue;
+import firebase from 'firebase/app';
+import { database, storage } from '..';
+import collections from '../../../utils/collections';
+
+const { FieldValue } = firebase.firestore;
 
 function upload(file, onProgress, onError, onComplete) {
   return new Promise((resolve, reject) => {
     const task = storage.ref(`/videos/${Date.now()}_${file.name}`).put(file);
 
     task.on(
-      "state_changed",
+      'state_changed',
       onProgress,
       (error) => {
         onError(error);
@@ -20,13 +21,13 @@ function upload(file, onProgress, onError, onComplete) {
         }
 
         resolve(await task.snapshot.ref.getDownloadURL());
-      }
+      },
     );
   });
 }
 
 class Video {
-  //precisa ser testado
+  // precisa ser testado
   async create(data, onProgress, onError, onComplete) {
     data.file = await upload(data.file, onProgress, onError, onComplete);
     const ref = database.collection(collections.videos).doc();
@@ -39,14 +40,17 @@ class Video {
       });
   }
 
-  list(idCourse, observer) {
-    const resolver = async (query) => {
+  async list(idCourse, observer) {
+    const resolver = (query) => {
       const data = query.data();
 
-      return await Promise.all(
-        data.videos.map((item) =>
-          item.get().then((resp) => ({ id: resp.id, ...resp.data() }))
-        )
+      return Promise.all(
+        data.videos.map(
+          (item) =>
+            // eslint-disable-next-line implicit-arrow-linebreak
+            item.get().then((resp) => ({ id: resp.id, ...resp.data() })),
+          // eslint-disable-next-line function-paren-newline
+        ),
       );
     };
 
@@ -56,18 +60,16 @@ class Video {
         .doc(idCourse)
         .onSnapshot(async (query) => observer(await resolver(query)));
     } else {
-      return database
+      const query = await database
         .collection(collections.courses)
         .doc(idCourse)
-        .get()
-        .then(resolver);
+        .get();
+      return resolver(query);
     }
   }
 
   async listUnique(id, observer) {
-    const resolver = (query) => {
-      return query.data();
-    };
+    const resolver = (query) => query.data();
 
     if (observer) {
       database
@@ -84,7 +86,7 @@ class Video {
   }
 
   async update(id, data, onProgress, onError, onComplete) {
-    if (typeof data.file === "object") {
+    if (typeof data.file === 'object') {
       data.file = await upload(data.file, onProgress, onError, onComplete);
     }
     if (onComplete) {

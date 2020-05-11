@@ -1,4 +1,4 @@
-import { keys } from "./storageKeys";
+import { keys } from './storageKeys';
 
 export function get() {
   return JSON.parse(localStorage.getItem(keys.GLOBAL_STORE));

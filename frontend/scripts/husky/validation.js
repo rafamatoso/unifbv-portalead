@@ -1,10 +1,10 @@
-const fileSystem = require("fs");
+const fileSystem = require('fs');
 
-const configVars = require("./config");
+const configVars = require('./config');
 
 const getMessageType = (configs, message) => {
   const filterResult = Object.keys(configs.rules).filter((keyString) =>
-    message.startsWith(keyString)
+    message.startsWith(keyString),
   );
 
   return filterResult[0];
@@ -12,7 +12,7 @@ const getMessageType = (configs, message) => {
 
 const validateFunction = (configs, fs) => {
   const defaultResult = {
-    message: "Validação de mensagem de commit realizada com sucesso.",
+    message: 'Validação de mensagem de commit realizada com sucesso.',
     status: configs.SUCCESS_STATUS,
   };
 
@@ -21,17 +21,17 @@ const validateFunction = (configs, fs) => {
   if (!fileExists) {
     return {
       ...defaultResult,
-      message: "Arquivo com a mensagem de commit não encontrado",
+      message: 'Arquivo com a mensagem de commit não encontrado',
       status: configs.ERROR_STATUS,
     };
   }
 
-  const fileContent = fs.readFileSync(configs.FILE_PATH, "utf8");
+  const fileContent = fs.readFileSync(configs.FILE_PATH, 'utf8');
 
   if (!fileContent || !fileContent.trim()) {
     return {
       ...defaultResult,
-      message: "Mensagem de commit não definida",
+      message: 'Mensagem de commit não definida',
       status: configs.ERROR_STATUS,
     };
   }
@@ -53,8 +53,8 @@ const validateFunction = (configs, fs) => {
     return {
       ...defaultResult,
       message: `A mensagem de commit deve iniciar com um dos seguintes prefixos: ${Object.keys(
-        configs.rules
-      ).join(" ")}`,
+        configs.rules,
+      ).join(' ')}`,
       status: configs.ERROR_STATUS,
       commitMessage,
     };
@@ -65,7 +65,7 @@ const validateFunction = (configs, fs) => {
   if (!ruleToBeExecuted.regex.test(commitMessage)) {
     return {
       ...defaultResult,
-      message: "Mensagem fora do padrão para o tipo do commit identificado.",
+      message: 'Mensagem fora do padrão para o tipo do commit identificado.',
       status: configs.ERROR_STATUS,
       rule: ruleToBeExecuted.description,
       examples: [...ruleToBeExecuted.examples],

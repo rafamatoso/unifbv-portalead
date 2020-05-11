@@ -9,6 +9,7 @@
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
   },
+  "parser": "babel-eslint",
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -18,6 +19,20 @@
   },
   "plugins": ["react", "prettier", "jest"],
   "rules": {
-    "react/jsx-filename-extension": [0]
+    "strict": 0,
+    "max-len": "off",
+    "react/jsx-filename-extension": [0],
+    "jsx-a11y/anchor-is-valid": 0,
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "no-param-reassign": "off",
+    "consistent-return": "off",
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
+    "no-shadow": "off",
+    "import/no-named-as-default": "off",
+    "import/no-named-as-default-member": "off",
+    "implicit-arrow-linebreak": "off",
+    "react/jsx-curly-newline": "off"
   }
 }
