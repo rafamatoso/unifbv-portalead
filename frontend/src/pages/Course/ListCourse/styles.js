@@ -1,16 +1,16 @@
-import { makeStyles } from "@material-ui/core/styles";
-import { colors } from "../../../utils/colors";
+import { makeStyles } from '@material-ui/core/styles';
+import { colors } from '../../../utils/colors';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
-    minHeight: "92vh",
+    minHeight: '92vh',
     backgroundColor: colors.gray2,
-    justifyContent: "center",
+    justifyContent: 'center',
   },
   content: {
-    justifyContent: "space-around",
+    justifyContent: 'space-around',
   },
-  button: { justifyContent: "flex-end" },
+  button: { justifyContent: 'flex-end' },
   position: {
     marginTop: theme.spacing(3),
   },

@@ -1,5 +1,6 @@
-import React from "react";
-import { useFormik } from "formik";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React from 'react';
+import { useFormik } from 'formik';
 import {
   Button,
   CssBaseline,
@@ -12,28 +13,32 @@ import {
   Select,
   MenuItem,
   Card,
-} from "@material-ui/core";
+} from '@material-ui/core';
 
-import AddAPhotoIcon from "@material-ui/icons/AddAPhoto";
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
-import { Copyright } from "../../../components/Copyright";
+import { useHistory } from 'react-router-dom';
+import { Copyright } from '../../../components/Copyright';
 
-import { useStyles } from "./styles";
+import { useStyles } from './styles';
 
-import { useHistory } from "react-router-dom";
-import { Course } from "../../../services/firebase/Models";
+import { Course } from '../../../services/firebase/Models';
 
 function AddCourse() {
   const classes = useStyles();
 
   const history = useHistory();
 
+  function handleClick() {
+    history.push('/dashboard/courses');
+  }
+
   const formik = useFormik({
     initialValues: {
-      title: "",
+      title: '',
       img: null,
-      show: "",
-      description: "",
+      show: '',
+      description: '',
       videos: [],
     },
 
@@ -42,10 +47,6 @@ function AddCourse() {
       handleClick();
     },
   });
-
-  function handleClick() {
-    history.push("/dashboard/courses");
-  }
 
   return (
     <Container component="main" maxWidth="100%">
@@ -76,14 +77,14 @@ function AddCourse() {
                   <label>Visibilidade:</label>
                   <Select
                     name="show"
-                    defaultValue={""}
+                    defaultValue=""
                     onChange={formik.handleChange}
                     fullWidth
                   >
-                    <MenuItem value={"false"} onChange={formik.handleChange}>
+                    <MenuItem value="false" onChange={formik.handleChange}>
                       Privado
                     </MenuItem>
-                    <MenuItem value={"true"} onChange={formik.handleChange}>
+                    <MenuItem value="true" onChange={formik.handleChange}>
                       Aberto
                     </MenuItem>
                   </Select>
@@ -96,21 +97,21 @@ function AddCourse() {
                           id="button-file"
                           accept="image/*"
                           type="file"
-                          style={{ display: "none" }}
+                          style={{ display: 'none' }}
                           name="img"
-                          onChange={(e) =>
+                          onChange={(e) => {
                             formik.setFieldValue(
                               e.target.name,
-                              e.target.files[0]
-                            )
-                          }
-                          onClick={(e) =>
-                            formik.setFieldTouched(e.target.name, true)
-                          }
+                              e.target.files[0],
+                            );
+                          }}
+                          onClick={(e) => {
+                            formik.setFieldTouched(e.target.name, true);
+                          }}
                         />
                         <Button
                           variant="contained"
-                          //color="primary"
+                          // color="primary"
                           component="label"
                           htmlFor="button-file"
                           className={classes.upload}
@@ -168,7 +169,7 @@ function AddCourse() {
               </Button>
             </Box>
           </div>
-          <Grid container justify="flex-end"></Grid>
+          <Grid container justify="flex-end" />
         </form>
       </div>
       <Box mt={5}>

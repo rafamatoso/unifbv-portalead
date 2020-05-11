@@ -1,17 +1,17 @@
-import Button from "@material-ui/core/Button";
-import { withStyles } from "@material-ui/core/styles";
-import { colors } from "../../utils/colors";
+import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
+import { colors } from '../../utils/colors';
 
 export const CustomButton = withStyles(() => ({
   root: {
     backgroundColor: colors.blue3,
-    fontWeight: "bolder",
+    fontWeight: 'bolder',
     color: colors.white1,
-    "&:hover": {
+    '&:hover': {
       backgroundColor: colors.blue1,
       color: colors.yellow1,
     },
-    "&:disabled": {
+    '&:disabled': {
       backgroundColor: colors.gray2,
       color: colors.gray1,
     },

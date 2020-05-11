@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+
 import {
   Grid,
   Paper,
@@ -15,21 +17,19 @@ import {
   IconButton,
   MenuItem,
   Menu,
-} from "@material-ui/core";
-import { Player, BigPlayButton, LoadingSpinner } from "video-react";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
-import { Course, Video } from "../../../services/firebase/Models";
-
-import { useStyles } from "./styles";
-import "../../../../node_modules/video-react/dist/video-react.css";
+} from '@material-ui/core';
+import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 import {
   Add,
   PlayCircleFilled,
   EditOutlined,
   DeleteOutline,
   MoreVert,
-} from "@material-ui/icons";
+} from '@material-ui/icons';
+import { Course, Video } from '../../../services/firebase/Models';
+
+import { useStyles } from './styles';
+import '../../../../node_modules/video-react/dist/video-react.css';
 
 export default function ListVideo() {
   const { id: idCourse } = useParams();
@@ -67,22 +67,22 @@ export default function ListVideo() {
       <Paper
         elevation={6}
         style={{
-          display: "flex",
-          alignItems: "center",
+          display: 'flex',
+          alignItems: 'center',
           maxHeight: 100,
-          width: "90vw",
-          margin: "10px",
-          padding: "20px",
+          width: '90vw',
+          margin: '10px',
+          padding: '20px',
         }}
       >
         <img src={course.img} alt={course.title} height="80%" />
         <div
           style={{
-            display: "flex",
+            display: 'flex',
             flex: 1,
-            flexDirection: "column",
-            alignSelf: "start",
-            margin: "0 30px",
+            flexDirection: 'column',
+            alignSelf: 'start',
+            margin: '0 30px',
           }}
         >
           <Typography
@@ -102,7 +102,7 @@ export default function ListVideo() {
             {course.description}
           </Typography>
         </div>
-        <div style={{ alignSelf: "flex-start" }}>
+        <div style={{ alignSelf: 'flex-start' }}>
           <Button
             variant="contained"
             color="primary"
@@ -117,7 +117,7 @@ export default function ListVideo() {
         </div>
       </Paper>
       {video ? (
-        <div style={{ width: "90%", margin: "10px auto" }}>
+        <div style={{ width: '90%', margin: '10px auto' }}>
           <Player
             // autoPlay={
             //   course.videos?.length ? video.id !== course.videos[0]?.id : true
@@ -140,7 +140,7 @@ export default function ListVideo() {
         <Toolbar />
         <div className={classes.drawerContainer}>
           <List>
-            <ListItem style={{ flexDirection: "column" }}>
+            <ListItem style={{ flexDirection: 'column' }}>
               <img src={course.img} alt={course.title} width={60} />
 
               <ListItemText

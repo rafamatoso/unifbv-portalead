@@ -1,4 +1,4 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,20 +15,20 @@ export const useStyles = makeStyles((theme) => ({
     padding: 10,
     minHeight: 100,
     maxHeight: 160,
-    "& .title": {
+    '& .title': {
       height: 32,
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
-    "& .description": {
+    '& .description': {
       height: 70,
     },
-    "& *": {
-      textOverflow: "ellipsis",
+    '& *': {
+      textOverflow: 'ellipsis',
     },
   },
   positionButtons: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     padding: theme.spacing(1, 1, 0, 1),
-    "& .child": { padding: theme.spacing(1) },
+    '& .child': { padding: theme.spacing(1) },
   },
 }));

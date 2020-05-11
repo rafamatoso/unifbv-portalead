@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { Grid } from "@material-ui/core";
-import { CardCourse } from "../../../components";
+import React, { useState, useEffect } from 'react';
+import { Grid } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { CardCourse } from '../../../components';
 
-import Course from "../../../services/firebase/Models/Course";
+import Course from '../../../services/firebase/Models/Course';
 
-import { useStyles } from "./styles";
-import Button from "@material-ui/core/Button";
-import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setLoading } from "../../../Store/ducks/layout";
+import { useStyles } from './styles';
+import { setLoading } from '../../../Store/ducks/layout';
 
 export default function ListCourse() {
   const classes = useStyles();
@@ -17,7 +17,7 @@ export default function ListCourse() {
   const history = useHistory();
 
   function handleClick() {
-    history.push("/dashboard/addCourse");
+    history.push('/dashboard/addCourse');
   }
   useEffect(() => {
     dispatch(setLoading(false));

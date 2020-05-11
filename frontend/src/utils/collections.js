@@ -1,1 +1,1 @@
-export default { courses: "courses", videos: "videos" };
+export default { courses: 'courses', videos: 'videos' };
