@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import {
   Grid,
@@ -40,6 +40,7 @@ export default function ListVideo() {
   const classes = useStyles();
   const [course, setCourse] = useState({});
   const [video, setVideo] = useState(null);
+  const [selectedVideo, setSelectedVideo] = useState(null);
   const [openModal, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -48,13 +49,15 @@ export default function ListVideo() {
     setOpen((state) => !state);
   }
 
-  const handlePopoverOpen = (event) => {
+  function handlePopoverOpen(event, item = null) {
     setAnchorEl(event.currentTarget);
-  };
+    setSelectedVideo(item);
+  }
 
-  const handlePopoverClose = () => {
+  function handlePopoverClose() {
     setAnchorEl(null);
-  };
+    setSelectedVideo(null);
+  }
 
   useEffect(() => {
     async function getFirebase() {
@@ -116,14 +119,19 @@ export default function ListVideo() {
             size="large"
             width="30%"
             startIcon={<Add />}
-            component={Link}
             onClick={handleClick}
           >
             Adicionar Aula
           </Button>
 
           <Modal open={openModal} onClose={handleClick}>
-            <AddVideo onClose={handleClick} />
+            <AddVideo
+              data={selectedVideo}
+              onClose={() => {
+                handleClick();
+                handlePopoverClose();
+              }}
+            />
           </Modal>
         </div>
       </Paper>
@@ -155,6 +163,7 @@ export default function ListVideo() {
               />
             </ListItem>
             <Divider />
+
             {course.videos?.map((item, i) => (
               <ListItem key={item.id} button onClick={() => setVideo(item)}>
                 <ListItemIcon>
@@ -168,20 +177,22 @@ export default function ListVideo() {
                   <IconButton
                     aria-controls="options"
                     aria-haspopup="true"
-                    onClick={handlePopoverOpen}
+                    onClick={(e) => {
+                      handlePopoverOpen(e, item);
+                    }}
                   >
                     <MoreVert />
                   </IconButton>
                   <Menu
                     id="options"
                     anchorEl={anchorEl}
-                    keepMounted
                     open={open}
                     onClose={handlePopoverClose}
                   >
                     <MenuItem
-                      component={Link}
-                      to={`/dashboard/courses/${idCourse}/addVideo/${item.id}`}
+                      onClick={() => {
+                        handleClick();
+                      }}
                     >
                       <EditOutlined />
                       Editar

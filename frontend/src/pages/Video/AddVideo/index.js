@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 
 import {
@@ -10,6 +9,7 @@ import {
   Paper,
 } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
+import { useParams } from 'react-router-dom';
 import { ModalUpload } from './ModalUpload';
 
 import { useStyles } from './styles';
@@ -17,19 +17,11 @@ import { useStyles } from './styles';
 import { initialValues, validationSchema } from './helper';
 import Video from '../../../services/firebase/Models/Video';
 
-function AddVideo({ onClose }) {
-  const { id, idVideo } = useParams();
-  const classes = useStyles();
-  const [state, setState] = useState(null);
+function AddVideo({ data, onClose }) {
+  const { id } = useParams();
 
-  useEffect(() => {
-    async function get() {
-      if (idVideo) {
-        setState(await Video.listUnique(idVideo));
-      }
-    }
-    get();
-  }, [idVideo]);
+  const classes = useStyles();
+
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
   function handlerProgress(snapshot) {
@@ -48,7 +40,7 @@ function AddVideo({ onClose }) {
   }
 
   const formik = useFormik({
-    initialValues: state || initialValues,
+    initialValues: data || initialValues,
     enableReinitialize: true,
     onSubmit: (values) => {
       setUpload((values) => ({
@@ -56,10 +48,11 @@ function AddVideo({ onClose }) {
         show: true,
       }));
 
-      if (idVideo) {
+      if (data) {
+        const { id, idCourse } = data;
         Video.update(
-          idVideo,
-          { idCourse: id, ...values },
+          id,
+          { idCourse, ...values },
           handlerProgress,
           null,
           handlerComplete,

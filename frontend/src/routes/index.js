@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, BrowserRouter, Redirect } from 'react-router-dom';
 import Route from './routeWrapper';
 
-import { Home, ListCourse, ListVideo, AddVideo } from '../pages';
+import { Home, ListCourse, ListVideo } from '../pages';
 
 import { NavBar } from '../components';
 import NotFound from '../pages/NotFound';
@@ -17,12 +17,6 @@ export const Routes = () => (
         path="/dashboard/courses/:id/listVideo"
         exact
         component={ListVideo}
-        isPrivate
-      />
-      <Route
-        path="/dashboard/courses/:id/addvideo/:idVideo?"
-        exact
-        component={AddVideo}
         isPrivate
       />
 

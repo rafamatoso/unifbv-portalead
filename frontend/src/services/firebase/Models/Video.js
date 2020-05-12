@@ -40,16 +40,13 @@ class Video {
       });
   }
 
-  async list(idCourse, observer) {
-    const resolver = (query) => {
+  list(idCourse, observer) {
+    const resolver = async (query) => {
       const data = query.data();
 
       return Promise.all(
-        data.videos.map(
-          (item) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
-            item.get().then((resp) => ({ id: resp.id, ...resp.data() })),
-          // eslint-disable-next-line function-paren-newline
+        data.videos.map((item) =>
+          item.get().then((resp) => ({ id: resp.id, ...resp.data() })),
         ),
       );
     };
@@ -60,7 +57,7 @@ class Video {
         .doc(idCourse)
         .onSnapshot(async (query) => observer(await resolver(query)));
     } else {
-      const query = await database
+      const query = database
         .collection(collections.courses)
         .doc(idCourse)
         .get();
