@@ -1,5 +1,5 @@
 // Generals Text Strings
-export const appNameText = 'Platea.';
+export const appNameText = 'Platea';
 export const emailText = 'E-mail';
 export const passwordText = 'Senha';
 export const copyritghText = 'Copyright ©';

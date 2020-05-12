@@ -52,7 +52,7 @@ function Login() {
   return (
     <>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4" className={classes.typography}>
+        <Typography component="h1" variant="h3" className={classes.typography}>
           {appNameText}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -65,7 +65,6 @@ function Login() {
             label={emailText}
             name="email"
             autoComplete="email"
-            autoFocus
             onChange={handleChange}
             error={Boolean(errors.email) && touched.email}
             onBlur={handleBlur}
