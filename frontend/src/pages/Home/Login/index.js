@@ -1,24 +1,20 @@
 import React from 'react';
-import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
 
 import { TextField, Typography } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useFormik } from 'formik';
+
 import { CustomButton } from '../../../components';
-
-import { setLoading } from '../../../Store/ducks/layout';
-
 import Auth from '../../../services/firebase/Models/Auth';
-
-import { initialValues, validationSchema } from '../helper';
-
-import { useStyles } from './styles';
-
+import { setLoading } from '../../../store/ducks/layout';
 import {
   appNameText,
   enterButtonText,
   emailText,
   passwordText,
 } from '../../../utils/strings';
+import { initialValues, validationSchema } from '../helper';
+import { useStyles } from './styles';
 
 function Login() {
   const classes = useStyles();
@@ -56,7 +52,7 @@ function Login() {
   return (
     <>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4" className={classes.typography}>
+        <Typography component="h1" variant="h3" className={classes.typography}>
           {appNameText}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
@@ -69,7 +65,6 @@ function Login() {
             label={emailText}
             name="email"
             autoComplete="email"
-            autoFocus
             onChange={handleChange}
             error={Boolean(errors.email) && touched.email}
             onBlur={handleBlur}

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+
 import { Grid, Modal } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
-import { useDispatch } from 'react-redux';
+
 import { CardCourse } from '../../../components';
-
 import Course from '../../../services/firebase/Models/Course';
-
-import { useStyles } from './styles';
-import { setLoading } from '../../../Store/ducks/layout';
+import { setLoading } from '../../../store/ducks/layout';
 import AddCourse from '../AddCourse';
+import { useStyles } from './styles';
 
 export default function ListCourse() {
   const classes = useStyles();

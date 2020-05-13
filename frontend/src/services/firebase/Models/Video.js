@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
+
 import { database, storage } from '..';
+
 import collections from '../../../utils/collections';
 
 const { FieldValue } = firebase.firestore;
@@ -41,26 +43,25 @@ class Video {
   }
 
   list(idCourse, observer) {
-    const resolver = async (query) => {
-      const data = query.data();
+    const resolver = (query) => {
+      const data = [];
+      query.forEach((item) => {
+        const video = { id: item.id, ...item.data() };
 
-      return Promise.all(
-        data.videos.map((item) =>
-          item.get().then((resp) => ({ id: resp.id, ...resp.data() })),
-        ),
-      );
+        if (video.idCourse === idCourse) {
+          data.push(video);
+        }
+      });
+
+      return data;
     };
 
     if (observer) {
       database
-        .collection(collections.courses)
-        .doc(idCourse)
-        .onSnapshot(async (query) => observer(await resolver(query)));
+        .collection(collections.videos)
+        .onSnapshot(async (query) => observer(resolver(query)));
     } else {
-      const query = database
-        .collection(collections.courses)
-        .doc(idCourse)
-        .get();
+      const query = database.collection(collections.videos).get();
       return resolver(query);
     }
   }
