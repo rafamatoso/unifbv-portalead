@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 
 import {
   Grid,
@@ -17,8 +18,8 @@ import {
   IconButton,
   MenuItem,
   Menu,
+  Modal,
 } from '@material-ui/core';
-import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 import {
   Add,
   PlayCircleFilled,
@@ -26,8 +27,9 @@ import {
   DeleteOutline,
   MoreVert,
 } from '@material-ui/icons';
-import { Course, Video } from '../../../services/firebase/Models';
 
+import { Course, Video } from '../../../services/firebase/Models';
+import AddVideo from '../AddVideo';
 import { useStyles } from './styles';
 import '../../../../node_modules/video-react/dist/video-react.css';
 
@@ -37,17 +39,24 @@ export default function ListVideo() {
   const classes = useStyles();
   const [course, setCourse] = useState({});
   const [video, setVideo] = useState(null);
-
+  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [openModal, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handlePopoverOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  function handleClick() {
+    setOpen((state) => !state);
+  }
 
-  const handlePopoverClose = () => {
+  function handlePopoverOpen(event, item = null) {
+    setAnchorEl(event.currentTarget);
+    setSelectedVideo(item);
+  }
+
+  function handlePopoverClose() {
     setAnchorEl(null);
-  };
+    setSelectedVideo(null);
+  }
 
   useEffect(() => {
     async function getFirebase() {
@@ -109,21 +118,25 @@ export default function ListVideo() {
             size="large"
             width="30%"
             startIcon={<Add />}
-            component={Link}
-            to={`/dashboard/courses/${idCourse}/addVideo`}
+            onClick={handleClick}
           >
             Adicionar Aula
           </Button>
+
+          <Modal open={openModal} onClose={handleClick}>
+            <AddVideo
+              data={selectedVideo}
+              onClose={() => {
+                handleClick();
+                handlePopoverClose();
+              }}
+            />
+          </Modal>
         </div>
       </Paper>
       {video ? (
         <div style={{ width: '90%', margin: '10px auto' }}>
-          <Player
-            // autoPlay={
-            //   course.videos?.length ? video.id !== course.videos[0]?.id : true
-            // }
-            src={video?.file}
-          >
+          <Player src={video?.file}>
             <BigPlayButton position="center" />
             <LoadingSpinner />
           </Player>
@@ -149,6 +162,7 @@ export default function ListVideo() {
               />
             </ListItem>
             <Divider />
+
             {course.videos?.map((item, i) => (
               <ListItem key={item.id} button onClick={() => setVideo(item)}>
                 <ListItemIcon>
@@ -162,20 +176,22 @@ export default function ListVideo() {
                   <IconButton
                     aria-controls="options"
                     aria-haspopup="true"
-                    onClick={handlePopoverOpen}
+                    onClick={(e) => {
+                      handlePopoverOpen(e, item);
+                    }}
                   >
                     <MoreVert />
                   </IconButton>
                   <Menu
                     id="options"
                     anchorEl={anchorEl}
-                    keepMounted
                     open={open}
                     onClose={handlePopoverClose}
                   >
                     <MenuItem
-                      component={Link}
-                      to={`/dashboard/courses/${idCourse}/addVideo/${item.id}`}
+                      onClick={() => {
+                        handleClick();
+                      }}
                     >
                       <EditOutlined />
                       Editar
