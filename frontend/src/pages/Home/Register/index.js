@@ -6,7 +6,7 @@ import { useFormik } from 'formik';
 
 import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
-import { setLoading } from '../../../store/ducks/layout';
+import { setLoading, addMessage } from '../../../store/ducks/layout';
 import {
   appNameText,
   signUpButtonText,
@@ -34,7 +34,13 @@ function SignUp() {
       dispatch(setLoading(true));
       const data = await Auth.signUp(values);
       dispatch(setLoading(false));
-      console.log(data);
+
+      dispatch(
+        addMessage({
+          message: `Email ${data.user.toJSON().email} cadastrado`,
+          time: 2500,
+        }),
+      );
     },
   });
 

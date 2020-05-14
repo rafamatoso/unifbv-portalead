@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
 
 import {
   TextField,
@@ -10,18 +10,21 @@ import {
   Paper,
 } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
-import { ModalUpload } from './ModalUpload';
+import { useFormik } from 'formik';
 
-import { useStyles } from './styles';
-
-import { initialValues, validationSchema } from './helper';
 import Video from '../../../services/firebase/Models/Video';
+import { addMessage } from '../../../store/ducks/layout';
+import { initialValues, validationSchema } from './helper';
+import { ModalUpload } from './ModalUpload';
+import { useStyles } from './styles';
 
 function AddVideo() {
   const { id, idVideo } = useParams();
   const history = useHistory();
   const classes = useStyles();
   const [state, setState] = useState(null);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     async function get() {
@@ -65,12 +68,24 @@ function AddVideo() {
           null,
           handlerComplete,
         );
+        dispatch(
+          addMessage({
+            message: `Video ${values.title} alterado.`,
+            time: 2500,
+          }),
+        );
       } else {
         Video.create(
           { idCourse: id, ...values },
           handlerProgress,
           null,
           handlerComplete,
+        );
+        dispatch(
+          addMessage({
+            message: `Video ${values.title} cadastrado.`,
+            time: 2500,
+          }),
         );
       }
     },
