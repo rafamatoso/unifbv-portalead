@@ -1,5 +1,7 @@
 import firebase from 'firebase/app';
+
 import { database, storage } from '..';
+
 import collections from '../../../utils/collections';
 
 const { FieldValue } = firebase.firestore;
@@ -27,7 +29,6 @@ function upload(file, onProgress, onError, onComplete) {
 }
 
 class Video {
-  // precisa ser testado
   async create(data, onProgress, onError, onComplete) {
     data.file = await upload(data.file, onProgress, onError, onComplete);
     const ref = database.collection(collections.videos).doc();
@@ -40,30 +41,26 @@ class Video {
       });
   }
 
-  async list(idCourse, observer) {
+  list(idCourse, observer) {
     const resolver = (query) => {
-      const data = query.data();
+      const data = [];
+      query.forEach((item) => {
+        const video = { id: item.id, ...item.data() };
 
-      return Promise.all(
-        data.videos.map(
-          (item) =>
-            // eslint-disable-next-line implicit-arrow-linebreak
-            item.get().then((resp) => ({ id: resp.id, ...resp.data() })),
-          // eslint-disable-next-line function-paren-newline
-        ),
-      );
+        if (video.idCourse === idCourse) {
+          data.push(video);
+        }
+      });
+
+      return data;
     };
 
     if (observer) {
       database
-        .collection(collections.courses)
-        .doc(idCourse)
-        .onSnapshot(async (query) => observer(await resolver(query)));
+        .collection(collections.videos)
+        .onSnapshot(async (query) => observer(resolver(query)));
     } else {
-      const query = await database
-        .collection(collections.courses)
-        .doc(idCourse)
-        .get();
+      const query = database.collection(collections.videos).get();
       return resolver(query);
     }
   }

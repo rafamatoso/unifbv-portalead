@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Dialog, DialogTitle, DialogContent } from '@material-ui/core';
+
 import { CustomProgressBar } from '../../../../components/CustomProgressBar';
 
 export const ModalUpload = ({ value, show }) => (

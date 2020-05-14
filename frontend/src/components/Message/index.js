@@ -21,7 +21,7 @@ function Message() {
   return message.map((item, i) => {
     setTimeout(() => {
       handleClose(i);
-    }, item.time || 2500);
+    }, 20000);
 
     return (
       <Snackbar
@@ -31,7 +31,7 @@ function Message() {
         }}
         open
         TransitionComponent={TransitionUp}
-        onClose={() => handleClose(i)}
+        // onClose={() => handleClose(i)}
       >
         <Alert
           elevation={6}
