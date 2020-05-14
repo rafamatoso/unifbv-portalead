@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { TextField, Typography } from '@material-ui/core';
+import { TextField, Typography, Button } from '@material-ui/core';
 import { useFormik } from 'formik';
 
 import { CustomButton } from '../../../components';
@@ -35,7 +35,7 @@ function Login() {
       try {
         await Auth.signIn(values);
       } catch (err) {
-        console.log(err);
+        console.err();
       }
     },
   });
@@ -93,6 +93,15 @@ function Login() {
           >
             {enterButtonText}
           </CustomButton>
+          <Button
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submit}
+            onClick={() => Auth.signInWithGoogle()}
+          >
+            Google
+          </Button>
         </form>
       </div>
     </>
