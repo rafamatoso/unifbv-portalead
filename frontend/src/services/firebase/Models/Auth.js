@@ -1,4 +1,5 @@
 import { auth } from '..';
+
 import { set, get, clear } from '../../storage';
 
 class Auth {

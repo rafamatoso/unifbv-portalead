@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 
 import {
   Grid,
@@ -26,11 +27,9 @@ import {
   DeleteOutline,
   MoreVert,
 } from '@material-ui/icons';
-import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 
 import { Course, Video } from '../../../services/firebase/Models';
 import AddVideo from '../AddVideo';
-
 import { useStyles } from './styles';
 import '../../../../node_modules/video-react/dist/video-react.css';
 

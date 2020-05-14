@@ -29,7 +29,6 @@ function upload(file, onProgress, onError, onComplete) {
 }
 
 class Video {
-  // precisa ser testado
   async create(data, onProgress, onError, onComplete) {
     data.file = await upload(data.file, onProgress, onError, onComplete);
     const ref = database.collection(collections.videos).doc();

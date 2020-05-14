@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useFormik } from 'formik';
+
 import {
   Button,
   CssBaseline,
@@ -14,14 +14,12 @@ import {
   MenuItem,
   Card,
 } from '@material-ui/core';
-
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { useFormik } from 'formik';
 
 import { Copyright } from '../../../components/Copyright';
-
-import { useStyles } from './styles';
-
 import { Course } from '../../../services/firebase/Models';
+import { useStyles } from './styles';
 
 function AddCourse({ onClose }) {
   const classes = useStyles();

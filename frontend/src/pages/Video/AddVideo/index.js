@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useFormik } from 'formik';
+import { useParams } from 'react-router-dom';
 
 import {
   TextField,
@@ -9,13 +9,12 @@ import {
   Paper,
 } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
-import { useParams } from 'react-router-dom';
-import { ModalUpload } from './ModalUpload';
+import { useFormik } from 'formik';
 
-import { useStyles } from './styles';
-
-import { initialValues, validationSchema } from './helper';
 import Video from '../../../services/firebase/Models/Video';
+import { initialValues, validationSchema } from './helper';
+import { ModalUpload } from './ModalUpload';
+import { useStyles } from './styles';
 
 function AddVideo({ data, onClose }) {
   const { id } = useParams();

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Switch, BrowserRouter, Redirect } from 'react-router-dom';
-import Route from './routeWrapper';
-
-import { Home, ListCourse, ListVideo } from '../pages';
 
 import { NavBar } from '../components';
+import { Home, ListCourse, ListVideo } from '../pages';
 import NotFound from '../pages/NotFound';
+import Route from './routeWrapper';
 
 export const Routes = () => (
   <BrowserRouter>
