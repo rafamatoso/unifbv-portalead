@@ -13,7 +13,7 @@ import { CloudUpload } from '@material-ui/icons';
 import { useFormik } from 'formik';
 
 import Video from '../../../services/firebase/Models/Video';
-import { addMessage } from '../../../store/ducks/layout';
+import { showMessage } from '../../../store/ducks/layout';
 import { initialValues, validationSchema } from './helper';
 import { ModalUpload } from './ModalUpload';
 import { useStyles } from './styles';
@@ -61,7 +61,7 @@ function AddVideo({ data, onClose }) {
           handlerComplete,
         );
         dispatch(
-          addMessage({
+          showMessage({
             message: `Video ${values.title} alterado.`,
             time: 2500,
           }),
@@ -74,7 +74,7 @@ function AddVideo({ data, onClose }) {
           handlerComplete,
         );
         dispatch(
-          addMessage({
+          showMessage({
             message: `Video ${values.title} cadastrado.`,
             time: 2500,
           }),

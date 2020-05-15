@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Snackbar, Slide } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { rmMessage } from '../../store/ducks/layout';
+import { hideMessage } from '../../store/ducks/layout';
 
 function TransitionUp(props) {
   return <Slide {...props} direction="up" />;
@@ -14,36 +14,34 @@ function Message() {
   const message = useSelector((state) => state.layout.message);
   const dispatch = useDispatch();
 
-  const handleClose = (i) => {
-    dispatch(rmMessage(i));
-  };
+  function handleClose(event, reason) {
+    if (reason === 'clickaway') {
+      return;
+    }
+    dispatch(hideMessage());
+  }
 
-  return message.map((item, i) => {
-    setTimeout(() => {
-      handleClose(i);
-    }, 20000);
-
-    return (
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'right',
-        }}
-        open
-        TransitionComponent={TransitionUp}
-        // onClose={() => handleClose(i)}
+  return (
+    <Snackbar
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      open={Boolean(message)}
+      autoHideDuration={message?.time}
+      TransitionComponent={TransitionUp}
+      onClose={handleClose}
+    >
+      <Alert
+        elevation={6}
+        variant="filled"
+        onClose={handleClose}
+        severity="success"
+        style={{ width: 300 }}
       >
-        <Alert
-          elevation={6}
-          variant="filled"
-          onClose={() => handleClose(i)}
-          severity="success"
-          style={{ width: 200 }}
-        >
-          {item.message}
-        </Alert>
-      </Snackbar>
-    );
-  });
+        {message?.message}
+      </Alert>
+    </Snackbar>
+  );
 }
 export default Message;

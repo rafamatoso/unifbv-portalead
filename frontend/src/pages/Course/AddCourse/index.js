@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { useDispatch } from 'react-redux';
 
 import {
   Button,
@@ -19,10 +20,12 @@ import { useFormik } from 'formik';
 
 import { Copyright } from '../../../components/Copyright';
 import { Course } from '../../../services/firebase/Models';
+import { showMessage } from '../../../store/ducks/layout';
 import { useStyles } from './styles';
 
 function AddCourse({ onClose }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -35,6 +38,12 @@ function AddCourse({ onClose }) {
 
     onSubmit: async (values) => {
       await Course.create(values);
+      dispatch(
+        showMessage({
+          message: `Curso ${values.title} cadastrado.`,
+          time: 2500,
+        }),
+      );
       onClose();
     },
   });

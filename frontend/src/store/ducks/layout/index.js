@@ -1,19 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
-const initalState = { loading: false, message: [] };
+const initalState = { loading: false, message: null };
 
 export const setLoading = createAction('SET_LOADING');
-export const addMessage = createAction('ADD_MESSAGE');
-export const rmMessage = createAction('RM_MESSAGE');
+export const showMessage = createAction('SHOW_MESSAGE');
+export const hideMessage = createAction('HIDE_MESSAGE');
 
 export default createReducer(initalState, {
   [setLoading.type]: (state, { payload }) => ({ ...state, loading: payload }),
-  [addMessage.type]: (state, { payload }) => ({
+  [showMessage.type]: (state, { payload }) => ({
     ...state,
-    message: [...state.message, payload],
+    message: payload,
   }),
-  [rmMessage.type]: (state, { payload }) => ({
+  [hideMessage.type]: (state) => ({
     ...state,
-    message: state.message.filter((item, i) => i !== payload),
+    message: null,
   }),
 });
