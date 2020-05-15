@@ -1,10 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { TextField, Typography, Button } from '@material-ui/core';
+import { TextField, Typography } from '@material-ui/core';
 import { useFormik } from 'formik';
 
-import { CustomButton } from '../../../components';
+import { icGoogle } from '../../../assets/icons';
+import { CustomButton, GoogleButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
 import {
@@ -12,6 +13,7 @@ import {
   enterButtonText,
   emailText,
   passwordText,
+  enterWithGoogle,
 } from '../../../utils/strings';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
@@ -39,6 +41,8 @@ function Login() {
       }
     },
   });
+
+  const googleLoginSubmit = () => Auth.signInWithGoogle();
 
   const handleHelperTextEmail = () =>
     Boolean(errors.email) && touched.email ? errors.email : null;
@@ -89,19 +93,24 @@ function Login() {
             type="submit"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}
+            className={classes.submitLogin}
           >
             {enterButtonText}
           </CustomButton>
-          <Button
+          <GoogleButton
             fullWidth
             variant="contained"
             color="secondary"
-            className={classes.submit}
-            onClick={() => Auth.signInWithGoogle()}
+            className={classes.submitGoogle}
+            onClick={() => googleLoginSubmit()}
           >
-            Google
-          </Button>
+            <img
+              src={icGoogle}
+              alt="Ícone representando a logo da Google"
+              className={classes.googleIcon}
+            />
+            {enterWithGoogle}
+          </GoogleButton>
         </form>
       </div>
     </>

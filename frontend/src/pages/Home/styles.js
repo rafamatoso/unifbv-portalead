@@ -17,6 +17,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2, 2),
+    width: '30vw',
   },
   link: {
     padding: theme.spacing(1),
