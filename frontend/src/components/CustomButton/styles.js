@@ -8,6 +8,8 @@ export const CustomButton = withStyles(() => ({
     backgroundColor: colors.blue3,
     fontWeight: 'bolder',
     color: colors.white1,
+    // border: 'solid 1px',
+    // borderColor: colors.blue1,
     '&:hover': {
       backgroundColor: colors.blue1,
       color: colors.yellow1,

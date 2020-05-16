@@ -16,11 +16,15 @@ export const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
     padding: theme.spacing(2, 2),
-    height: '50vh',
+    height: '46vh',
     width: '30vw',
     minWidth: '250px',
-    minHeight: '415px',
+    minHeight: '440px',
   },
   link: {
     padding: theme.spacing(0),
@@ -30,7 +34,6 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   copyright: {
-    marginTop: '1rem',
     minWidth: '250px',
   },
 }));

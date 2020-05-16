@@ -91,6 +91,7 @@ function Login() {
           />
           <CustomButton
             type="submit"
+            variant="contained"
             fullWidth
             disabled={verifyButtonDisable()}
             className={classes.submitLogin}

@@ -16,8 +16,8 @@ export const useStyles = makeStyles((theme) => ({
     color: colors.blue1,
     height: '100%',
     width: '100%',
-    fontSize: '3.65vmax',
-    paddingBottom: '1rem',
+    fontSize: '3rem',
+    padding: '0.5rem',
   },
   form: {
     width: '100%', // Fix IE 11 issue.
