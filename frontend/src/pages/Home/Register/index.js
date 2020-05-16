@@ -7,12 +7,7 @@ import { useFormik } from 'formik';
 import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
-import {
-  appNameText,
-  signUpButtonText,
-  emailText,
-  passwordText,
-} from '../../../utils/i18n_PTBR';
+import * as i18n from '../../../utils/i18n_PTBR';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 
@@ -51,7 +46,7 @@ function SignUp() {
     <>
       <div className={classes.paper}>
         <Typography component="h1" variant="h3" className={classes.typography}>
-          {`${signUpButtonText} no ${appNameText}`}
+          {`${i18n.signUpButtonText} no ${i18n.appNameText}`}
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -60,7 +55,7 @@ function SignUp() {
             required
             fullWidth
             id="email"
-            label={emailText}
+            label={i18n.emailText}
             name="email"
             autoComplete="email"
             onChange={handleChange}
@@ -74,7 +69,7 @@ function SignUp() {
             required
             fullWidth
             id="password"
-            label={passwordText}
+            label={i18n.passwordText}
             name="password"
             autoComplete="current-password"
             type="password"
@@ -90,7 +85,7 @@ function SignUp() {
               disabled={verifyButtonDisable()}
               className={classes.submit}
             >
-              {signUpButtonText}
+              {i18n.signUpButtonText}
             </CustomButton>
           </div>
         </form>

@@ -7,11 +7,7 @@ import { Grid, Paper, Link, Box } from '@material-ui/core';
 import { Copyright } from '../../components/Copyright';
 import { Auth } from '../../services/firebase/Models';
 import { setUser } from '../../store/ducks/user';
-import {
-  dontHaveAnAccountText,
-  createOneHereText,
-  alreadyHaveAAccount,
-} from '../../utils/i18n_PTBR';
+import * as i18n from '../../utils/i18n_PTBR';
 import Login from './Login';
 import Register from './Register';
 import { useStyles } from './styles';
@@ -44,7 +40,7 @@ function Home() {
               <div className={classes.link}>
                 <Grid item>
                   <Link variant="body2" onClick={handleShowRegister}>
-                    {`${dontHaveAnAccountText} ${createOneHereText}`}
+                    {`${i18n.dontHaveAnAccountText} ${i18n.createOneHereText}`}
                   </Link>
                 </Grid>
               </div>
@@ -55,7 +51,7 @@ function Home() {
               <div className={classes.link}>
                 <Grid item>
                   <Link variant="body2" onClick={handleShowRegister}>
-                    {alreadyHaveAAccount}
+                    {i18n.alreadyHaveAAccount}
                   </Link>
                 </Grid>
               </div>

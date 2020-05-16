@@ -2,19 +2,14 @@ import React from 'react';
 
 import { Typography, Link } from '@material-ui/core';
 
-import {
-  UniversityLink,
-  appNameText,
-  copyritghText,
-  unifbvText,
-} from '../../utils/i18n_PTBR';
+import * as i18n from '../../utils/i18n_PTBR';
 
 export function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {`${copyritghText} ${appNameText} `}
-      <Link color="inherit" href={UniversityLink}>
-        {`${unifbvText}`}
+      {`${i18n.copyritghText} ${i18n.appNameText} `}
+      <Link color="inherit" href={i18n.UniversityLink}>
+        {`${i18n.unifbvText}`}
       </Link>
 
       {`, ${new Date().getFullYear()}.`}

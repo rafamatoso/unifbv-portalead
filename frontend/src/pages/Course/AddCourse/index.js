@@ -19,6 +19,7 @@ import { useFormik } from 'formik';
 
 import { Copyright } from '../../../components/Copyright';
 import { Course } from '../../../services/firebase/Models';
+import * as i18n from '../../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 function AddCourse({ onClose }) {
@@ -48,7 +49,7 @@ function AddCourse({ onClose }) {
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
-                  <label>Titulo do Curso:</label>
+                  <label>{i18n.courseTitle}</label>
                   <Input
                     autoComplete="cTitle"
                     name="title"
@@ -65,7 +66,7 @@ function AddCourse({ onClose }) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <label>Visibilidade:</label>
+                  <label>{i18n.courseVisibility}</label>
                   <Select
                     name="show"
                     defaultValue=""
@@ -73,10 +74,10 @@ function AddCourse({ onClose }) {
                     fullWidth
                   >
                     <MenuItem value="false" onChange={formik.handleChange}>
-                      Privado
+                      {i18n.privateCourse}
                     </MenuItem>
                     <MenuItem value="true" onChange={formik.handleChange}>
-                      Aberto
+                      {i18n.openCourse}
                     </MenuItem>
                   </Select>
                 </Grid>
@@ -118,7 +119,7 @@ function AddCourse({ onClose }) {
                   </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <label>Descrição do Curso:</label>
+                  <label>{i18n.courseDescription}</label>
 
                   <TextField
                     name="description"
@@ -144,7 +145,7 @@ function AddCourse({ onClose }) {
                     onClick={onClose}
                     spacing="auto"
                   >
-                    Cancelar
+                    {i18n.cancelButtonText}
                   </Button>
                   <span> &nbsp; </span>
                   <Button
@@ -154,7 +155,7 @@ function AddCourse({ onClose }) {
                     color="primary"
                     className={classes.submit}
                   >
-                    Salvar
+                    {i18n.saveButtonButtonText}
                   </Button>
                 </Box>
               </div>

@@ -8,11 +8,7 @@ import { logoCircularGrande } from '../../../assets/img';
 import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
-import {
-  enterButtonText,
-  emailText,
-  passwordText,
-} from '../../../utils/i18n_PTBR';
+import * as i18n from '../../../utils/i18n_PTBR';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 
@@ -61,7 +57,7 @@ function Login() {
             required
             fullWidth
             id="email"
-            label={emailText}
+            label={i18n.emailText}
             name="email"
             autoComplete="email"
             onChange={handleChange}
@@ -75,7 +71,7 @@ function Login() {
             required
             fullWidth
             name="password"
-            label={passwordText}
+            label={i18n.passwordText}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -90,7 +86,7 @@ function Login() {
             disabled={verifyButtonDisable()}
             className={classes.submit}
           >
-            {enterButtonText}
+            {i18n.enterButtonText}
           </CustomButton>
         </form>
       </div>

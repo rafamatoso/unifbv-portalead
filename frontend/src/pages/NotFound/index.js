@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Typography, Grid } from '@material-ui/core';
 
 import { CustomButton } from '../../components';
-import { GoToInicialPage, NotFoundText } from '../../utils/i18n_PTBR';
+import * as i18n from '../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 export default function NotFound() {
@@ -18,10 +18,10 @@ export default function NotFound() {
   return (
     <Grid className={classes.notfoundstyle}>
       <Typography component="h1" variant="h4">
-        {NotFoundText}
+        {i18n.NotFoundText}
       </Typography>
       <CustomButton type="submit" onClick={handleClick}>
-        {GoToInicialPage}
+        {i18n.GoToInicialPage}
       </CustomButton>
     </Grid>
   );

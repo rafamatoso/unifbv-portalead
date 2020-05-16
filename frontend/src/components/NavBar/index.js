@@ -7,11 +7,7 @@ import { AccountCircle, ExitToApp } from '@material-ui/icons';
 
 import Auth from '../../services/firebase/Models/Auth';
 import { setLoading } from '../../store/ducks/layout';
-import {
-  appNameText,
-  logoutButtonText,
-  courseIconText,
-} from '../../utils/i18n_PTBR';
+import * as i18n from '../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 const routeDashboard = '/dashboard';
@@ -58,7 +54,7 @@ function NavBar() {
             aria-label="menu"
             className={classes.logo}
           >
-            {appNameText}
+            {i18n.appNameText}
           </IconButton>
           <div className={classes.containerIcon}>
             <IconButton
@@ -68,7 +64,7 @@ function NavBar() {
               onClick={handleGoToCourse}
               className={classes.iconButton}
             >
-              {courseIconText}
+              {i18n.courseIconText}
             </IconButton>
             <IconButton
               edge="end"
@@ -99,7 +95,9 @@ function NavBar() {
             >
               <div className={classes.containerMenuItem}>
                 <ExitToApp />
-                <MenuItem onClick={handleLogout}>{logoutButtonText}</MenuItem>
+                <MenuItem onClick={handleLogout}>
+                  {i18n.logoutButtonText}
+                </MenuItem>
               </div>
             </Menu>
           </div>
