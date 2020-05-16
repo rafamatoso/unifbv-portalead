@@ -17,16 +17,19 @@ export const useStyles = makeStyles((theme) => ({
   },
   paper: {
     padding: theme.spacing(2, 2),
+    height: '50vh',
     width: '30vw',
+    minWidth: '250px',
+    minHeight: '450px',
   },
   link: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
     color: colors.blue1,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   copyright: {
-    paddingTop: '0.5rem',
+    marginTop: '1rem',
   },
 }));

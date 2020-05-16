@@ -11,7 +11,7 @@ import {
 
 export function Copyright() {
   return (
-    <Typography variant="body2" color="textSecondary" align="center">
+    <Typography variant="body1" color="textSecondary" align="center">
       {`${copyritghText} ${appNameText} `}
       <Link color="inherit" href={UniversityLink}>
         {`${unifbvText}`}

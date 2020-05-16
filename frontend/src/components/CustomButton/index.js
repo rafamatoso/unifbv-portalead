@@ -16,6 +16,7 @@ export const CustomButton = withStyles(() => ({
       backgroundColor: colors.gray2,
       color: colors.gray1,
     },
+    fontSize: '0.7rem',
   },
 }))(Button);
 
@@ -32,5 +33,6 @@ export const GoogleButton = withStyles(() => ({
       border: `solid 1px`,
       borderColor: colors.redGoogle,
     },
+    fontSize: '0.7rem',
   },
 }))(Button);

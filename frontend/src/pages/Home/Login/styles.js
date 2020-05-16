@@ -4,14 +4,19 @@ import { colors } from '../../../utils/colors';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(6, 3),
-    marginBottom: '16px',
+    margin: theme.spacing(3, 3),
+    marginBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   typography: {
+    display: 'flex',
+    justifyContent: 'center',
     color: colors.blue1,
+    height: '100%',
+    width: '100%',
+    fontSize: '3.65vmax',
     paddingBottom: '1rem',
   },
   form: {
