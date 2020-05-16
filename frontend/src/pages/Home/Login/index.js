@@ -12,7 +12,7 @@ import {
   enterButtonText,
   emailText,
   passwordText,
-} from '../../../utils/strings';
+} from '../../../utils/i18n_PTBR';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 

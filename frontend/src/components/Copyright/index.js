@@ -7,7 +7,7 @@ import {
   appNameText,
   copyritghText,
   unifbvText,
-} from '../../utils/strings';
+} from '../../utils/i18n_PTBR';
 
 export function Copyright() {
   return (

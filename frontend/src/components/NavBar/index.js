@@ -11,7 +11,7 @@ import {
   appNameText,
   logoutButtonText,
   courseIconText,
-} from '../../utils/strings';
+} from '../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 const routeDashboard = '/dashboard';

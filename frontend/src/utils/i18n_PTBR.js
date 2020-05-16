@@ -30,3 +30,11 @@ export const NotFoundText = 'Pagina nao encontrada.';
 
 // NavBar
 export const courseIconText = 'Cursos';
+
+// Course Modals
+export const courseTitle = 'Titulo do Curso:';
+export const courseVisibility = 'Visibilidade:';
+export const privateCourse = 'Privado';
+export const openCourse = 'Aberto';
+export const courseDescription = 'Descrição do Curso:';
+export const loadingVideo = 'Carregando...';

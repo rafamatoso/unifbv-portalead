@@ -11,7 +11,7 @@ import {
   dontHaveAnAccountText,
   createOneHereText,
   alreadyHaveAAccount,
-} from '../../utils/strings';
+} from '../../utils/i18n_PTBR';
 import Login from './Login';
 import Register from './Register';
 import { useStyles } from './styles';

@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Typography, Grid } from '@material-ui/core';
 
 import { CustomButton } from '../../components';
-import { GoToInicialPage, NotFoundText } from '../../utils/strings';
+import { GoToInicialPage, NotFoundText } from '../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 export default function NotFound() {
