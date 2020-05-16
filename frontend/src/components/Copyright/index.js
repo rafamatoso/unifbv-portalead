@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Typography, Link } from '@material-ui/core';
+import { Link } from '@material-ui/core';
 
 import {
   UniversityLink,
@@ -8,16 +8,17 @@ import {
   copyritghText,
   unifbvText,
 } from '../../utils/strings';
+import { CustomTypography } from './styles';
 
 export function Copyright() {
   return (
-    <Typography variant="body1" color="textSecondary" align="center">
+    <CustomTypography variant="body1" color="textSecondary" align="center">
       {`${copyritghText} ${appNameText} `}
       <Link color="inherit" href={UniversityLink}>
         {`${unifbvText}`}
       </Link>
 
       {`, ${new Date().getFullYear()}.`}
-    </Typography>
+    </CustomTypography>
   );
 }

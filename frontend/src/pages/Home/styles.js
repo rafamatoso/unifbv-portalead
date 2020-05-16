@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
     height: '50vh',
     width: '30vw',
     minWidth: '250px',
-    minHeight: '450px',
+    minHeight: '415px',
   },
   link: {
     padding: theme.spacing(0),
@@ -31,5 +31,6 @@ export const useStyles = makeStyles((theme) => ({
   },
   copyright: {
     marginTop: '1rem',
+    minWidth: '250px',
   },
 }));
