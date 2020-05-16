@@ -36,7 +36,7 @@ function Message() {
         elevation={6}
         variant="filled"
         onClose={handleClose}
-        severity="success"
+        severity={message?.type || 'success'}
         style={{ width: 300 }}
       >
         {message?.message}
