@@ -10,6 +10,10 @@ export const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     alignItems: 'center',
   },
+  logo: {
+    width: '250px',
+    height: '250px',
+  },
   typography: {
     display: 'flex',
     justifyContent: 'center',

@@ -1,15 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { TextField, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 
 import { icGoogle } from '../../../assets/icons';
 import { CustomButton, GoogleButton } from '../../../components';
+import { logoCircularGrande } from '../../../assets/img';
+
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
 import {
-  appNameText,
   enterButtonText,
   emailText,
   passwordText,
@@ -56,9 +57,8 @@ function Login() {
   return (
     <>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h3" className={classes.typography}>
-          {appNameText}
-        </Typography>
+        <img src={logoCircularGrande} className={classes.logo} alt="Logo" />
+        <p />
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
