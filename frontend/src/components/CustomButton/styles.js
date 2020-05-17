@@ -1,5 +1,6 @@
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+
 import { colors } from '../../utils/colors';
 
 export const CustomButton = withStyles(() => ({
@@ -7,6 +8,8 @@ export const CustomButton = withStyles(() => ({
     backgroundColor: colors.blue3,
     fontWeight: 'bolder',
     color: colors.white1,
+    // border: 'solid 1px',
+    // borderColor: colors.blue1,
     '&:hover': {
       backgroundColor: colors.blue1,
       color: colors.yellow1,
@@ -15,5 +18,23 @@ export const CustomButton = withStyles(() => ({
       backgroundColor: colors.gray2,
       color: colors.gray1,
     },
+    fontSize: '0.7rem',
+  },
+}))(Button);
+
+export const GoogleButton = withStyles(() => ({
+  root: {
+    backgroundColor: colors.white1,
+    fontWeight: 'bolder',
+    color: colors.blue1,
+    border: 'solid 1px',
+    borderColor: colors.blue1,
+    '&:hover': {
+      backgroundColor: colors.redGoogle,
+      color: colors.white1,
+      border: `solid 1px`,
+      borderColor: colors.redGoogle,
+    },
+    fontSize: '0.7rem',
   },
 }))(Button);

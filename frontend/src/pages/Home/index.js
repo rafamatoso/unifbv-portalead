@@ -62,7 +62,7 @@ function Home() {
             </>
           )}
           <div>
-            <Box mt={5} className={classes.copyright}>
+            <Box mt={3} className={classes.copyright}>
               <Copyright />
             </Box>
           </div>
