@@ -5,9 +5,8 @@ import { TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 
 import { icGoogle } from '../../../assets/icons';
-import { CustomButton, GoogleButton } from '../../../components';
 import { logoCircularGrande } from '../../../assets/img';
-
+import { CustomButton, GoogleButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
 import {
@@ -58,7 +57,7 @@ function Login() {
     <>
       <div className={classes.paper}>
         <img src={logoCircularGrande} className={classes.logo} alt="Logo" />
-        <p />
+
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"

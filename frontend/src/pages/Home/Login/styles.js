@@ -11,8 +11,9 @@ export const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
   },
   logo: {
-    width: '250px',
-    height: '250px',
+    marginTop: '10px',
+    maxWidth: '8rem',
+    maxHeight: '8rem',
   },
   typography: {
     display: 'flex',
