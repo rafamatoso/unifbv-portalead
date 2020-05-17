@@ -12,6 +12,7 @@ function TransitionUp(props) {
 
 function Message() {
   const message = useSelector((state) => state.layout.message);
+
   const dispatch = useDispatch();
 
   function handleClose(event, reason) {
@@ -27,7 +28,7 @@ function Message() {
         vertical: 'bottom',
         horizontal: 'right',
       }}
-      open={Boolean(message)}
+      open={message.active}
       autoHideDuration={message?.time}
       TransitionComponent={TransitionUp}
       onClose={handleClose}
@@ -36,7 +37,7 @@ function Message() {
         elevation={6}
         variant="filled"
         onClose={handleClose}
-        severity="success"
+        severity={message?.type}
         style={{ width: 300 }}
       >
         {message?.message}
