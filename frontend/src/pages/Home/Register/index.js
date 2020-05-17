@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { TextField, Typography } from '@material-ui/core';
@@ -7,7 +8,6 @@ import { useFormik } from 'formik';
 import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading, showMessage } from '../../../store/ducks/layout';
-import * as i18n from '../../../utils/i18n_PTBR';
 import { severityTypes } from '../../../utils/severityTypes';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
@@ -15,6 +15,9 @@ import { useStyles } from './styles';
 function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const intl = useIntl();
+  const email = intl.formatMessage({ id: 'emailText' });
+  const password = intl.formatMessage({ id: 'passwordText' });
 
   const {
     handleSubmit,
@@ -53,7 +56,9 @@ function SignUp() {
     <>
       <div className={classes.paper}>
         <Typography component="h1" variant="h3" className={classes.typography}>
-          {`${i18n.signUpButtonText} no ${i18n.appNameText}`}
+          <FormattedMessage id="signUpButtonText" />
+          &nbsp;
+          <FormattedMessage id="appNameTextAt" />
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -62,7 +67,7 @@ function SignUp() {
             required
             fullWidth
             id="email"
-            label={i18n.emailText}
+            label={email}
             name="email"
             autoComplete="email"
             onChange={handleChange}
@@ -76,7 +81,7 @@ function SignUp() {
             required
             fullWidth
             id="password"
-            label={i18n.passwordText}
+            label={password}
             name="password"
             autoComplete="current-password"
             type="password"
@@ -92,7 +97,7 @@ function SignUp() {
               disabled={verifyButtonDisable()}
               className={classes.submit}
             >
-              {i18n.signUpButtonText}
+              <FormattedMessage id="signUpButtonText" />
             </CustomButton>
           </div>
         </form>

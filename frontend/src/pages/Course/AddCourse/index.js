@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import {
@@ -21,12 +22,16 @@ import { useFormik } from 'formik';
 import { Copyright } from '../../../components/Copyright';
 import { Course } from '../../../services/firebase/Models';
 import { showMessage } from '../../../store/ducks/layout';
-import * as i18n from '../../../utils/i18n_PTBR';
 import { useStyles } from './styles';
 
 function AddCourse({ onClose }) {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const intl = useIntl();
+  const courseTitlePH = intl.formatMessage({
+    id: 'courseTitlePH',
+  });
+  const courseDescriptionPH = intl.formatMessage({ id: 'courseDescriptionPH' });
 
   const formik = useFormik({
     initialValues: {
@@ -58,14 +63,16 @@ function AddCourse({ onClose }) {
             <CardContent>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={12}>
-                  <label>{i18n.courseTitle}</label>
+                  <label>
+                    <FormattedMessage id="courseTitle" />
+                  </label>
                   <Input
                     autoComplete="cTitle"
                     name="title"
                     variant="outlined"
+                    placeholder={courseTitlePH}
                     required
                     fullWidth
-                    placeholder="Titulo do Curso"
                     id="courseTitle"
                     label="Titulo do Curso"
                     autoFocus
@@ -75,7 +82,9 @@ function AddCourse({ onClose }) {
                 </Grid>
 
                 <Grid item xs={12}>
-                  <label>{i18n.courseVisibility}</label>
+                  <label>
+                    <FormattedMessage id="courseVisibility" />
+                  </label>
                   <Select
                     name="show"
                     defaultValue=""
@@ -83,10 +92,10 @@ function AddCourse({ onClose }) {
                     fullWidth
                   >
                     <MenuItem value="false" onChange={formik.handleChange}>
-                      {i18n.privateCourse}
+                      <FormattedMessage id="privateCourse" />
                     </MenuItem>
                     <MenuItem value="true" onChange={formik.handleChange}>
-                      {i18n.openCourse}
+                      <FormattedMessage id="openCourse" />
                     </MenuItem>
                   </Select>
                 </Grid>
@@ -128,12 +137,14 @@ function AddCourse({ onClose }) {
                   </Card>
                 </Grid>
                 <Grid item xs={12}>
-                  <label>{i18n.courseDescription}</label>
+                  <label>
+                    <FormattedMessage id="courseDescription" />
+                  </label>
 
                   <TextField
                     name="description"
-                    placeholder="Descrição..."
                     multiline="true"
+                    placeholder={courseDescriptionPH}
                     rows="5"
                     size="large"
                     maxWidth
@@ -154,7 +165,7 @@ function AddCourse({ onClose }) {
                     onClick={onClose}
                     spacing="auto"
                   >
-                    {i18n.cancelButtonText}
+                    <FormattedMessage id="cancelButtonText" />
                   </Button>
                   <span> &nbsp; </span>
                   <Button
@@ -164,7 +175,7 @@ function AddCourse({ onClose }) {
                     color="primary"
                     className={classes.submit}
                   >
-                    {i18n.saveButtonButtonText}
+                    <FormattedMessage id="saveButtonText" />
                   </Button>
                 </Box>
               </div>

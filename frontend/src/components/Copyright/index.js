@@ -1,15 +1,19 @@
 import React from 'react';
+import { useIntl } from 'react-intl';
 
 import { Typography, Link } from '@material-ui/core';
 
-import * as i18n from '../../utils/i18n_PTBR';
-
 export function Copyright() {
+  const intl = useIntl();
+  const copyritghText = intl.formatMessage({ id: 'copyritghText' });
+  const appNameText = intl.formatMessage({ id: 'appNameText' });
+  const UniversityLink = intl.formatMessage({ id: 'UniversityLink' });
+  const unifbvText = intl.formatMessage({ id: 'unifbvText' });
   return (
     <Typography variant="body2" color="textSecondary" align="center">
-      {`${i18n.copyritghText} ${i18n.appNameText} `}
-      <Link color="inherit" href={i18n.UniversityLink}>
-        {`${i18n.unifbvText}`}
+      {`${copyritghText} ${appNameText} `}
+      <Link color="inherit" href={UniversityLink}>
+        {`${unifbvText}`}
       </Link>
 
       {`, ${new Date().getFullYear()}.`}
