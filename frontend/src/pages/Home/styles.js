@@ -21,7 +21,6 @@ export const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
 
     padding: theme.spacing(2, 2),
-    height: '46vh',
     width: '30vw',
     minWidth: '250px',
     minHeight: '440px',
