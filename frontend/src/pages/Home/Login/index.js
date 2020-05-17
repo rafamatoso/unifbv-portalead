@@ -5,8 +5,9 @@ import { useDispatch } from 'react-redux';
 import { TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 
+import { icGoogle } from '../../../assets/icons';
 import { logoCircularGrande } from '../../../assets/img';
-import { CustomButton } from '../../../components';
+import { CustomButton, GoogleButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
 import { initialValues, validationSchema } from '../helper';
@@ -33,10 +34,12 @@ function Login() {
       try {
         await Auth.signIn(values);
       } catch (err) {
-        console.log(err);
+        console.err();
       }
     },
   });
+
+  const googleLoginSubmit = () => Auth.signInWithGoogle();
 
   const handleHelperTextEmail = () =>
     Boolean(errors.email) && touched.email ? errors.email : null;
@@ -51,7 +54,7 @@ function Login() {
     <>
       <div className={classes.paper}>
         <img src={logoCircularGrande} className={classes.logo} alt="Logo" />
-        <p />
+
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -84,12 +87,27 @@ function Login() {
           />
           <CustomButton
             type="submit"
+            variant="contained"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}
+            className={classes.submitLogin}
           >
             <FormattedMessage id="enterButtonText" />
           </CustomButton>
+          <GoogleButton
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submitGoogle}
+            onClick={() => googleLoginSubmit()}
+          >
+            <img
+              src={icGoogle}
+              alt="Ícone representando a logo da Google"
+              className={classes.googleIcon}
+            />
+            {/* {enterWithGoogle} */}
+          </GoogleButton>
         </form>
       </div>
     </>

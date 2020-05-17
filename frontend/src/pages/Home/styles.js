@@ -16,16 +16,24 @@ export const useStyles = makeStyles((theme) => ({
     height: '100vh',
   },
   paper: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+
     padding: theme.spacing(2, 2),
+    height: '46vh',
+    width: '30vw',
+    minWidth: '250px',
+    minHeight: '440px',
   },
   link: {
-    padding: theme.spacing(1),
+    padding: theme.spacing(0),
     color: colors.blue1,
     display: 'flex',
     justifyContent: 'space-around',
     alignItems: 'center',
   },
   copyright: {
-    paddingTop: '0.5rem',
+    minWidth: '250px',
   },
 }));

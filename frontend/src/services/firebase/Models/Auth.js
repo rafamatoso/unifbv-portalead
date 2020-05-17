@@ -1,4 +1,4 @@
-import { auth } from '..';
+import { auth, provider } from '..';
 
 import { set, get, clear } from '../../storage';
 
@@ -8,6 +8,19 @@ class Auth {
       auth
         .signInWithEmailAndPassword(email, password)
         .then((res) => {
+          set(res.user.toJSON());
+          resolve();
+        })
+        .catch(reject());
+    });
+  }
+
+  signInWithGoogle() {
+    return new Promise((resolve, reject) => {
+      auth
+        .signInWithPopup(provider)
+        .then((res) => {
+          // const token = res.credential.accessToken;
           set(res.user.toJSON());
           resolve();
         })

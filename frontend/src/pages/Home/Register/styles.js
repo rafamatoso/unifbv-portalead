@@ -5,7 +5,7 @@ import { colors } from '../../../utils/colors';
 export const useStyles = makeStyles((theme) => ({
   paper: {
     margin: theme.spacing(6, 4),
-    marginBottom: '16px',
+    marginBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
