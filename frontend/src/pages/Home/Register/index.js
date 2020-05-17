@@ -6,8 +6,9 @@ import { useFormik } from 'formik';
 
 import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
-import { setLoading } from '../../../store/ducks/layout';
+import { setLoading, showMessage } from '../../../store/ducks/layout';
 import * as i18n from '../../../utils/i18n_PTBR';
+import { severityTypes } from '../../../utils/severityTypes';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 
@@ -29,7 +30,13 @@ function SignUp() {
       dispatch(setLoading(true));
       const data = await Auth.signUp(values);
       dispatch(setLoading(false));
-      console.log(data);
+      dispatch(
+        showMessage({
+          message: `Email ${data.user.toJSON().email} cadastrado`,
+          time: 5000,
+          type: severityTypes.SUCCESS,
+        }),
+      );
     },
   });
 
