@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import {
@@ -12,6 +13,7 @@ import { CloudUpload } from '@material-ui/icons';
 import { useFormik } from 'formik';
 
 import Video from '../../../services/firebase/Models/Video';
+import { showMessage } from '../../../store/ducks/layout';
 import { initialValues, validationSchema } from './helper';
 import { ModalUpload } from './ModalUpload';
 import { useStyles } from './styles';
@@ -20,6 +22,8 @@ function AddVideo({ data, onClose }) {
   const { id } = useParams();
 
   const classes = useStyles();
+
+  const dispatch = useDispatch();
 
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
@@ -56,12 +60,24 @@ function AddVideo({ data, onClose }) {
           null,
           handlerComplete,
         );
+        dispatch(
+          showMessage({
+            message: `Video ${values.title} alterado.`,
+            time: 2500,
+          }),
+        );
       } else {
         Video.create(
           { idCourse: id, ...values },
           handlerProgress,
           null,
           handlerComplete,
+        );
+        dispatch(
+          showMessage({
+            message: `Video ${values.title} cadastrado.`,
+            time: 2500,
+          }),
         );
       }
     },
