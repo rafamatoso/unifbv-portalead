@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -7,11 +8,6 @@ import { AccountCircle, ExitToApp } from '@material-ui/icons';
 
 import Auth from '../../services/firebase/Models/Auth';
 import { setLoading } from '../../store/ducks/layout';
-import {
-  appNameText,
-  logoutButtonText,
-  courseIconText,
-} from '../../utils/strings';
 import { useStyles } from './styles';
 
 const routeDashboard = '/dashboard';
@@ -58,7 +54,7 @@ function NavBar() {
             aria-label="menu"
             className={classes.logo}
           >
-            {appNameText}
+            <FormattedMessage id="appNameText" />
           </IconButton>
           <div className={classes.containerIcon}>
             <IconButton
@@ -68,7 +64,7 @@ function NavBar() {
               onClick={handleGoToCourse}
               className={classes.iconButton}
             >
-              {courseIconText}
+              <FormattedMessage id="courseIconText" />
             </IconButton>
             <IconButton
               edge="end"
@@ -99,7 +95,9 @@ function NavBar() {
             >
               <div className={classes.containerMenuItem}>
                 <ExitToApp />
-                <MenuItem onClick={handleLogout}>{logoutButtonText}</MenuItem>
+                <MenuItem onClick={handleLogout}>
+                  <FormattedMessage id="logoutButtonText" />
+                </MenuItem>
               </div>
             </Menu>
           </div>

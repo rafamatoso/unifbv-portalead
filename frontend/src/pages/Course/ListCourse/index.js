@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { Grid, Modal } from '@material-ui/core';
@@ -33,7 +34,7 @@ export default function ListCourse() {
         onClick={handleClick}
         className={classes.addCourse}
       >
-        Adicionar curso
+        <FormattedMessage id="buttonAddCourse" />
       </Button>
       <Grid container className={classes.content}>
         {courses.map((item) => (

@@ -1,10 +1,10 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useHistory } from 'react-router-dom';
 
 import { Typography, Grid } from '@material-ui/core';
 
 import { CustomButton } from '../../components';
-import { GoToInicialPage, NotFoundText } from '../../utils/strings';
 import { useStyles } from './styles';
 
 export default function NotFound() {
@@ -18,10 +18,10 @@ export default function NotFound() {
   return (
     <Grid className={classes.notfoundstyle}>
       <Typography component="h1" variant="h4">
-        {NotFoundText}
+        <FormattedMessage id="NotFoundText" />
       </Typography>
       <CustomButton type="submit" onClick={handleClick}>
-        {GoToInicialPage}
+        <FormattedMessage id="GoToInicialPage" />
       </CustomButton>
     </Grid>
   );

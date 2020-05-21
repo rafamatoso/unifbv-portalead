@@ -16,7 +16,8 @@ export const backButtonText = 'Voltar';
 export const logoutButtonText = 'Logout';
 export const signUpButtonText = 'Registrar';
 export const signOutButtonText = 'Logout';
-export const enterWithGoogle = 'Entrar com Google';
+export const saveButtonButtonText = 'Salvar';
+export const cancelButtonText = 'Cancelar';
 
 // FormControlLabel Text Strings
 export const remenberMeText = 'Lembre-se de mim';
@@ -31,3 +32,11 @@ export const NotFoundText = 'Pagina nao encontrada.';
 
 // NavBar
 export const courseIconText = 'Cursos';
+
+// Course Modals
+export const courseTitle = 'Titulo do Curso:';
+export const courseVisibility = 'Visibilidade:';
+export const privateCourse = 'Privado';
+export const openCourse = 'Aberto';
+export const courseDescription = 'Descrição do Curso:';
+export const loadingVideo = 'Carregando...';

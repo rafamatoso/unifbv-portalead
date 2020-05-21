@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { TextField } from '@material-ui/core';
@@ -9,19 +10,15 @@ import { logoCircularGrande } from '../../../assets/img';
 import { CustomButton, GoogleButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
-import {
-  enterButtonText,
-  emailText,
-  passwordText,
-  enterWithGoogle,
-} from '../../../utils/strings';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 
 function Login() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const intl = useIntl();
+  const email = intl.formatMessage({ id: 'emailText' });
+  const password = intl.formatMessage({ id: 'passwordText' });
   const {
     handleSubmit,
     handleChange,
@@ -65,7 +62,7 @@ function Login() {
             required
             fullWidth
             id="email"
-            label={emailText}
+            label={email}
             name="email"
             autoComplete="email"
             onChange={handleChange}
@@ -79,7 +76,7 @@ function Login() {
             required
             fullWidth
             name="password"
-            label={passwordText}
+            label={password}
             type="password"
             id="password"
             autoComplete="current-password"
@@ -95,7 +92,7 @@ function Login() {
             disabled={verifyButtonDisable()}
             className={classes.submitLogin}
           >
-            {enterButtonText}
+            <FormattedMessage id="enterButtonText" />
           </CustomButton>
           <GoogleButton
             fullWidth
@@ -109,7 +106,7 @@ function Login() {
               alt="Ícone representando a logo da Google"
               className={classes.googleIcon}
             />
-            {enterWithGoogle}
+            {/* {enterWithGoogle} */}
           </GoogleButton>
         </form>
       </div>

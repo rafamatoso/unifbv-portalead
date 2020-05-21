@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
@@ -7,11 +8,6 @@ import { Grid, Paper, Link, Box } from '@material-ui/core';
 import { Copyright } from '../../components/Copyright';
 import { Auth } from '../../services/firebase/Models';
 import { setUser } from '../../store/ducks/user';
-import {
-  dontHaveAnAccountText,
-  createOneHereText,
-  alreadyHaveAAccount,
-} from '../../utils/strings';
 import Login from './Login';
 import Register from './Register';
 import { useStyles } from './styles';
@@ -19,7 +15,11 @@ import { useStyles } from './styles';
 function Home() {
   const classes = useStyles();
   const [showRegister, setShowRegister] = useState(false);
-
+  const intl = useIntl();
+  const dontHaveAnAccountText = intl.formatMessage({
+    id: 'dontHaveAnAccountText',
+  });
+  const createOneHereText = intl.formatMessage({ id: 'createOneHereText' });
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ function Home() {
               <div className={classes.link}>
                 <Grid item>
                   <Link variant="body2" onClick={handleShowRegister}>
-                    {alreadyHaveAAccount}
+                    <FormattedMessage id="alreadyHaveAAccount" />
                   </Link>
                 </Grid>
               </div>
