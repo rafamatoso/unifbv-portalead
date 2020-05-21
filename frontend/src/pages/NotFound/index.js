@@ -1,8 +1,10 @@
 import React from 'react';
-import { Typography, Grid } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
-import { GoToInicialPage, NotFoundText } from '../../utils/strings';
+
+import { Typography, Grid } from '@material-ui/core';
+
 import { CustomButton } from '../../components';
+import { GoToInicialPage, NotFoundText } from '../../utils/strings';
 import { useStyles } from './styles';
 
 export default function NotFound() {

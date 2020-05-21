@@ -1,17 +1,19 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { TextField, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 
-import { CustomButton } from '../../../components';
+import { icGoogle } from '../../../assets/icons';
+import { logoCircularGrande } from '../../../assets/img';
+import { CustomButton, GoogleButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading } from '../../../store/ducks/layout';
 import {
-  appNameText,
   enterButtonText,
   emailText,
   passwordText,
+  enterWithGoogle,
 } from '../../../utils/strings';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
@@ -35,10 +37,12 @@ function Login() {
       try {
         await Auth.signIn(values);
       } catch (err) {
-        console.log(err);
+        console.err();
       }
     },
   });
+
+  const googleLoginSubmit = () => Auth.signInWithGoogle();
 
   const handleHelperTextEmail = () =>
     Boolean(errors.email) && touched.email ? errors.email : null;
@@ -52,9 +56,8 @@ function Login() {
   return (
     <>
       <div className={classes.paper}>
-        <Typography component="h1" variant="h4" className={classes.typography}>
-          {appNameText}
-        </Typography>
+        <img src={logoCircularGrande} className={classes.logo} alt="Logo" />
+
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -65,7 +68,6 @@ function Login() {
             label={emailText}
             name="email"
             autoComplete="email"
-            autoFocus
             onChange={handleChange}
             error={Boolean(errors.email) && touched.email}
             onBlur={handleBlur}
@@ -88,12 +90,27 @@ function Login() {
           />
           <CustomButton
             type="submit"
+            variant="contained"
             fullWidth
             disabled={verifyButtonDisable()}
-            className={classes.submit}
+            className={classes.submitLogin}
           >
             {enterButtonText}
           </CustomButton>
+          <GoogleButton
+            fullWidth
+            variant="contained"
+            color="secondary"
+            className={classes.submitGoogle}
+            onClick={() => googleLoginSubmit()}
+          >
+            <img
+              src={icGoogle}
+              alt="Ícone representando a logo da Google"
+              className={classes.googleIcon}
+            />
+            {enterWithGoogle}
+          </GoogleButton>
         </form>
       </div>
     </>

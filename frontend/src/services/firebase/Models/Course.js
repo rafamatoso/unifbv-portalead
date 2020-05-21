@@ -1,4 +1,5 @@
 import { database, storage } from '..';
+
 import collections from '../../../utils/collections';
 
 function upload(file, onProgress, onError, onComplete) {
@@ -24,13 +25,12 @@ function upload(file, onProgress, onError, onComplete) {
 }
 
 class Course {
-  // precisa ser testado
   async create(data, onProgress, onError, onComplete) {
     data.img = await upload(data.img, onProgress, onError, onComplete);
     await database.collection(collections.courses).doc().set(data);
   }
 
-  list(observer) {
+  async list(observer) {
     const resolver = (query) => {
       const docs = [];
       query.forEach((course) => {
@@ -44,7 +44,8 @@ class Course {
         .collection(collections.courses)
         .onSnapshot((query) => observer(resolver(query)));
     } else {
-      return database.collection(collections.courses).get().then(resolver);
+      const query = await database.collection(collections.courses).get();
+      return resolver(query);
     }
   }
 

@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { useFormik } from 'formik';
+import { useDispatch } from 'react-redux';
+
 import {
   Button,
   CssBaseline,
@@ -14,24 +15,17 @@ import {
   MenuItem,
   Card,
 } from '@material-ui/core';
-
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import { useFormik } from 'formik';
 
-import { useHistory } from 'react-router-dom';
 import { Copyright } from '../../../components/Copyright';
-
+import { Course } from '../../../services/firebase/Models';
+import { showMessage } from '../../../store/ducks/layout';
 import { useStyles } from './styles';
 
-import { Course } from '../../../services/firebase/Models';
-
-function AddCourse() {
+function AddCourse({ onClose }) {
   const classes = useStyles();
-
-  const history = useHistory();
-
-  function handleClick() {
-    history.push('/dashboard/courses');
-  }
+  const dispatch = useDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -44,7 +38,13 @@ function AddCourse() {
 
     onSubmit: async (values) => {
       await Course.create(values);
-      handleClick();
+      dispatch(
+        showMessage({
+          message: `Curso ${values.title} cadastrado.`,
+          time: 2500,
+        }),
+      );
+      onClose();
     },
   });
 
@@ -142,33 +142,34 @@ function AddCourse() {
                   />
                 </Grid>
               </Grid>
+              <div margin-top="0" className={classes.buttons}>
+                <Box display="flex" alignContent="center" width="60%">
+                  <Button
+                    type="reset"
+                    fullWidth
+                    variant="contained"
+                    color="secondary"
+                    className={classes.submit}
+                    onClick={onClose}
+                    spacing="auto"
+                  >
+                    Cancelar
+                  </Button>
+                  <span> &nbsp; </span>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Salvar
+                  </Button>
+                </Box>
+              </div>
             </CardContent>
           </Card>
-          <div margin-top="0" className={classes.buttons}>
-            <Box display="flex" alignContent="center" width="60%">
-              <Button
-                type="reset"
-                fullWidth
-                variant="contained"
-                color="secondary"
-                className={classes.submit}
-                onClick={handleClick}
-                spacing="auto"
-              >
-                Cancelar
-              </Button>
-              <span> &nbsp; </span>
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Salvar
-              </Button>
-            </Box>
-          </div>
+
           <Grid container justify="flex-end" />
         </form>
       </div>

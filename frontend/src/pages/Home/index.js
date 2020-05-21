@@ -36,9 +36,8 @@ function Home() {
 
   return (
     <>
-      <Grid container component="main" className={classes.root}>
-        <Grid item sm="auto" md={6} className={classes.image} />
-        <Grid item sm={12} md={6} component={Paper} elevation={6} square>
+      <div className={classes.root}>
+        <Paper elevation={3} className={classes.paper}>
           {!showRegister ? (
             <>
               <Login />
@@ -62,13 +61,13 @@ function Home() {
               </div>
             </>
           )}
-          <div className={classes.paper}>
-            <Box mt={5}>
+          <div>
+            <Box mt={3} className={classes.copyright}>
               <Copyright />
             </Box>
           </div>
-        </Grid>
-      </Grid>
+        </Paper>
+      </div>
     </>
   );
 }

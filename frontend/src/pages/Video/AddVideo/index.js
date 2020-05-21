@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory, useParams } from 'react-router-dom';
-import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
 import {
   TextField,
@@ -10,27 +10,21 @@ import {
   Paper,
 } from '@material-ui/core';
 import { CloudUpload } from '@material-ui/icons';
-import { ModalUpload } from './ModalUpload';
+import { useFormik } from 'formik';
 
+import Video from '../../../services/firebase/Models/Video';
+import { showMessage } from '../../../store/ducks/layout';
+import { initialValues, validationSchema } from './helper';
+import { ModalUpload } from './ModalUpload';
 import { useStyles } from './styles';
 
-import { initialValues, validationSchema } from './helper';
-import Video from '../../../services/firebase/Models/Video';
+function AddVideo({ data, onClose }) {
+  const { id } = useParams();
 
-function AddVideo() {
-  const { id, idVideo } = useParams();
-  const history = useHistory();
   const classes = useStyles();
-  const [state, setState] = useState(null);
 
-  useEffect(() => {
-    async function get() {
-      if (idVideo) {
-        setState(await Video.listUnique(idVideo));
-      }
-    }
-    get();
-  }, [idVideo]);
+  const dispatch = useDispatch();
+
   const [upload, setUpload] = useState({ progress: 0, show: false });
 
   function handlerProgress(snapshot) {
@@ -45,11 +39,11 @@ function AddVideo() {
       ...values,
       show: false,
     }));
-    history.push(`/dashboard/courses/${id}/listVideo`);
+    onClose();
   }
 
   const formik = useFormik({
-    initialValues: state || initialValues,
+    initialValues: data || initialValues,
     enableReinitialize: true,
     onSubmit: (values) => {
       setUpload((values) => ({
@@ -57,13 +51,20 @@ function AddVideo() {
         show: true,
       }));
 
-      if (idVideo) {
+      if (data) {
+        const { id, idCourse } = data;
         Video.update(
-          idVideo,
-          { idCourse: id, ...values },
+          id,
+          { idCourse, ...values },
           handlerProgress,
           null,
           handlerComplete,
+        );
+        dispatch(
+          showMessage({
+            message: `Video ${values.title} alterado.`,
+            time: 2500,
+          }),
         );
       } else {
         Video.create(
@@ -71,6 +72,12 @@ function AddVideo() {
           handlerProgress,
           null,
           handlerComplete,
+        );
+        dispatch(
+          showMessage({
+            message: `Video ${values.title} cadastrado.`,
+            time: 2500,
+          }),
         );
       }
     },
@@ -156,6 +163,7 @@ function AddVideo() {
                 variant="contained"
                 color="secondary"
                 className={classes.submit}
+                onClick={onClose}
               >
                 Cancelar
               </Button>
