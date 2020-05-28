@@ -4,14 +4,13 @@ import { colors } from '../../../utils/colors';
 
 export const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: theme.spacing(3, 3),
+    margin: theme.spacing(2, 3),
     marginBottom: '1rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
   logo: {
-    // marginTop: '10px',
     maxWidth: '8rem',
     maxHeight: '8rem',
   },

@@ -19,7 +19,6 @@ export const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-
     padding: theme.spacing(2, 2),
     width: '30vw',
     minWidth: '250px',

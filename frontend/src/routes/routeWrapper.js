@@ -5,8 +5,6 @@ import { Route, Redirect } from 'react-router-dom';
 function RouteWrapper({ component: Component, isPrivate, ...rest }) {
   const user = useSelector((state) => state.user);
 
-  console.log(user);
-
   if (isPrivate) {
     if (user) {
       return <Route {...rest} component={Component} />;
