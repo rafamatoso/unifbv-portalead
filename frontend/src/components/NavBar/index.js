@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { AppBar, Toolbar, IconButton, MenuItem, Menu } from '@material-ui/core';
 import { AccountCircle, ExitToApp } from '@material-ui/icons';
 
+import { logoBranca } from '../../assets/img';
 import Auth from '../../services/firebase/Models/Auth';
 import { setLoading } from '../../store/ducks/layout';
 import { useStyles } from './styles';
@@ -54,7 +55,7 @@ function NavBar() {
             aria-label="menu"
             className={classes.logo}
           >
-            <FormattedMessage id="appNameText" />
+            <img src={logoBranca} className={classes.logoImg} alt="Logo" />
           </IconButton>
           <div className={classes.containerIcon}>
             <IconButton
