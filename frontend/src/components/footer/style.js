@@ -12,6 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '5px',
   },
   CopyrightName: {
+    fontSize:'12px',
     color: colors.white1,
     textAlign: 'center',
     '&:hover': {
