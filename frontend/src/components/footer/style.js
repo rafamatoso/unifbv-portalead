@@ -3,18 +3,19 @@ import { makeStyles } from '@material-ui/core';
 import { colors } from '../../utils/colors';
 
 export const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   footer: {
     backgroundColor: colors.blue1,
-    padding: theme.spacing(3),
     zIndex: theme.zIndex.drawer + 1,
+    marginTop: '5px',
   },
   CopyrightName: {
-    fontSize: '17px',
     color: colors.white1,
     textAlign: 'center',
-  },
-  logo: {
-    width: '100px',
-    height: '100px',
+    '&:hover': {
+      color: colors.yellow1,
+    },
   },
 }));

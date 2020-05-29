@@ -7,7 +7,7 @@ import {
   appNameText,
   copyritghText,
   unifbvText,
-} from '../../utils/strings';
+} from '../../utils/i18n_PTBR';
 import { useStyles } from './style';
 
 // import { logoCircularGrande } from '../../assets/img';
@@ -16,7 +16,7 @@ export default function Appfooter() {
   const classes = useStyles();
 
   return (
-    <>
+    <div className={classes.root} container>
       <footer className={classes.footer}>
         <Typography className={classes.CopyrightName}>
           {`${copyritghText} ${appNameText} `}
@@ -27,6 +27,6 @@ export default function Appfooter() {
           {`, ${new Date().getFullYear()}.`}
         </Typography>
       </footer>
-    </>
+    </div>
   );
 }
