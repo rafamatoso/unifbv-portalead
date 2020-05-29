@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
@@ -26,7 +27,9 @@ function AddVideo({ data, onClose }) {
   const dispatch = useDispatch();
 
   const [upload, setUpload] = useState({ progress: 0, show: false });
-
+  const intl = useIntl();
+  const title = intl.formatMessage({ id: 'title' });
+  const description = intl.formatMessage({ id: 'description' });
   function handlerProgress(snapshot) {
     setUpload((values) => ({
       ...values,
@@ -99,7 +102,7 @@ function AddVideo({ data, onClose }) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.title}
-              label="Titulo"
+              label={title}
               variant="outlined"
               fullWidth
               error={formik.errors.title && formik.touched.title}
@@ -114,7 +117,7 @@ function AddVideo({ data, onClose }) {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.description}
-              label="Descrição"
+              label={description}
               multiline
               variant="outlined"
               fullWidth
@@ -165,7 +168,7 @@ function AddVideo({ data, onClose }) {
                 className={classes.submit}
                 onClick={onClose}
               >
-                Cancelar
+                <FormattedMessage id="cancelButtonText" />
               </Button>
               <Button
                 variant="contained"
@@ -173,7 +176,7 @@ function AddVideo({ data, onClose }) {
                 className={classes.submit}
                 type="submit"
               >
-                Salvar
+                <FormattedMessage id="saveButtonText" />
               </Button>
             </div>
           </form>

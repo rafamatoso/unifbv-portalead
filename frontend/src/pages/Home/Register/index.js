@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
 import { TextField, Typography } from '@material-ui/core';
@@ -8,18 +9,15 @@ import { CustomButton } from '../../../components';
 import Auth from '../../../services/firebase/Models/Auth';
 import { setLoading, showMessage } from '../../../store/ducks/layout';
 import { severityTypes } from '../../../utils/severityTypes';
-import {
-  appNameText,
-  signUpButtonText,
-  emailText,
-  passwordText,
-} from '../../../utils/strings';
 import { initialValues, validationSchema } from '../helper';
 import { useStyles } from './styles';
 
 function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const intl = useIntl();
+  const email = intl.formatMessage({ id: 'emailText' });
+  const password = intl.formatMessage({ id: 'passwordText' });
 
   const {
     handleSubmit,
@@ -58,7 +56,9 @@ function SignUp() {
     <>
       <div className={classes.paper}>
         <Typography component="h1" variant="h3" className={classes.typography}>
-          {`${signUpButtonText} no ${appNameText}`}
+          <FormattedMessage id="signUpButtonText" />
+          &nbsp;
+          <FormattedMessage id="appNameTextAt" />
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
@@ -67,7 +67,7 @@ function SignUp() {
             required
             fullWidth
             id="email"
-            label={emailText}
+            label={email}
             name="email"
             autoComplete="email"
             onChange={handleChange}
@@ -81,7 +81,7 @@ function SignUp() {
             required
             fullWidth
             id="password"
-            label={passwordText}
+            label={password}
             name="password"
             autoComplete="current-password"
             type="password"
@@ -97,7 +97,7 @@ function SignUp() {
               disabled={verifyButtonDisable()}
               className={classes.submit}
             >
-              {signUpButtonText}
+              <FormattedMessage id="signUpButtonText" />
             </CustomButton>
           </div>
         </form>

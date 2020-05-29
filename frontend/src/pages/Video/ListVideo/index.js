@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { FormattedMessage } from 'react-intl';
 import { useParams } from 'react-router-dom';
 import { Player, BigPlayButton, LoadingSpinner } from 'video-react';
 
@@ -120,7 +121,7 @@ export default function ListVideo() {
             startIcon={<Add />}
             onClick={handleClick}
           >
-            Adicionar Aula
+            <FormattedMessage id="addLesson" />
           </Button>
 
           <Modal open={openModal} onClose={handleClick}>
@@ -194,7 +195,7 @@ export default function ListVideo() {
                       }}
                     >
                       <EditOutlined />
-                      Editar
+                      <FormattedMessage id="buttonEdit" />
                     </MenuItem>
                     <MenuItem
                       onClick={() => {
@@ -203,7 +204,7 @@ export default function ListVideo() {
                       }}
                     >
                       <DeleteOutline />
-                      Remover
+                      <FormattedMessage id="buttonRemove" />
                     </MenuItem>
                   </Menu>
                 </ListItemSecondaryAction>
