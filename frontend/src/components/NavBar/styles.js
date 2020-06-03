@@ -18,6 +18,11 @@ export const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+  logoImg: {
+    marginBottom: '5px',
+    maxWidth: '8rem',
+    maxHeight: '8rem',
+  },
   containerIcon: {
     display: 'flex',
     width: '100vw',
