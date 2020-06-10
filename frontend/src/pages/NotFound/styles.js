@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   notfoundstyle: {
     marginTop: 250,
-    margin: theme.spacing(1),
+    margin: theme.spacing(25),
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
