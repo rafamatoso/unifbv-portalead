@@ -7,7 +7,6 @@ import {
   Grid,
   Paper,
   Typography,
-  Button,
   Drawer,
   List,
   ListItem,
@@ -20,6 +19,7 @@ import {
   MenuItem,
   Menu,
   Modal,
+  Fab,
 } from '@material-ui/core';
 import {
   Add,
@@ -28,6 +28,7 @@ import {
   DeleteOutline,
   MoreVert,
 } from '@material-ui/icons';
+import AddIcon from '@material-ui/icons/Add';
 
 import { Course, Video } from '../../../services/firebase/Models';
 import AddVideo from '../AddVideo';
@@ -113,16 +114,15 @@ export default function ListVideo() {
           </Typography>
         </div>
         <div style={{ alignSelf: 'flex-start' }}>
-          <Button
-            variant="contained"
+          <Fab
+            size="small"
             color="primary"
-            size="large"
-            width="30%"
             startIcon={<Add />}
             onClick={handleClick}
+            className={classes.FABaddVideo}
           >
-            <FormattedMessage id="addLesson" />
-          </Button>
+            <AddIcon />
+          </Fab>
 
           <Modal open={openModal} onClose={handleClick}>
             <AddVideo

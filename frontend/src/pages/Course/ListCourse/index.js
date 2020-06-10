@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
 import { useDispatch } from 'react-redux';
 
-import { Grid, Modal } from '@material-ui/core';
-import Button from '@material-ui/core/Button';
+import { Grid, Modal, Fab } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 import { CardCourse } from '../../../components';
 import Course from '../../../services/firebase/Models/Course';
@@ -28,14 +27,15 @@ export default function ListCourse() {
   }
   return (
     <div className={classes.root}>
-      <Button
-        variant="contained"
+      <Fab
         color="primary"
+        aria-label="add"
+        size="small"
         onClick={handleClick}
-        className={classes.addCourse}
+        className={classes.FABaddCourse}
       >
-        <FormattedMessage id="buttonAddCourse" />
-      </Button>
+        <AddIcon />
+      </Fab>
       <Grid container className={classes.content}>
         {courses.map((item) => (
           <CardCourse className={classes.position} key={item.id} data={item} />

@@ -15,8 +15,15 @@ export const useStyles = makeStyles((theme) => ({
   position: {
     marginTop: theme.spacing(3),
   },
-  addCourse: {
-    margin: theme.spacing(1, 2),
+  FABaddCourse: {
     backgroundColor: colors.blue1,
+    position: 'fixed',
+    bottom: theme.spacing(8),
+    right: theme.spacing(2),
+    '&:hover': {
+      backgroundColor: colors.blue3,
+      color: colors.blue1,
+    },
+    zIndex: '1',
   },
 }));

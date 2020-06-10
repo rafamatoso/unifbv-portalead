@@ -26,4 +26,15 @@ export const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  FABaddVideo: {
+    backgroundColor: colors.blue1,
+    position: 'fixed',
+    bottom: theme.spacing(3),
+    right: theme.spacing(2),
+    zIndex: '1000',
+    '&:hover': {
+      backgroundColor: colors.blue3,
+      color: colors.blue1,
+    },
+  },
 }));
